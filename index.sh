@@ -1,9 +1,7 @@
 #!/bin/bash
 
 
-isDeploy=0
 if [ "$1" == "_deploy" ]; then
-  isDeploy=1
   if [ "`which realpath`" == "" ]; then
     realpath() {
       echo `cd "${1}";pwd`
@@ -17,12 +15,6 @@ fi
 refDir=`dirname $0`
 refDir=`realpath $refDir`
 cd $refDir
-
-if [ $isDeploy == 0 ];then
-  ./_common/forever.sh
-fi
-
-
 
 
 if [ "$1" == "" ]; then
