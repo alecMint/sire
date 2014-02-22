@@ -4,6 +4,7 @@ var gitroot = require('./gitroot')
 var argv = require('optimist').argv;
 var proc = require('child_process');
 var fs = require('fs');
+var sireconfig = require('../../config.js');
 
 //
 // node index.js -r "/my/repo /my/other/repo" -ip $publicip
@@ -16,7 +17,8 @@ var fs = require('fs');
 var repos = require(argv.c||argv.config);
 var publicIp = argv.a||argv.ip||argv.address;
 var port = 9998;
-var githubAuthToken = argv.githubAuthToken;
+var githubAuthToken = sire.config.githubAuthTokenHooks;
+console.log('I GOT THE TOKEN',githubAuthToken);
 // get a new auth token @ https://github.com/settings/tokens/new
 
 console.log("hooky> startup. port:",port,", ip:",publicIp,", repos:",repos);
