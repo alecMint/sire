@@ -16,7 +16,7 @@ var fs = require('fs');
 var repos = require(argv.c||argv.config);
 var publicIp = argv.a||argv.ip||argv.address;
 var port = 9998;
-var githubAuthToken = "34bc247550ef41be1f26b377b946959cc11f3b94";
+var githubAuthToken = ""; throw 'needs github token';
 // get a new auth token @ https://github.com/settings/tokens/new
 
 console.log("hooky> startup. port:",port,", ip:",publicIp,", repos:",repos);
