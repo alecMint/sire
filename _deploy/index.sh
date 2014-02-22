@@ -1,14 +1,5 @@
 #!/bin/bash
 
-skipAptUpdate=0
-while getopts 'l' opt; do
-  case $opt in
-    l)
-      skipAptUpdate=1
-    ;;
-  esac
-done
-
 echo 'serverName: '$serverName
 echo 'ec2Cert: '$ec2Cert
 
