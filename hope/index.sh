@@ -1,5 +1,5 @@
 
-$pwd=`pwd`
+startpwd=`pwd`
 
 # modules
 ../_common/nginx.sh
@@ -32,9 +32,9 @@ localhost_add_cname 'local.hopechapellongbeach.com'
 
 # deploy hook service
 IP=`public_ip`
-echo "-------- $pwd -----------"
-cd $pwd/hooky
+echo "-------- $startpwd -----------"
+cd $startpwd/hooky
 npmi
 echo '[{"repo":"/var/www/hope","branch":"master"}]' > hooky.json
 forever_run "./index.js -a $IP -c "`pwd`"/hooky.json"
-cd $pwd
+cd $startpwd
