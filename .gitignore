@@ -1,9 +1,6 @@
 *~
 .DS_Store
+node_modules
 config.js
 .node-pixel-lastoffset
 spool/*
-node_modules
-nbproject/private/
-nbproject/project.properties
-nbproject/project.xml
