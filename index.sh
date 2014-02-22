@@ -1,7 +1,9 @@
 #!/bin/bash
 
 
+isDeploy=0
 if [ "$1" == "_deploy" ]; then
+  isDeploy=1
   if [ "`which realpath`" == "" ]; then
     realpath() {
       echo `cd "${1}";pwd`
@@ -10,13 +12,18 @@ if [ "$1" == "_deploy" ]; then
 else
   export DEBIAN_FRONTEND=noninteractive # shhh!
   apt-get install --assume-yes curl build-essential realpath
-  ./_common/forever.sh
 fi
-
 
 refDir=`dirname $0`
 refDir=`realpath $refDir`
 cd $refDir
+
+if [ $isDeploy == 0 ];then
+  ./_common/forever.sh
+fi
+
+
+
 
 if [ "$1" == "" ]; then
   echo "if you would like to deploy specific environment(s) please specify them as arguments"
