@@ -1,3 +1,3 @@
 #!/bin/bash
 
-apt-get install php5 php5-cli
+apt-get -y install php5 php5-cli

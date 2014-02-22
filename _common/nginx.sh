@@ -1,5 +1,5 @@
 #!/bin/bash
 
-apt-get install nginx
+apt-get -y install nginx
 /etc/init.d/nginx start
 update-rc.d nginx defaults
