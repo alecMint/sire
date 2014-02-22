@@ -19,3 +19,7 @@ ssh ubuntu@$serverName "sudo apt-get -y install git-core"
 echo 'setting up deployment repo...'
 ssh ubuntu@$serverName "sudo rm -fr /root/sire"
 ssh ubuntu@$serverName "sudo git clone $sireRepo /root/sire"
+
+echo 'copying github tokens...'
+# @todo: make a function for this
+ssh ubuntu@$serverName "sudo echo '{"githubAuthTokenHooks":"$githubAuthTokenHooks"}' > /root/sire/config.local.json"
