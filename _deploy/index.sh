@@ -11,7 +11,7 @@ else
 fi
 
 echo 'installing git...'
-if [ skipAptUpdate == 0 ]; then
+if [ $updateAptGet == 1 ]; then
     ssh ubuntu@$serverName "sudo apt-get update"
 fi
 ssh ubuntu@$serverName "sudo apt-get -y install git-core"
