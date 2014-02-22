@@ -39,7 +39,7 @@ remote_config_add(){
   module=$2
   key=$3
   val=$4
-  search=`ssh ubuntu@$serverName "sudo cat $module/config.local.sh | grep $key | head -n1"`
+  search=`ssh ubuntu@$serverName "sudo cat $module/config.local.sh 2>&1 /dev/null | grep $key | head -n1"`
   if [ "$search" == "" ]; then
     ssh ubuntu@$serverName "echo 'exports $key=\"$val\"' | sudo tee $module/config.local.sh >> /dev/null"
   fi
