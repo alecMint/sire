@@ -1,7 +1,7 @@
 
 
 hc=`curl fakem1.jewelmint.com/hc.php`
-if [ $hc != "OK" ]; then
+if [ "$hc" != "OK" ]; then
   echo "web failed healthcheck"
   echo $hc
   exit 1
