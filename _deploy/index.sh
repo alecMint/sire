@@ -15,5 +15,5 @@ ssh ubuntu@$serverName "sudo apt-get update"
 ssh ubuntu@$serverName "sudo apt-get -y install git-core"
 
 echo 'setting up deployment repo...'
-ssh ubuntu@$serverName "sudo rm -fr /root/sire/*"
+ssh ubuntu@$serverName "sudo rm -fr /root/sire"
 ssh ubuntu@$serverName "sudo git clone $sireRepo /root/sire"
