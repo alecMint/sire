@@ -1,0 +1,28 @@
+
+# modules
+../_common/nginx.sh
+../_common/php.sh
+../_common/mysql.sh
+../_common/nodejs.sh
+../_common/wordpress.sh /var/www/hope/web
+
+
+# nginx conf
+. ./nginx.sh
+
+# crons
+. ./crons.sh
+
+# repo
+if [ ! -d /var/www/hope ]; then
+  mkdir -p /var/www/hope
+  git clone $hopeRepo /var/www/hope
+fi
+cd /var/www/hope
+git checkout master
+git pull origin master
+
+
+# test cname
+localhost_add_cname 'local.hopechapellongbeach.com'
+
