@@ -29,6 +29,11 @@ git pull origin master
 # test cname
 localhost_add_cname 'local.hopechapellongbeach.com'
 
+# @todo: make a function for this
+#config_add githubAuthToken "$githubAuthToken"
+    "githubAuthToken": "7495aebdc16d7727af3a8c964001d0a896d6e134"
+}
+
 
 # deploy hook service
 IP=`public_ip`
