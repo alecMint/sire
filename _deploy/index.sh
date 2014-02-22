@@ -22,4 +22,5 @@ ssh ubuntu@$serverName "sudo git clone $sireRepo /root/sire"
 
 echo 'copying github tokens...'
 # @todo: make a function for this
-ssh ubuntu@$serverName "echo '{\"githubAuthTokenHooks\":\"$githubAuthTokenHooks\"}' | sudo tee /root/sire/config.local.json > /dev/null"
+remote_config_add $serverName /root/sire githubHookAuthToken "$githubHookAuthToken"
+#ssh ubuntu@$serverName "echo '{\"githubHookAuthToken\":\"$githubHookAuthToken\"}' | sudo tee /root/sire/config.local.json > /dev/null"

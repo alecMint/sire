@@ -4,7 +4,6 @@ var gitroot = require('./gitroot')
 var argv = require('optimist').argv;
 var proc = require('child_process');
 var fs = require('fs');
-var sireconfig = require('../../config.js');
 
 //
 // node index.js -r "/my/repo /my/other/repo" -ip $publicip

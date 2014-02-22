@@ -34,6 +34,17 @@ crontab_clear(){
   echo "crontab cleared tmp in "$tmp"_cron"
 }
 
+remote_config_add(){
+  serverName=$1
+  module=$2
+  key=$3
+  val=$4
+  search=`ssh ubuntu@$serverName "sudo cat $module/config.local.sh | grep $key | head -n1"`
+  if [ $search == "" ]; then
+    ssh ubuntu@$serverName "echo 'exports key=\"$val\"' | sudo tee $module/config.local.sh >> /dev/null"
+  fi
+}
+
 localhost_add_cname(){
   cname=$1
   check=`cat /etc/hosts | grep "$cname" | head -n1`
