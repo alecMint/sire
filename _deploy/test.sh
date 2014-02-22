@@ -17,5 +17,5 @@ if [ "`ssh ubuntu@$serverName "sudo cat /root/sire/.git/config | grep -oP "${sir
   echo "sire repo missing"
   exit 1
 else
-  echo "sire deployed"
+  echo "sire repo deployed"
 fi

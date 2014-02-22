@@ -11,6 +11,7 @@ else
   export DEBIAN_FRONTEND=noninteractive # shhh!
   apt-get update
   apt-get install --assume-yes curl build-essential realpath
+  ./_common/forever.sh
 fi
 
 

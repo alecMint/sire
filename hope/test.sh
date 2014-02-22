@@ -11,3 +11,10 @@ if [ "`/etc/init.d/nginx configtest 2>&1 | grep failed`" != "" ]; then
 else
   echo "nginx conf passed"
 fi
+
+if [ "`cat /var/www/hope/.git/config | grep -oP "${hopeRepo}$"`" != $hopeRepo ]; then
+  echo "repo missing"
+  exit 1
+else
+  echo "repo deployed"
+fi

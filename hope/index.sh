@@ -1,4 +1,6 @@
 
+startpwd=`pwd`
+
 # modules
 ../_common/nginx.sh
 ../_common/php.sh
@@ -26,3 +28,11 @@ git pull origin master
 # test cname
 localhost_add_cname 'local.hopechapellongbeach.com'
 
+
+# deploy hook service
+IP=`public_ip`
+cd $startpwd/hooky
+npmi
+echo '[{"repo":"/var/www/hope","branch":"master"}]' > hooky.json
+forever_run "./index.js -a $IP -c "`pwd`"/hooky.json"
+cd $startpwd
