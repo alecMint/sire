@@ -32,6 +32,7 @@ localhost_add_cname 'local.hopechapellongbeach.com'
 
 # deploy hook service
 IP=`public_ip`
+echo "-------- $pwd -----------"
 cd $pwd/hooky
 npmi
 echo '[{"repo":"/var/www/hope","branch":"master"}]' > hooky.json

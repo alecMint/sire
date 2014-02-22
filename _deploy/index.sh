@@ -1,5 +1,14 @@
 #!/bin/bash
 
+skipAptUpdate=0
+while getopts 'l' opt; do
+  case $opt in
+    l)
+      skipAptUpdate=1
+    ;;
+  esac
+done
+
 echo 'serverName: '$serverName
 echo 'ec2Cert: '$ec2Cert
 
@@ -11,7 +20,9 @@ else
 fi
 
 echo 'installing git...'
-ssh ubuntu@$serverName "sudo apt-get update"
+if [ skipAptUpdate == 0 ]; then
+    ssh ubuntu@$serverName "sudo apt-get update"
+fi
 ssh ubuntu@$serverName "sudo apt-get -y install git-core"
 
 echo 'setting up deployment repo...'
