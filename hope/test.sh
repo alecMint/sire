@@ -1,6 +1,6 @@
 
 
-hc=`curl fakem1.jewelmint.com/hc.php`
+hc=`curl local.hopechapellongbeach.com/hc.php`
 if [ "$hc" != "OK" ]; then
   echo "web failed healthcheck"
   echo $hc
