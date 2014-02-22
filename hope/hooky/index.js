@@ -16,7 +16,7 @@ var fs = require('fs');
 var repos = require(argv.c||argv.config);
 var publicIp = argv.a||argv.ip||argv.address;
 var port = 9998;
-var githubAuthToken = sireconfig.githubAuthTokenHooks;
+var githubAuthToken = argv.ght||argv.githubHookAuthToken;
 console.log('I GOT THE TOKEN',githubAuthToken);
 // get a new auth token @ https://github.com/settings/tokens/new
 

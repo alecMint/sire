@@ -1,6 +1,8 @@
 
 startpwd=`pwd`
 
+. ../secrets
+
 # modules
 ../_common/nginx.sh
 ../_common/php.sh
@@ -32,8 +34,9 @@ localhost_add_cname 'local.hopechapellongbeach.com'
 
 # deploy hook service
 IP=`public_ip`
+echo "---------------- $githubHookAuthToken -----------------"
 cd $startpwd/hooky
 npmi
 echo '[{"repo":"/var/www/hope","branch":"master"}]' > hooky.json
-forever_run "./index.js -a $IP -c "`pwd`"/hooky.json"
+forever_run "./index.js -ghc $githubHookAuthToken -a $IP -c "`pwd`"/hooky.json"
 cd $startpwd
