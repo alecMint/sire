@@ -20,9 +20,9 @@ else
   echo "sire repo deployed"
 fi
 
-#if [ "`ssh ubuntu@$serverName "sudo cat /root/sire/config.local.json | grep githubHookAuthToken | head -n1"`" == "" ]; then
-#  echo "config missing githubHookAuthToken"
-#  exit 1
-#else
-#  echo "config contains githubHookAuthToken"
-#fi
+if [ "`ssh ubuntu@$serverName "sudo cat /root/sire/secrets | grep githubHookAuthToken | head -n1"`" == "" ]; then
+  echo "config missing githubHookAuthToken"
+  exit 1
+else
+  echo "config contains githubHookAuthToken"
+fi
