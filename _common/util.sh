@@ -36,12 +36,12 @@ crontab_clear(){
 
 remote_config_add(){
   serverName=$1
-  module=$2
+  file=$2
   key=$3
   val=$4
-  search=`ssh ubuntu@$serverName "sudo cat $module/config.local.sh 2>&1 /dev/null | grep $key | head -n1"`
+  search=`ssh ubuntu@$serverName "sudo cat $file 2>&1 /dev/null | grep $key | head -n1"`
   if [ "$search" == "" ]; then
-    ssh ubuntu@$serverName "echo 'exports $key=\"$val\"' | sudo tee $module/config.local.sh >> /dev/null"
+    ssh ubuntu@$serverName "echo 'exports $key=\"$val\"' | sudo tee $file >> /dev/null"
   fi
 }
 
