@@ -19,8 +19,8 @@ var port = 9998;
 var githubAuthToken = argv.ght||argv.githubHookAuthToken;
 // get a new auth token @ https://github.com/settings/tokens/new
 
-console.log("hooky> startup. port:",port,", ip:",publicIp,", repos:",repos);
-if(!publicIp || !repos.length) {
+console.log("hooky> startup. port:",port,", ip:",publicIp,", repos:",repos,", ght:",githubAuthToken);
+if(!publicIp || !repos.length || !githubAuthToken) {
   console.log('hooky> error both publicIp (-a) and repos required in config');
   process.exit(1);
 }
