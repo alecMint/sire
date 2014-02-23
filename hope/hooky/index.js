@@ -16,10 +16,10 @@ var fs = require('fs');
 var repos = require(argv.c||argv.config);
 var publicIp = argv.a||argv.ip||argv.address;
 var port = 9998;
-var githubAuthToken = argv.ght||argv.githubHookAuthToken;
+var githubAuthToken = argv.t||argv.githubHookAuthToken;
 // get a new auth token @ https://github.com/settings/tokens/new
 
-console.log("hooky> startup. port:",port,", ip:",publicIp,", repos:",repos,", ght:",githubAuthToken);
+console.log("hooky> startup. port:",port,", ip:",publicIp,", repos:",repos,", t:",githubAuthToken);
 if(!publicIp || !repos.length || !githubAuthToken) {
   console.log('hooky> error both publicIp (-a) and repos required in config');
   process.exit(1);
