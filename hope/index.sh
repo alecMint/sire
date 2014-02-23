@@ -37,5 +37,5 @@ IP=`public_ip`
 cd $startpwd/hooky
 npmi
 echo '[{"repo":"/var/www/hope","branch":"master"}]' > hooky.json
-forever_run "./index.js -ghc $githubHookAuthToken -a $IP -c "`pwd`"/hooky.json"
+forever_run "./index.js -ght $githubHookAuthToken -a $IP -c "`pwd`"/hooky.json"
 cd $startpwd
