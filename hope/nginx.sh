@@ -16,6 +16,15 @@ server {
     gzip_proxied any; # enable proxy for the fcgi requests
     gzip_types text/plain text/css application/x-javascript text/javascript application/json; 
 
+    # s3 webwrite
+    location ~ ^/wp-content/uploads {
+        if (!-f \$request_filename) {
+            # 9991 = s3dl
+            proxy_pass http://localhost:9991;
+            break;
+        }
+    }
+
     # pass php to fastcgi
     location ~ \.php\$ {
         fastcgi_index index.php;

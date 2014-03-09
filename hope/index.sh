@@ -47,3 +47,9 @@ npmi
 echo '[{"repo":"/var/www/hope","branch":"master"}]' > hooky.json
 forever_run "./index.js -t $githubHookAuthToken -a $IP -c "`pwd`"/hooky.json"
 cd $startpwd
+
+# s3 sync service
+cd /root/sire/s3dl
+npmi
+forever_run "./index.js -d /var/www/hope/web/wp-content/uploads -b sire-hope/uploads"
+cd $startpwd
