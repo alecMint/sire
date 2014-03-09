@@ -1,6 +1,7 @@
 var path = require('path')
 ,cp = require('child_process')
 ,fs = require('fs')
+,argv = require('optimist').argv
 ,s3cmd = require('./s3cmd')
 ,tmpDir = '/tmp/sire-dbbak/'
 ;
