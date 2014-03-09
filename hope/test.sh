@@ -22,3 +22,10 @@ if [ "`cat /var/www/hope/.git/config | grep -oP "${hopeRepo}$"`" != $hopeRepo ];
 else
   echo "repo deployed"
 fi
+
+if [ "`s3cmd 2>&1 | grep 'not found'`" != ""]; then
+  echo "s3cmd not installed"
+  exit 1
+else
+  echo "s3cmd installed"
+fi
