@@ -8,6 +8,7 @@ if [ "$1" == "_deploy" ]; then
     }
   fi
 else
+  apt-get update
   export DEBIAN_FRONTEND=noninteractive # shhh!
   apt-get install --assume-yes curl build-essential realpath
 fi
