@@ -1,6 +1,6 @@
 # put and get from s3 like a champ
 
-apt-get install --assume-yes s3
+apt-get install --assume-yes s3cmd
 
 if [ ! -f "/root/.s3cfg" ]; then
 
