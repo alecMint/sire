@@ -51,5 +51,5 @@ cd $startpwd
 # s3 sync service
 cd /root/sire/_common/s3dl
 npmi
-forever_run "./index.js -d /var/www/hope/web/wp-content/uploads -b sire-hope/wp-content/uploads"
+forever_run "./index.js -d /var/www/hope/web/wp-content/uploads -w /wp-content/uploads -b sire-hope/wp-content/uploads"
 cd $startpwd

@@ -10,20 +10,20 @@ var deleter = require('./s3deleter');
 
 var localDir = argv.d || argv.dir;
 var bucket = argv.b || argv.bucket;
+var webDir = argv.w || argv.webdir;
 var deleteLocal = argv.l || argv.localdel;
 
-if(!localDir || !bucket)  throw "both dir and bucket are required!";
+if(!localDir || !webDir || !bucket)  throw "both dir and webdir and bucket are required!";
 
-var syncDir = path.basename(localDir);
 watch(localDir,bucket,deleteLocal);
 
 
 var server;
 server = http.createServer(function(req,res){
-  var inSyncDir = false;
-  if (req.url.indexOf('/'+syncDir) == 0) {
-    inSyncDir = true;
-    req.url = req.url.replace('/'+syncDir,'');
+  var inWebDir = false;
+  if (req.url.indexOf(webDir) == 0) {
+    inWebDir = true;
+    req.url = req.url.replace(webDir,'');
   }
 
   var parsed = url.parse(req.url,true);
@@ -36,7 +36,7 @@ server = http.createServer(function(req,res){
     if(err) o.error = err+'';
     o.data = name;
 
-    if (inSyncDir) {
+    if (inWebDir) {
       if (err) {
         res.writeHead(404,{
           //'xerr': err+' '+localDir+' '+bucket+' '+req.url
