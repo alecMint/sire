@@ -20,7 +20,8 @@ else
   echo "sire repo deployed"
 fi
 
-if [ "`ssh ubuntu@$serverName "sudo cat /root/sire/secrets | grep githubHookAuthToken | head -n1" | grep -oP '\".+\"'`" != "\"$githubHookAuthToken\"" ]; then
+# `ssh ubuntu@ec2-54-84-87-232.compute-1.amazonaws.com "sudo cat /root/sire/secrets | grep githubHookAuthToken | head -n1 | grep -oP '\".+\"'"`
+if [ "`ssh ubuntu@$serverName "sudo cat /root/sire/secrets | grep githubHookAuthToken | head -n1 | grep -oP '\".+\"'"`" != "\"$githubHookAuthToken\"" ]; then
   echo "config missing githubHookAuthToken"
   exit 1
 else
