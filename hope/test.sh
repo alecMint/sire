@@ -23,7 +23,7 @@ else
   echo "repo deployed"
 fi
 
-if [ "`s3cmd 2>&1 | grep 'not found'`" != ""]; then
+if [ "`s3cmd 2>&1 | grep 'not found'`" != "" ]; then
   echo "s3cmd not installed"
   exit 1
 else
