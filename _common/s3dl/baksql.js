@@ -16,17 +16,17 @@ fs.mkdir(tmpDir,function(err){
   if (err && err.code != 'EEXIST')
     return console.log(err);
   var fn = dbName+'.'+Date.now()+'.sql.gz'
-  ,path = tmpDir+fn
+  ,localPath = tmpDir+fn
   ,remotePath = 's3://'+path.join([bucket,fn])
   ;
-  cp.exec('mysqldump --opt -hlocalhost -uroot '+dbName+' | gzip > '+path,function(err){
+  cp.exec('mysqldump --opt -hlocalhost -uroot '+dbName+' | gzip > '+localPath,function(err){
     if (err)
       return console.log(err);
     s3cmd(['put',remotePath],function(err){
       if (err)
-        console.log('failed to push '+path+' to '+remotePath,err);
+        console.log('failed to push '+localPath+' to '+remotePath,err);
       else
-        console.log('successfully pushed '+path+' to '+remotePath);
+        console.log('successfully pushed '+localPath+' to '+remotePath);
       fs.unlink(path,function(err){
         if (err)
           return console.log('failed to clean up');
