@@ -39,7 +39,7 @@ function readdirR(dir,cb){
         } else {
           files.push(file);
           if (!--scanning)
-            files.push(file);
+            cb(false,files);
         }
       });
     });
