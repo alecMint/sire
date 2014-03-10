@@ -28,9 +28,9 @@ fs.mkdir(tmpDir,function(err){
       else
         console.log('successfully pushed '+localPath+' to '+remotePath);
 
-      fs.unlink(remotePath,function(err){
+      fs.unlink(localPath,function(err){
         if (err)
-          return console.log('failed to clean up local');
+          return console.log('failed to clean up local',err);
       });
     });
   });
