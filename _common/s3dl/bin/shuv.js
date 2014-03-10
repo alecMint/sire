@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// node /root/sire/_common/s3dl/bin/shuv.js -d /var/www/hope/web/wp-content/uploads -b sire-hope/wp-content/uploads
 
 var fs = require('graceful-fs')
 ,path = require('path')
@@ -14,7 +15,7 @@ readdirR(localDir,function(err,files){
   if (err)
     return console.log(err);
   files.forEach(function(file){
-    var remotePath = 's3://'+path.join(bucket,path.basename(file));
+    var remotePath = 's3://'+path.join(bucket,file.replace(localDir,''));
     return console.log(remotePath);
     s3cmd(['put',file,remotePath],function(err){
       console.log(err?'ERROR':'SUCCESS',remotePath,err);
