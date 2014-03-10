@@ -22,12 +22,12 @@ fs.mkdir(tmpDir,function(err){
   cp.exec('mysqldump --opt -hlocalhost -uroot '+dbName+' | gzip > '+localPath,function(err){
     if (err)
       return console.log(err);
-    s3cmd(['put',remotePath],function(err){
+    s3cmd(['put',localPath,remotePath],function(err){
       if (err)
         console.log('failed to push '+localPath+' to '+remotePath,err);
       else
         console.log('successfully pushed '+localPath+' to '+remotePath);
-      
+
       fs.unlink(remotePath,function(err){
         if (err)
           return console.log('failed to clean up local');
