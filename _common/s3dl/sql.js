@@ -52,6 +52,19 @@ module.exports.clean = function(bucket,dbName,histNum,cb){
   });
 }
 
+module.exports.load = function(bucket,dbName,cb){
+  getBakList(bucket,dbName,function(err,list){
+    if (err)
+      return cb(err);
+    if (!list[0])
+      return cb();
+    var fn = path.basename(list[0])
+    ,localPath = tmpDir+fn
+    console.log(localPath);
+    cb();
+  });
+}
+
 function getBakList(bucket,dbName,cb){
   if (bucket[bucket.length-1] != '/')
     bucket = bucket+'/';  
