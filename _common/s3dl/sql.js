@@ -33,7 +33,8 @@ module.exports.clean = function(bucket,dbName,histNum,cb){
   getBakList(bucket,dbName,function(err,list){
     if (err)
       return cb(err);
-    var numToDel = numDeled = 0;
+    var numToDel = 0
+    ,filesDeleted = [];
     list.forEach(function(file,i){
       if (i < histNum)
         return;
@@ -43,9 +44,9 @@ module.exports.clean = function(bucket,dbName,histNum,cb){
           cb(err);
           return cb = function(){};
         }
-        console.log('deleted '+file.p);
-        if (++numDeled == numToDel)
-          cb();
+        filesDeleted.push(file.p);
+        if (filesDeleted.length == numToDel)
+          cb(false,filesDeleted);
       });
     });
   });
