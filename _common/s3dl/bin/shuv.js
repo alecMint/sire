@@ -10,8 +10,8 @@ if(!localDir || !bucket)  throw "both dir and bucket are required!";
 
 readdirR(localDir,function(err,files){
   if (err)
-    return console.log(err);
-  console.log(files);
+    return console.log('err',err);
+  console.log('success',files);
 });
 
 function readdirR(dir,cb){
