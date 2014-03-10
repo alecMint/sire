@@ -12,7 +12,7 @@ crontab_add(){
   fi
 
   tmp=`mktemp`
-  crontab -l | grep -v $search > $tmp
+  crontab -l | grep -v "$search" > $tmp
   echo "$line" >> $tmp
   crontab < $tmp 
   rm $tmp
