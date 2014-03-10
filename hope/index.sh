@@ -6,8 +6,8 @@ startpwd=`pwd`
 # modules
 ../_common/s3.sh
 ../_common/nginx.sh
-../_common/mysql.sh
 ../_common/php.sh
+../_common/mysql.sh
 ../_common/nodejs.sh
 ../_common/forever.sh
 ../_common/wordpress.sh /var/www/hope/web
