@@ -39,11 +39,11 @@ module.exports.clean = function(bucket,dbName,histNum,cb){
 
 function getBakList(bucket,dbName,cb){
   if (bucket[bucket.length-1] != '/')
-    bucket = bucket+'/';
+    bucket = bucket+'/';  
   s3cmd(['ls','s3://'+bucket],function(err,data){
+    console.log(err,'\n',data,'\n');
     if (err)
       return cb(err);
-    console.log(data);
     cb(data);
   });
 }
