@@ -38,6 +38,8 @@ module.exports.clean = function(bucket,dbName,histNum,cb){
 }
 
 function getBakList(bucket,dbName,cb){
+  if (bucket[bucket.length-1] != '/')
+    bucket = bucket+'/';
   s3cmd(['ls','s3://'+bucket],function(err,data){
     if (err)
       return cb(err);
