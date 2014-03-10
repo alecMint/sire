@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 var fs = require('graceful-fs')
+,path = require('path')
+,s3cmd = require('../s3cmd')
 ,argv = require('optimist').argv
 ;
 
@@ -10,8 +12,14 @@ if(!localDir || !bucket)  throw "both dir and bucket are required!";
 
 readdirR(localDir,function(err,files){
   if (err)
-    return console.log('err',err);
-  console.log('success',files);
+    return console.log(err);
+  files.forEach(function(file){
+    var remotePath = 's3://'+path.join(bucket,path.basename(file));
+    return console.log(remotePath);
+    s3cmd(['put',file,remotePath],function(err){
+      console.log(err?'ERROR':'SUCCESS',remotePath,err);
+    });
+  });
 });
 
 function readdirR(dir,cb){
