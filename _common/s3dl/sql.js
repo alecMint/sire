@@ -6,7 +6,7 @@ var path = require('path')
 ;
 
 
-module.exports.backup = function(dbName,bucket){
+module.exports.backup = function(dbName,bucket,cb){
   fs.mkdir(tmpDir,function(err){
     if (err && err.code != 'EEXIST')
       return cb(err);

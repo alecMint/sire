@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var sql = require('../sql')
 ,argv = require('optimist').argv
 ;
