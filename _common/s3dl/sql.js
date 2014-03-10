@@ -63,7 +63,6 @@ module.exports.load = function(bucket,dbName,cb){
     s3cmd(['get',list[0].p,localPath],function(err){
       if (err)
         return cb(err);
-      zcat /var/www/m1.jewelmint.com/webwrite/dbdumps/acquiremint.sql.gz | mysql -uroot -pmarketinG78 acquiremint
       cp.exec('zcat '+localPath+' | mysql '+dbName,function(err){
         try {
           fs.unlinkSync(localPath);
