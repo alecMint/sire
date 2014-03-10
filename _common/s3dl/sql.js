@@ -41,9 +41,9 @@ function getBakList(bucket,dbName,cb){
   if (bucket[bucket.length-1] != '/')
     bucket = bucket+'/';  
   s3cmd(['ls','s3://'+bucket],function(err,data){
-    console.log(err,'\n',data,'\n');
     if (err)
       return cb(err);
-    cb(data);
+    console.log(data);
+    cb(false,data);
   });
 }
