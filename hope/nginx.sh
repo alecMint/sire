@@ -1,5 +1,7 @@
 # nginx conf
 
+nginxBackend="127.0.0.1:9000"
+
 cat > /etc/nginx/sites-available/hope <<FILE
 server {
     listen 80;
