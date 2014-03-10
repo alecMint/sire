@@ -13,7 +13,7 @@ sql.backup(dbName,bucket,function(err){
   if (err)
     return console.log(err);
   console.log(dbName+' backed to '+bucket);
-  sql.clean(bucket,dbName,2,function(err){
+  sql.clean(bucket,dbName,3,function(err){
     if (err)
       return console.log('error cleaning s3',err);
   });

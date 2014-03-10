@@ -33,8 +33,21 @@ module.exports.clean = function(bucket,dbName,histNum,cb){
   getBakList(bucket,dbName,function(err,list){
     if (err)
       return cb(err);
-    console.log(list);
-    cb();
+    var numToDel = numDeled = 0;
+    list.forEach(function(file,i){
+      if (i < histNum)
+        return;
+      ++numToDel;
+      s3cmd(['del',file.p],function(err){
+        if (err) {
+          cb(err);
+          return cb = function(){};
+        }
+        console.log('deleted '+file.p);
+        if (++numDeled == numToDel)
+          cb();
+      });
+    });
   });
 }
 
@@ -57,7 +70,7 @@ function getBakList(bucket,dbName,cb){
       }
     });
     files.sort(function(a,b){
-      return a.t-b.t;
+      return b.t-a.t;
     });
     cb(false,files);
   });
