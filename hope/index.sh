@@ -53,3 +53,7 @@ cd /root/sire/_common/s3dl
 npmi
 forever_run "./index.js -d /var/www/hope/web/wp-content/uploads -w /wp-content/uploads -b sire-hope/wp-content/uploads"
 cd $startpwd
+
+# fetch wordpress data
+node /root/sire/_common/s3dl/bin/loadsql.js -d wordpress -b sire-hope/sql
+
