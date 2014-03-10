@@ -10,7 +10,6 @@ startpwd=`pwd`
 ../_common/mysql.sh
 ../_common/nodejs.sh
 ../_common/forever.sh
-../_common/wordpress.sh /var/www/hope/web
 
 
 # nginx conf
