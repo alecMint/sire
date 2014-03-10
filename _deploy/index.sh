@@ -10,10 +10,11 @@ else
   echo 'user already has access to ec2, skipping cert copy'
 fi
 
-echo 'installing git...'
 if [ $updateAptGet == 1 ]; then
-    ssh ubuntu@$serverName "sudo apt-get update"
+  echo "updating apt-get..."
+  ssh ubuntu@$serverName "sudo apt-get update"
 fi
+echo 'installing git...'
 ssh ubuntu@$serverName "sudo apt-get -y install git-core"
 
 echo 'setting up deployment repo...'
