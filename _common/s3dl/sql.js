@@ -33,6 +33,7 @@ module.exports.clean = function(bucket,dbName,histNum,cb){
   getBakList(bucket,dbName,function(err,list){
     if (err)
       return cb(err);
+    console.log(list);
     cb();
   });
 }
@@ -43,7 +44,21 @@ function getBakList(bucket,dbName,cb){
   s3cmd(['ls','s3://'+bucket],function(err,data){
     if (err)
       return cb(err);
-    console.log(data);
-    cb(false,data);
+    var files = []
+    ,re = new RegExp(' (s3://'+bucket+dbName+'\.([0-9]+)\.sql\.gz)$')
+    console.log(re);
+    data.split('\n').forEach(function(l){
+      var m = l.match(re);
+      if (m && m[1] && m[2]) {
+        files.push({
+          t: +m[2]
+          ,p: m[1]
+        });
+      }
+    });
+    files.sort(function(a,b){
+      return a.t-b.t;
+    });
+    cb(false,files);
   });
 }
