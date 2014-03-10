@@ -22,7 +22,7 @@ fs.mkdir(tmpDir,function(err){
   cp.exec('mysqldump --opt -hlocalhost -uroot '+dbName+' | gzip > '+path,function(err){
     if (err)
       return console.log(err);
-    s3cmd(['put',remotePath,function(err){
+    s3cmd(['put',remotePath],function(err){
       if (err)
         console.log('failed to push '+path+' to '+remotePath,err);
       else
