@@ -17,7 +17,7 @@ fs.mkdir(tmpDir,function(err){
     return console.log(err);
   var fn = dbName+'.'+Date.now()+'.sql.gz'
   ,path = tmpDir+fn
-  ,remotePath = 's3://'+path.join([bucket,fn])]
+  ,remotePath = 's3://'+path.join([bucket,fn])
   ;
   cp.exec('mysqldump --opt -hlocalhost -uroot '+dbName+' | gzip > '+path,function(err){
     if (err)
