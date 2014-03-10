@@ -60,7 +60,6 @@ function getBakList(bucket,dbName,cb){
       return cb(err);
     var files = []
     ,re = new RegExp(' (s3://'+bucket+dbName+'\.([0-9]+)\.sql\.gz)$')
-    console.log(re);
     data.split('\n').forEach(function(l){
       var m = l.match(re);
       if (m && m[1] && m[2]) {
