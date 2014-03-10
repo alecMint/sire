@@ -58,7 +58,7 @@ module.exports.load = function(bucket,dbName,cb){
       return cb(err);
     if (!list[0])
       return cb();
-    var fn = path.basename(list[0])
+    var fn = path.basename(list[0].p)
     ,localPath = tmpDir+fn
     console.log(localPath);
     cb();
