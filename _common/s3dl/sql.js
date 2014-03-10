@@ -29,7 +29,7 @@ module.exports.backup = function(dbName,bucket,cb){
   });
 }
 
-module.exports.clean = function(bucket,dbName,cb){
+module.exports.clean = function(bucket,dbName,histNum,cb){
   getBakList(bucket,dbName,function(err,list){
     if (err)
       return cb(err);
