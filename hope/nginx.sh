@@ -8,7 +8,7 @@ server {
     root /var/www/hope/web;
     autoindex off;
 
-    access_log /var/log/nginx/test_log.log;
+    access_log /var/log/nginx/hope_access_log.log;
 
     gzip on; # use gzip compression
     gzip_min_length 1100;
