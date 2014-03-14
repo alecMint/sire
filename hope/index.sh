@@ -31,7 +31,7 @@ git pull origin master
 # wordpress
 echo 'create database if not exists wordpress' | mysql -uroot
 mkdir /var/www/hope/web/wp-content/uploads
-# list users: cat /etc/passwd
+# @todo: make next two lines a script and attach as a callback for s3 sync service
 chown -R www-data /var/www/hope/web/wp-content/uploads
 chmod -R +w /var/www/hope/web/wp-content/uploads
 
