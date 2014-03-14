@@ -31,8 +31,9 @@ git pull origin master
 # wordpress
 echo 'create database if not exists wordpress' | mysql -uroot
 mkdir /var/www/hope/web/wp-content/uploads
-chown www-data /var/www/hope/web/wp-content/uploads
-chmod +w /var/www/hope/web/wp-content/uploads
+# list users: cat /etc/passwd
+chown -R www-data /var/www/hope/web/wp-content/uploads
+chmod -R +w /var/www/hope/web/wp-content/uploads
 
 
 # test cname
