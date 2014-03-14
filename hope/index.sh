@@ -31,7 +31,7 @@ git pull origin master
 # wordpress
 echo 'create database if not exists wordpress' | mysql -uroot
 mkdir /var/www/hope/web/wp-content/uploads
-# @todo: make next two lines a script and attach as a callback for s3 sync service
+# we may have a problem when s3 pulls down a directory that wasnt previously given permissions...
 chown -R www-data /var/www/hope/web/wp-content/uploads
 chmod -R +w /var/www/hope/web/wp-content/uploads
 
