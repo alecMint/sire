@@ -40,7 +40,7 @@ chmod -R +w /var/www/hope/web/wp-content/uploads
 
 
 #secret configs
-echo "<?php\n" > /var/www/hope/web/config.override.php
+printf "<?php\n" > /var/www/hope/web/config.override.php
 local_php_config_add /var/www/hope/web/config.override.php hopeTwitterAppKey "$hopeTwitterAppKey"
 local_php_config_add /var/www/hope/web/config.override.php hopeTwitterAppSecret "$hopeTwitterAppSecret"
 
