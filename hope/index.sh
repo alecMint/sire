@@ -40,8 +40,8 @@ chmod -R +w /var/www/hope/web/wp-content/uploads
 
 
 #secret configs
-local_php_config_add hopeTwitterAppKey "$hopeTwitterAppKey"
-local_php_config_add hopeTwitterAppSecret "$hopeTwitterAppSecret"
+local_php_config_add /var/www/hope/web/config.override.php hopeTwitterAppKey "$hopeTwitterAppKey"
+local_php_config_add /var/www/hope/web/config.override.php hopeTwitterAppSecret "$hopeTwitterAppSecret"
 
 
 # test cname
