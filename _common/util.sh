@@ -53,6 +53,16 @@ localhost_add_cname(){
   fi
 }
 
+local_php_config_add(){
+  file=$1
+  key=$2
+  val=$3
+  search=`cat $file | grep "$key" | head -n1`
+  if [ "$search" == "" ]; then
+    echo "\$$key='$val';" >> $file
+  fi
+}
+
 forever_is_running(){
   forever list | grep "$1"
 }

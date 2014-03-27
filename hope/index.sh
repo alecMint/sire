@@ -39,6 +39,11 @@ chown -R www-data /var/www/hope/web/wp-content/uploads
 chmod -R +w /var/www/hope/web/wp-content/uploads
 
 
+#secret configs
+local_php_config_add hopeTwitterAppKey "$hopeTwitterAppKey"
+local_php_config_add hopeTwitterAppSecret "$hopeTwitterAppSecret"
+
+
 # test cname
 localhost_add_cname 'local.hopechapellongbeach.com'
 
