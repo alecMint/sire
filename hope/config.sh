@@ -1,3 +1,3 @@
 
-export hopeRepo="https://github.com/alecMint/hope.git"
+export hopeRepo="https://github.com/fluffybunnies/hope.git"
 export hopeS3Bucket="sire-hope"
