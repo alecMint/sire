@@ -6,9 +6,10 @@ var sql = require('../sql')
 
 var bucket = argv.b || argv.bucket
 ,dbName = argv.d || argv.database
-,numBaks = argv.n || argv.numbaks || 30
+,numBaks = +(argv.n || argv.numbaks || 30)
 ;
-if (!bucket || !dbName) throw "db and bucket required";
+if (!bucket || !dbName) throw 'db and bucket required';
+if (isNaN(numBaks)) throw 'num baks should be an integer';
 
 sql.backup(dbName,bucket,function(err){
   if (err)
