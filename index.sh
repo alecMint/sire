@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-if [ "$1" == "_deploy" ]; then
+if [ "$1" == "_deploy" ] || [ "$1" == "_deploy/" ]; then
   if [ "`which realpath`" == "" ]; then
     realpath() {
       echo `cd "${1}";pwd`
