@@ -1,3 +1,5 @@
+To Do
+- Package hooky and remove dups
 
 
 # clean up old server
