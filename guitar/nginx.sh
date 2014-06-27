@@ -6,7 +6,7 @@ cat > /etc/nginx/sites-available/guitar <<FILE
 server {
     listen 80;
 
-    server_name guitarlessonslongbeach.com local.guitarlessonslongbeach.com;
+    server_name guitarlessonslongbeach.com www.guitarlessonslongbeach.com local.guitarlessonslongbeach.com;
     root /var/www/guitar/web;
     autoindex off;
 
