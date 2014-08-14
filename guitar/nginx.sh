@@ -4,9 +4,14 @@ nginxBackend="127.0.0.1:9000"
 
 cat > /etc/nginx/sites-available/guitar <<FILE
 server {
+	listen 80;
+	server_name guitarlessonslongbeach.com;
+	return 301 http://www.guitarlessonslongbeach.com\$request_uri;
+}
+server {
     listen 80;
 
-    server_name guitarlessonslongbeach.com www.guitarlessonslongbeach.com local.guitarlessonslongbeach.com;
+    server_name www.guitarlessonslongbeach.com local.guitarlessonslongbeach.com;
     root /var/www/guitar/web;
     autoindex off;
 
