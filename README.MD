@@ -1,6 +1,6 @@
 To Do
 - Package hooky and remove dups
-- Fix /bin/angel.sh
+- Update _common/util.sh to use $sireDir as passed arg instead of hardcoded $dir
 
 
 # clean up old server
