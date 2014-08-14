@@ -6,7 +6,7 @@ cat > /etc/nginx/sites-available/alechulce <<FILE
 server {
 	listen 80;
 	server_name alechulce.com;
-	return 301 http://www.alechulce.com$request_uri;
+	return 301 http://www.alechulce.com\$request_uri;
 }
 server {
 	listen 80;
