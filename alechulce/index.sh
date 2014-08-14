@@ -30,8 +30,8 @@ localhost_add_cname 'local.alechulce.com'
 
 # deploy hook service
 IP=`public_ip`
+echo '[{"repo":"/var/www/alechulce","branch":"master"}]' > '/var/www/alechulce/hooky.json'
 cd $startpwd/hooky
 npmi
-echo '[{"repo":"/var/www/alechulce","branch":"master"}]' > hooky.json
-forever_run "./index.js -t $githubHookAuthToken -a $IP -c "`pwd`"/hooky.json"
+forever_run "./index.js -t $githubHookAuthToken -a $IP -c /var/www/alechulce/hooky.json"
 cd $startpwd
