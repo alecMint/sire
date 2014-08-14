@@ -58,6 +58,7 @@ forever_run "./index.js -t $githubHookAuthToken -a $IP -c /var/www/hope/hooky.js
 cd $startpwd
 
 # s3 sync service
+# NOTE: the angel script is pointed to wrong location, need to update to use $sireDir
 cd $startpwd/../_common/s3dl
 npmi
 forever_run "./index.js -d /var/www/hope/web/wp-content/uploads -w /wp-content/uploads -b sire-hope/wp-content/uploads"
