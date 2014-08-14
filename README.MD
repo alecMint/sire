@@ -1,6 +1,6 @@
 To Do
 - Package hooky and remove dups
-- the angel script in forever_run is pointed to wrong location, need to update to use $sireDir
+- Fix /bin/angel.sh
 
 
 # clean up old server
