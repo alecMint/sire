@@ -18,17 +18,17 @@ echo 'installing git...'
 ssh ubuntu@$serverName "sudo apt-get -y install git-core"
 
 echo 'setting up deployment repo...'
-ssh ubuntu@$serverName "sudo rm -fr /root/sire"
-ssh ubuntu@$serverName "sudo git clone $sireRepo /root/sire"
+ssh ubuntu@$serverName "sudo rm -fr $sireDir"
+ssh ubuntu@$serverName "sudo git clone $sireRepo $sireDir"
 
 echo 'copying github tokens...'
-remote_config_add $serverName /root/sire/secrets githubHookAuthToken "$githubHookAuthToken"
-#ssh ubuntu@$serverName "echo '{\"githubHookAuthToken\":\"$githubHookAuthToken\"}' | sudo tee /root/sire/config.local.json > /dev/null"
+remote_config_add $serverName $sireDir/secrets githubHookAuthToken "$githubHookAuthToken"
+#ssh ubuntu@$serverName "echo '{\"githubHookAuthToken\":\"$githubHookAuthToken\"}' | sudo tee $sireDir/config.local.json > /dev/null"
 
 echo 'copying amazon tokens...'
-remote_config_add $serverName /root/sire/secrets awsAccessKey "$awsAccessKey"
-remote_config_add $serverName /root/sire/secrets awsAccessSecret "$awsAccessSecret"
+remote_config_add $serverName $sireDir/secrets awsAccessKey "$awsAccessKey"
+remote_config_add $serverName $sireDir/secrets awsAccessSecret "$awsAccessSecret"
 
 echo 'copying service specific secrets...'
-remote_config_add $serverName /root/sire/secrets hopeTwitterAppKey "$hopeTwitterAppKey"
-remote_config_add $serverName /root/sire/secrets hopeTwitterAppSecret "$hopeTwitterAppSecret"
+remote_config_add $serverName $sireDir/secrets hopeTwitterAppKey "$hopeTwitterAppKey"
+remote_config_add $serverName $sireDir/secrets hopeTwitterAppSecret "$hopeTwitterAppSecret"
