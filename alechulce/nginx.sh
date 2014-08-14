@@ -6,7 +6,7 @@ cat > /etc/nginx/sites-available/alechulce <<FILE
 server {
     listen 80;
 
-    server_name alechulce.com local.alechulce.com;
+    server_name alechulce.com www.alechulce.com local.alechulce.com;
     root /var/www/alechulce/web;
     autoindex off;
 
