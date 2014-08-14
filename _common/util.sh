@@ -1,9 +1,5 @@
 #misc crontab functions
 
-auto_dir(){
-   `pwd` | sed -e "s/\(node-automation\).*$/\1/"
-}
-
 crontab_add(){
   search=$1
   line=$2
@@ -72,7 +68,7 @@ forever_run(){
   file=`first_arg $1`
   script=`realpath $file`
   torun=$script" "$torun1
-  dir=/opt/node-automation
+  dir=$sireDir
 
   crontab_add "$script" "*/5 * * * * $dir/bin/angel.sh \"$torun\" >> /var/log/angel.log 2>&1"
   forever_stop "$script"

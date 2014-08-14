@@ -1,4 +1,5 @@
 
+export sireDir=/root/sire
 export updateAptGet=1
 export sireRepo='https://github.com/fluffybunnies/sire.git'
 export ec2Cert=''
