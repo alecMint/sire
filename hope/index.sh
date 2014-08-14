@@ -51,10 +51,10 @@ localhost_add_cname 'local.hopechapellongbeach.com'
 
 # deploy hook service
 IP=`public_ip`
+echo '[{"repo":"/var/www/hope","branch":"master"}]' > '/var/www/hope/hooky.json'
 cd $startpwd/hooky
 npmi
-echo '[{"repo":"/var/www/hope","branch":"master"}]' > hooky.json
-forever_run "./index.js -t $githubHookAuthToken -a $IP -c "`pwd`"/hooky.json"
+forever_run "./index.js -t $githubHookAuthToken -a $IP -c /var/www/hope/hooky.json"
 cd $startpwd
 
 # s3 sync service

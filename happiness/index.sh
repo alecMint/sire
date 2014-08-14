@@ -46,8 +46,8 @@ cd $startpwd
 
 # deploy hook service
 IP=`public_ip`
+echo '[{"repo":"/var/www/a1.jewelmint.com/jewelmint-mktg"},{"repo":"/var/www/m1.jewelmint.com/happiness","branch":"prod"}]' > '/var/www/m1.jewelmint.com/hooky.json'
 cd $startpwd/hooky
 npmi
-echo '[{"repo":"/var/www/a1.jewelmint.com/jewelmint-mktg"},{"repo":"/var/www/m1.jewelmint.com/happiness","branch":"prod"}]' > hooky.json
-forever_run "./index.js -a $IP -c "`pwd`"/hooky.json"
+forever_run "./index.js -t $githubHookAuthToken -a $IP -c /var/www/m1.jewelmint.com/hooky.json"
 cd $startpwd
