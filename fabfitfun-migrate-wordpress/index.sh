@@ -14,14 +14,12 @@ startpwd=`pwd`
 # nginx conf
 . ./nginx.sh
 
-webDir='/var/www/migrate-wordpress'
-
 # repo
-if [ ! -d "$webDir" ]; then
-  mkdir -p "$webDir"
-  git clone $fabFitFunMigrateWordpressRepo "$webDir"
+if [ ! -d "$installDir" ]; then
+  mkdir -p "$installDir"
+  git clone $gitRepo "$installDir"
 fi
-cd "$webDir"
+cd "$installDir"
 git checkout master
 git pull origin master
 
@@ -32,8 +30,8 @@ localhost_add_cname 'local.fffdev-migrate-wordpress.com'
 
 # deploy hook service
 IP=`public_ip`
-echo '[{"repo":"'$webDir'","branch":"master"}]' > $webDir'/hooky.json'
+echo '[{"repo":"'$installDir'","branch":"master"}]' > $installDir'/hooky.json'
 cd $startpwd/hooky
 npmi
-forever_run "./index.js -t $githubHookAuthToken -a $IP -c $webDir/hooky.json"
+forever_run "./index.js -t $githubHookAuthToken -a $IP -c $installDir/hooky.json"
 cd $startpwd
