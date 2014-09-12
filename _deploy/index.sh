@@ -32,3 +32,10 @@ remote_config_add $serverName $sireDir/secrets awsAccessSecret "$awsAccessSecret
 echo 'copying service specific secrets...'
 remote_config_add $serverName $sireDir/secrets hopeTwitterAppKey "$hopeTwitterAppKey"
 remote_config_add $serverName $sireDir/secrets hopeTwitterAppSecret "$hopeTwitterAppSecret"
+
+if [ "$machineSshKeyPublic" != '' ]; then
+	echo 'copying machine ssh keys...'
+	ssh ubuntu@$serverName "sudo echo '$machineSshKeyPublic' > /root/.ssh/id_rsa.pub"
+	ssh ubuntu@$serverName "sudo echo '$machineSshKeyPrivate' > /root/.ssh/id_rsa"
+fi
+
