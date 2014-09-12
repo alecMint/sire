@@ -40,5 +40,6 @@ if [ "$machineSshKeyPublic" != '' ]; then
 	echo 'copying machine ssh keys...'
 	ssh ubuntu@$serverName "echo \"echo '$machineSshKeyPublic' > /root/.ssh/id_rsa.pub\" | sudo -s"
 	ssh ubuntu@$serverName "echo \"echo '$machineSshKeyPrivate' > /root/.ssh/id_rsa\" | sudo -s"
+	ssh ubuntu@$serverName "chmod 0400 /root/.ssh/id_rsa"
 fi
 
