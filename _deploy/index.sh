@@ -1,5 +1,6 @@
 #!/bin/bash
 # temp solution for "sudo: unable to resolve host"
+# ssh -i/Users/ahulce/.ssh/fabfitfun1.pem ubuntu@54.165.124.226
 # echo "127.0.0.1    `hostname`" >> /etc/hosts
 
 echo 'serverName: '$serverName
