@@ -6,7 +6,7 @@ else
   echo "nginx conf passed"
 fi
 
-if [ "`cat /var/www/migrate-wordpress/.git/config | grep -oP "${migrateWordpressRepo}$"`" != $fabFitFunMigrateWordpressRepo ]; then
+if [ "`cat /var/www/migrate-wordpress/.git/config | grep -oP "${migrateWordpressRepo}$"`" != $migrateWordpressRepo ]; then
   echo "repo missing"
   exit 1
 else
