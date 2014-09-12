@@ -38,7 +38,7 @@ remote_config_add $serverName $sireDir/secrets hopeTwitterAppSecret "$hopeTwitte
 
 if [ "$machineSshKeyPublic" != '' ]; then
 	echo 'copying machine ssh keys...'
-	ssh ubuntu@$serverName "sudo echo '$machineSshKeyPublic' > /root/.ssh/id_rsa.pub"
-	ssh ubuntu@$serverName "sudo echo '$machineSshKeyPrivate' > /root/.ssh/id_rsa"
+	ssh ubuntu@$serverName "echo \"echo '$machineSshKeyPublic' > /root/.ssh/id_rsa.pub\" | sudo -s"
+	ssh ubuntu@$serverName "echo \"echo '$machineSshKeyPrivate' > /root/.ssh/id_rsa\" | sudo -s"
 fi
 
