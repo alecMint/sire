@@ -32,8 +32,8 @@ localhost_add_cname 'local.fffdev-migrate-wordpress.com'
 
 # deploy hook service
 IP=`public_ip`
-echo '[{"repo":"/var/www/migrate-wordpress","branch":"master"}]' > '/var/www/migrate-wordpress/hooky.json'
+echo '[{"repo":"'$webDir'","branch":"master"}]' > $webDir'/hooky.json'
 cd $startpwd/hooky
 npmi
-forever_run "./index.js -t $githubHookAuthToken -a $IP -c /var/www/migrate-wordpress/hooky.json"
+forever_run "./index.js -t $githubHookAuthToken -a $IP -c $webDir/hooky.json"
 cd $startpwd
