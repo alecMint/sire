@@ -14,12 +14,14 @@ startpwd=`pwd`
 # nginx conf
 . ./nginx.sh
 
+webDir='/var/www/migrate-wordpress'
+
 # repo
-if [ ! -d /var/www/migrate-wordpress ]; then
-  mkdir -p /var/www/migrate-wordpress
-  git clone $fabfitfunRepo /var/www/migrate-wordpress
+if [ ! -d "$webDir" ]; then
+  mkdir -p "$webDir"
+  git clone $fabFitFunMigrateWordpressRepo "$webDir"
 fi
-cd /var/www/migrate-wordpress
+cd "$webDir"
 git checkout master
 git pull origin master
 
@@ -33,5 +35,5 @@ IP=`public_ip`
 echo '[{"repo":"/var/www/migrate-wordpress","branch":"master"}]' > '/var/www/migrate-wordpress/hooky.json'
 cd $startpwd/hooky
 npmi
-forever_run "./index.js -t $githubHookAuthTokenFabFitFun -a $IP -c /var/www/migrate-wordpress/hooky.json"
+forever_run "./index.js -t $githubHookAuthToken -a $IP -c /var/www/migrate-wordpress/hooky.json"
 cd $startpwd
