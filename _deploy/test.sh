@@ -31,14 +31,16 @@ fi
 if [ "$machineSshKeyPublic" != '' ]; then
 	t=`ssh ubuntu@$serverName "sudo cat /root/.ssh/id_rsa.pub 2>/dev/null"`
 	if [ "$t" != "$machineSshKeyPublic" ]; then
-		echo "machine public key installed"
-	else
 		echo "machine public key missing"
+		exit 1
+	else
+		echo "machine public key installed"
 	fi
 	t=`ssh ubuntu@$serverName "sudo cat /root/.ssh/id_rsa 2>/dev/null"`
 	if [ "$t" != "$machineSshKeyPrivate" ]; then
-		echo "machine private key installed"
-	else
 		echo "machine private key missing"
+		exit 1
+	else
+		echo "machine private key installed"
 	fi
 fi
