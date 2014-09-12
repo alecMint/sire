@@ -1,26 +1,21 @@
 #!/bin/bash
 # temp solution for "sudo: unable to resolve host"
 # ssh -i/Users/ahulce/.ssh/fabfitfun1.pem ubuntu@54.165.124.226
-# echo "127.0.0.1    `hostname`" >> /etc/hosts
+# echo "127.0.0.1		`hostname`" >> /etc/hosts
 
 echo 'serverName: '$serverName
 echo 'ec2Cert: '$ec2Cert
 
 if [ "`ssh ubuntu@$serverName 'echo "ok"'`" != "ok" ]; then
-  echo 'copying ssh public key...'
-  ssh -oStrictHostKeyChecking=no -i"$ec2Cert" ubuntu@$serverName "echo '$sshKey' >> ~/.ssh/authorized_keys"
+	echo 'copying ssh public key...'
+	ssh -oStrictHostKeyChecking=no -i"$ec2Cert" ubuntu@$serverName "echo '$sshKey' >> ~/.ssh/authorized_keys"
 else
-  echo 'user already has access to ec2, skipping cert copy'
+	echo 'user already has access to ec2, skipping cert copy'
 fi
 
-#if [ `ssh ubuntu@$serverName "sudo echo 'ok' 2>&1"` != 'ok' ]; then
-#	hostname=`ssh ubuntu@$serverName "cat /etc/hostname"`
-#	ssh ubuntu@$serverName "echo '127.0.1.1    $hostname' >> /etc/hosts"
-#fi
-
 if [ $updateAptGet == 1 ]; then
-  echo "updating apt-get..."
-  ssh ubuntu@$serverName "sudo apt-get update"
+	echo "updating apt-get..."
+	ssh ubuntu@$serverName "sudo apt-get update"
 fi
 echo 'installing git...'
 ssh ubuntu@$serverName "sudo apt-get -y install git-core"
