@@ -1,3 +1,5 @@
+Team effort with ma main man Ryan Day (github.com/soldair)
+
 To Do
 - Package hooky and remove dups
 - Update _common/util.sh to use $sireDir as passed arg instead of hardcoded $dir
