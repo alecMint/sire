@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=v0.10.26
+VERSION=v0.10.29
 PLATFORM=linux
 ARCH=x64
 PREFIX="/usr/local"
