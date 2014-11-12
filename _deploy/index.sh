@@ -21,7 +21,7 @@ echo 'installing git...'
 ssh ubuntu@$serverName "sudo apt-get -y install git-core"
 
 echo "adding git's public key to known_hosts" # 2>&1 ?
-ssh -oStrictHostKeyChecking=no git@github.com
+ssh ubuntu@$serverName "sudo ssh -oStrictHostKeyChecking=no git@github.com"
 
 echo 'setting up deployment repo...'
 ssh ubuntu@$serverName "sudo rm -fr $sireDir"
