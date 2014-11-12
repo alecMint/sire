@@ -70,7 +70,7 @@ forever_run(){
   torun=$script" "$torun1
   dir=/root/sire # @todo: pass and use $sireDir
 
-  crontab_add "$script" "*/5 * * * * $dir/bin/angel.sh \"$torun\" >> /var/log/angel.log 2>&1"
+  crontab_add "$script" "* * * * * $dir/bin/angel.sh \"$torun\" >> /var/log/angel.log 2>&1"
   forever_stop "$script"
 
   echo "torun1: $torun1"
