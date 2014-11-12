@@ -6,7 +6,7 @@ startpwd=`pwd`
 # modules
 #../_common/nginx.sh
 #../_common/php.sh
-#../_common/mysql.sh
+../_common/mysql.sh
 ../_common/nodejs.sh
 ../_common/forever.sh
 
