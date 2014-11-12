@@ -23,7 +23,8 @@ ssh ubuntu@$serverName "sudo apt-get -y install git-core"
 echo 'setting up deployment repo...'
 ssh ubuntu@$serverName "sudo rm -fr $sireDir"
 ssh ubuntu@$serverName "sudo git clone $sireRepo $sireDir"
-ssh ubuntu@$serverName "sudo mkdir -p $sireDir/_common/s3dl/node_modules && sudo npm install --prefix $sireDir/_common/s3dl"
+# dont think i need this...
+#ssh ubuntu@$serverName "sudo mkdir -p $sireDir/_common/s3dl/node_modules && sudo npm install --prefix $sireDir/_common/s3dl"
 
 echo 'copying github tokens...'
 remote_config_add $serverName $sireDir/secrets githubHookAuthToken "$githubHookAuthToken"
