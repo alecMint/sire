@@ -20,6 +20,7 @@ cd "$installDir"
 git checkout master
 git pull origin master
 npm install
+forever_run ./server.js
 
 
 # deploy hook service
