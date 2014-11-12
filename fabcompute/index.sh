@@ -19,6 +19,7 @@ fi
 cd "$installDir"
 git checkout master
 git pull origin master
+npm install
 
 
 # deploy hook service

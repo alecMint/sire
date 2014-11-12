@@ -13,6 +13,9 @@ if [ "$CVERSION" != "$VERSION" ]; then
   curl http://nodejs.org/dist/$VERSION/node-$VERSION-$PLATFORM-$ARCH.tar.gz \
     | tar xzvf - --strip-components=1 -C "$PREFIX"
   # what is the wiggles for biggles?
+
+  # might need this to avoid npm install error
+  #mkdir -p /root/.node-gyp/$VERSION
 else
   echo "node is already up to date!"
 fi
