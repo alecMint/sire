@@ -11,11 +11,12 @@ startpwd=`pwd`
 ../_common/forever.sh
 
 
-# init boot hook
-gen_add_line_to_file '/etc/init/fabcompute' 'echo "init fabcompute"' '+x'
-gen_add_line_to_file '/etc/init/fabcompute' 'export NOREBOOT=1'
-gen_add_line_to_file '/etc/init/fabcompute' '/root/sire/index.sh fabcompute'
-
+# reboot hook
+#gen_add_line_to_file '/etc/rc0.d' 'echo "init fabcompute"' '+x'
+#gen_add_line_to_file '/etc/rc0.d' 'export NOREBOOT=1'
+#gen_add_line_to_file '/etc/rc0.d' '/root/sire/index.sh fabcompute'
+crontab_add 'fabcompute-reboot' \
+'@reboot export NOREBOOT=1;/root/sire/index.sh fabcompute'
 
 
 # repo
@@ -47,8 +48,9 @@ for f in $sessionFiles; do
 	gen_add_line_to_file "$f" 'session required pam_limits.so'
 done
 # reboot...
-if [ "$NOREBOOT" == "" ]; then
-	sudo reboot
-fi
+echo "NOREBOOT == $NOREBOOT"
+#if [ "$NOREBOOT" == "" ]; then
+#	sudo reboot
+#fi
 # END set file open limit
 
