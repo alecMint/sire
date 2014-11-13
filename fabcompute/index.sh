@@ -57,7 +57,6 @@ gen_add_line_to_file '/etc/security/limits.conf' 'root soft nofile 4096'
 # session files...
 sessionFiles=/etc/pam.d/common-session*
 for f in $sessionFiles; do
-	echo "$f"
 	gen_add_line_to_file "$f" 'session required pam_limits.so'
 done
 # reboot...
