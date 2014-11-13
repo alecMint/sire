@@ -47,6 +47,7 @@ for f in $sessionFiles; do
 done
 # reboot...
 reboot=1
+echo "GETTING OPTS..."
 while getopts 'r:' opt; do
 	echo "OPTS..."
 	echo $opt
