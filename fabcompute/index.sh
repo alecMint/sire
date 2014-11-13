@@ -16,7 +16,7 @@ startpwd=`pwd`
 #gen_add_line_to_file '/etc/rc0.d' 'export NOREBOOT=1'
 #gen_add_line_to_file '/etc/rc0.d' '/root/sire/index.sh fabcompute'
 crontab_add 'fabcompute-reboot' \
-'@reboot export NOREBOOT=1;/root/sire/index.sh fabcompute'
+'@reboot echo "fabcompute-reboot";export NOREBOOT=1;/root/sire/index.sh fabcompute'
 
 
 # repo
