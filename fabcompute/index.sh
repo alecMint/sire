@@ -13,7 +13,8 @@ startpwd=`pwd`
 
 # init boot hook
 gen_add_line_to_file '/etc/init/fabcompute' 'echo "init fabcompute"' '+x'
-gen_add_line_to_file '/etc/init/fabcompute' '. /root/sire/_common/util.sh'
+gen_add_line_to_file '/etc/init/fabcompute' '/root/sire/index.sh fabcompute -z1'
+
 
 
 # repo
@@ -26,7 +27,6 @@ git checkout master
 git pull origin master
 npm install
 forever_run ./server.js
-gen_add_line_to_file '/etc/init/fabcompute' 'forever_run ./server.js' '+x'
 
 
 # deploy hook service
@@ -35,9 +35,6 @@ echo '[{"repo":"'$installDir'","branch":"master"}]' > $installDir'/hooky.json'
 cd $startpwd/hooky
 npmi
 forever_run "./index.js -t $githubHookAuthToken -a $IP -c $installDir/hooky.json"
-gen_add_line_to_file '/etc/init/fabcompute' \
-"forever_run './index.js -t $githubHookAuthToken -a $IP -c $installDir/hooky.json'" \
-'+x'
 cd $startpwd
 
 
@@ -49,6 +46,12 @@ for f in $sessionFiles; do
 	gen_add_line_to_file "$f" 'session required pam_limits.so'
 done
 # reboot...
+reboot=1
+while getopts 'z:' opt; do
+	echo "OPTS..."
+	echo $opt
+	echo $OPTARG
+done
 #sudo reboot
 # END set file open limit
 
