@@ -49,8 +49,8 @@ for f in $sessionFiles; do
 done
 # reboot...
 echo "FABCOMPUTE_REBOOT == $FABCOMPUTE_REBOOT"
-#if [ "$NOREBOOT" == "" ]; then
-#	sudo reboot
-#fi
+if [ "$FABCOMPUTE_REBOOT" == "" ]; then
+	sudo reboot
+fi
 # END set file open limit
 
