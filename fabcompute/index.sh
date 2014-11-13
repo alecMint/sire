@@ -13,7 +13,7 @@ startpwd=`pwd`
 
 # reboot hook
 sed -i '/exit 0/d' /etc/rc.local
-gen_add_line_to_file '/etc/rc.local' '/root/sire/fabcompute/startup.sh' '' 'top'
+gen_add_line_to_file '/etc/rc.local' '/root/sire/fabcompute/onstartup.sh' '' 'top'
 gen_add_line_to_file '/etc/rc.local' 'exit 0'
 #crontab_add 'FABCOMPUTE_REBOOT' '@reboot export FABCOMPUTE_REBOOT=1; /root/sire/index.sh fabcompute; unset FABCOMPUTE_REBOOT'
 #gen_add_line_to_file '/etc/rc0.d' 'echo "init fabcompute"'
