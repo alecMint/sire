@@ -43,7 +43,7 @@ cd $startpwd/hooky
 npmi
 forever_run "./index.js -t $githubHookAuthToken -a $IP -c $installDir/hooky.json"
 gen_add_line_to_file '/etc/init/fabcompute' \
-'forever_run "./index.js -t $githubHookAuthToken -a $IP -c $installDir/hooky.json"' \
+"forever_run './index.js -t $githubHookAuthToken -a $IP -c $installDir/hooky.json'" \
 '+x'
 cd $startpwd
 
