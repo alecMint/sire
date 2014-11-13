@@ -13,7 +13,7 @@ startpwd=`pwd`
 
 # init boot hook
 gen_add_line_to_file '/etc/init/fabcompute' 'echo "init fabcompute"' '+x'
-gen_add_line_to_file '/etc/init/fabcompute' '/root/sire/index.sh fabcompute -z1'
+gen_add_line_to_file '/etc/init/fabcompute' '/root/sire/index.sh fabcompute -r1'
 
 
 
@@ -47,7 +47,7 @@ for f in $sessionFiles; do
 done
 # reboot...
 reboot=1
-while getopts 'z:' opt; do
+while getopts 'r:' opt; do
 	echo "OPTS..."
 	echo $opt
 	echo $OPTARG
