@@ -13,7 +13,8 @@ startpwd=`pwd`
 
 # init boot hook
 gen_add_line_to_file '/etc/init/fabcompute' 'echo "init fabcompute"' '+x'
-gen_add_line_to_file '/etc/init/fabcompute' '/root/sire/index.sh fabcompute -r1'
+gen_add_line_to_file '/etc/init/fabcompute' 'export NOREBOOT=1'
+gen_add_line_to_file '/etc/init/fabcompute' '/root/sire/index.sh fabcompute'
 
 
 
@@ -47,12 +48,7 @@ for f in $sessionFiles; do
 done
 # reboot...
 reboot=1
-echo "GETTING OPTS..."
-while getopts 'r:' opt; do
-	echo "OPTS..."
-	echo $opt
-	echo $OPTARG
-done
+echo "NOREBOOT? $NOREBOOT"
 #sudo reboot
 # END set file open limit
 
