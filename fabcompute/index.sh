@@ -49,7 +49,7 @@ cd $startpwd
 profFile='/root/.profile'
 if [ ! -f $profFile ]; then
 	touch $profFile
-	chmod 644 $profFile
+	chmod 0644 $profFile
 fi
 gen_add_line_to_file "$profFile" 'ulimit -Sn 4096'
 # limits...
