@@ -15,8 +15,8 @@ startpwd=`pwd`
 #gen_add_line_to_file '/etc/rc0.d' 'echo "init fabcompute"' '+x'
 #gen_add_line_to_file '/etc/rc0.d' 'export NOREBOOT=1'
 #gen_add_line_to_file '/etc/rc0.d' '/root/sire/index.sh fabcompute'
-crontab_add 'fabcompute-reboot' \
-'@reboot echo "fabcompute-reboot";export NOREBOOT=1;/root/sire/index.sh fabcompute'
+crontab_add 'FABCOMPUTE_REBOOT' \
+'@reboot export FABCOMPUTE_REBOOT=1; /root/sire/index.sh fabcompute; unset FABCOMPUTE_REBOOT'
 
 
 # repo
@@ -48,7 +48,7 @@ for f in $sessionFiles; do
 	gen_add_line_to_file "$f" 'session required pam_limits.so'
 done
 # reboot...
-echo "NOREBOOT == $NOREBOOT"
+echo "FABCOMPUTE_REBOOT == $FABCOMPUTE_REBOOT"
 #if [ "$NOREBOOT" == "" ]; then
 #	sudo reboot
 #fi
