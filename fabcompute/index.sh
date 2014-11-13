@@ -47,8 +47,8 @@ for f in $sessionFiles; do
 	gen_add_line_to_file "$f" 'session required pam_limits.so'
 done
 # reboot...
-reboot=1
-echo "NOREBOOT? $NOREBOOT"
-#sudo reboot
+if [ "$NOREBOOT" == "" ]; then
+	sudo reboot
+fi
 # END set file open limit
 
