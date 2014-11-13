@@ -1,12 +1,5 @@
 #!/bin/bash
 
-echo "GETTING OPTS..."
-while getopts 'r:' opt; do
-	echo "OPTS..."
-	echo $opt
-	echo $OPTARG
-done
-
 if [ "$1" == "_deploy" ] || [ "$1" == "_deploy/" ]; then
   if [ "`which realpath`" == "" ]; then
     realpath() {
