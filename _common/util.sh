@@ -90,6 +90,10 @@ forever_stop(){
   fi
 }
 
+forever_uid(){
+	forever list | grep $1 | awk '{print $3}' | sed -e 's/\[\|\]//g'
+}
+
 forever_index(){
   forever list | grep $1 | awk '{print $2}' | sed -e 's/\[\|\]//g'
 }
