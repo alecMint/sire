@@ -42,3 +42,25 @@ cd $startpwd/hooky
 npmi
 forever_run "./index.js -t $githubHookAuthToken -a $IP -c $installDir/hooky.json"
 cd $startpwd
+
+
+# BEGIN set file open limit
+# shell...
+profFile='/root/.profile'
+if [ ! -f $profFile ]; then
+	touch $profFile
+	chmod 644 $profFile
+fi
+gen_add_line_to_file "$profFile" 'ulimit -Sn 4096'
+# limits...
+gen_add_line_to_file '/etc/security/limits.conf' 'root soft nofile 4096'
+# session files...
+sessionFiles=/etc/pam.d/common-session*
+for f in $sessionFiles; do
+	echo "$f"
+	gen_add_line_to_file "$f" 'session required pam_limits.so'
+done
+# reboot...
+sudo reboot
+# END set file open limit
+

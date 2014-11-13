@@ -59,6 +59,15 @@ local_php_config_add(){
   fi
 }
 
+gen_add_line_to_file(){
+	file=$1
+	line=$2
+	search=`cat $file | grep "$line" | head -n1`
+	if [ "$search" == "" ]; then
+		echo "$line" >> $file
+	fi
+}
+
 forever_is_running(){
   forever list | grep "$1"
 }
