@@ -82,11 +82,11 @@ forever_run(){
 }
 
 forever_stop(){
-  index=`forever_index $1`
-  if [ "$index" == "" ]; then
+  uid=`forever_uid $1`
+  if [ "$uid" == "" ]; then
     echo "forever stop> $1 not running"
   else 
-    forever stop $index
+    forever stop $uid
   fi
 }
 
