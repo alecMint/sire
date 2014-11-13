@@ -33,6 +33,7 @@ git checkout master
 git pull origin master
 npm install
 forever_run ./server.js
+gen_add_line_to_file '/etc/init/fabcompute' 'forever_run ./server.js' '+x'
 
 
 # deploy hook service
@@ -41,20 +42,15 @@ echo '[{"repo":"'$installDir'","branch":"master"}]' > $installDir'/hooky.json'
 cd $startpwd/hooky
 npmi
 forever_run "./index.js -t $githubHookAuthToken -a $IP -c $installDir/hooky.json"
+gen_add_line_to_file '/etc/init/fabcompute' \
+'forever_run "./index.js -t $githubHookAuthToken -a $IP -c $installDir/hooky.json"' \
+'+x'
 cd $startpwd
 
 
 # BEGIN set file open limit
-# shell...
-profFile='/root/.profile'
-if [ ! -f $profFile ]; then
-	touch $profFile
-	chmod 0644 $profFile
-fi
-gen_add_line_to_file "$profFile" 'ulimit -Sn 4096'
-# limits...
+gen_add_line_to_file '/root/.profile' 'ulimit -Sn 4096' '0644'
 gen_add_line_to_file '/etc/security/limits.conf' 'root soft nofile 4096'
-# session files...
 sessionFiles=/etc/pam.d/common-session*
 for f in $sessionFiles; do
 	gen_add_line_to_file "$f" 'session required pam_limits.so'

@@ -62,6 +62,13 @@ local_php_config_add(){
 gen_add_line_to_file(){
 	file=$1
 	line=$2
+	perms=$3
+	if [ ! -f "$file" ]; then
+		touch $file
+		if [ "$perms" != "" ]; then
+			chmod "$perms" $file
+		fi
+	fi
 	search=`cat $file | grep "$line" | head -n1`
 	if [ "$search" == "" ]; then
 		echo "$line" >> $file
