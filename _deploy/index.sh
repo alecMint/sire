@@ -6,7 +6,7 @@
 echo 'serverName: '$serverName
 echo 'ec2Cert: '$ec2Cert
 
-if [ "`ssh ubuntu@$serverName 'echo "ok"'`" != "ok" ]; then
+if [ "`ssh -oStrictHostKeyChecking=no ubuntu@$serverName 'echo "ok"'`" != "ok" ]; then
 	echo 'copying ssh public key...'
 	ssh -oStrictHostKeyChecking=no -i"$ec2Cert" ubuntu@$serverName "echo '$sshKey' >> ~/.ssh/authorized_keys"
 else
