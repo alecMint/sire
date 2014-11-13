@@ -11,17 +11,10 @@ startpwd=`pwd`
 ../_common/forever.sh
 
 
-# set higher ulimit
-profFile='/root/.profile'
-setLimit='ulimit -Sn 4096'
-if [ ! -f $profFile ]; then
-	touch $profFile
-	chmod 644 $profFile
-fi
-check=`grep "$setLimit" $profFile`
-if [ "$check" == "" ]; then
-	echo $setLimit >> $profFile
-fi
+# init boot hook
+gen_add_line_to_file '/etc/init/fabcompute' 'echo "init fabcompute"' '+x'
+gen_add_line_to_file '/etc/init/fabcompute' '. /root/sire/_common/util.sh'
+
 
 # repo
 if [ ! -d "$installDir" ]; then
