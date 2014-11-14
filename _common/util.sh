@@ -72,7 +72,9 @@ gen_add_line_to_file(){
 	search=`cat $file | grep "$line" | head -n1`
 	if [ "$search" == "" ]; then
 		echo "$line" >> $file
+		echo '1'
 	fi
+	echo '0'
 }
 
 forever_is_running(){
