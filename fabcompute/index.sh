@@ -27,6 +27,8 @@ cd "$installDir"
 git checkout master
 git pull origin master
 npm install
+# give ubuntu access to uploads directory
+chown ubuntu /var/www/scripts/uploads
 forever_run ./server.js
 
 
