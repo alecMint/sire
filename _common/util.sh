@@ -102,7 +102,8 @@ forever_stop(){
   index=`forever_uid $1` # was using index before, but had issues when stopping index 0
   if [ "$index" == "" ]; then
     echo "forever stop> $1 not running"
-  else 
+  else
+  	/usr/local/bin/forever list
     /usr/local/bin/forever stop $index
   fi
 }
