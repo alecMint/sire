@@ -135,7 +135,9 @@ everything_but(){
     if [ "$a" == "0" ]; then
       a=1
     else
-      out=$out" "$arg
+    	if [ "$arg" != "" ]; then
+      	out=$out" "$arg
+      fi
     fi
   done
   echo $out
