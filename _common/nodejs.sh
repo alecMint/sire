@@ -9,7 +9,7 @@ CVERSION=`node -v 2> /dev/null`
 
 if [ "$CVERSION" != "$VERSION" ]; then
   # might need this to avoid npm install error
-  mkdir -p /root/.node-gyp/$VERSION
+  #mkdir -p /root/.node-gyp/$VERSION
 
 	# mkdir -p "/usr/local" && curl http://nodejs.org/dist/v0.10.32/node-v0.10.32-linux-x64.tar.gz | tar xzvf - --strip-components=1 -C "/usr/local"
   mkdir -p "$PREFIX" && \
