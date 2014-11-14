@@ -76,7 +76,7 @@ gen_add_line_to_file(){
 }
 
 forever_is_running(){
-  forever list | grep "$1"
+  /usr/local/bin/forever list | grep "$1"
 }
 
 forever_run(){
@@ -94,7 +94,7 @@ forever_run(){
   echo "script: $script"
   echo "torun: $torun"
   echo "dir: $dir"
-  forever start --spinSleepTime 1000 --minUptime 500 $torun
+  /usr/local/bin/forever start --spinSleepTime 1000 --minUptime 500 $torun
 }
 
 forever_stop(){
@@ -102,21 +102,21 @@ forever_stop(){
   if [ "$uid" == "" ]; then
     echo "forever stop> $1 not running"
   else 
-    forever stop $uid
+    /usr/local/bin/forever stop $uid
   fi
 }
 
 forever_uid(){
-	forever list | grep $1 | awk '{print $3}' | sed -e 's/\[\|\]//g'
+	/usr/local/bin/forever list | grep $1 | awk '{print $3}' | sed -e 's/\[\|\]//g'
 }
 
 forever_index(){
-  forever list | grep $1 | awk '{print $2}' | sed -e 's/\[\|\]//g'
+  /usr/local/bin/forever list | grep $1 | awk '{print $2}' | sed -e 's/\[\|\]//g'
 }
 
 forever_logfile(){
   search=$1
-  forever --plain list | grep $search | grep -oP '\/root[^ ]+'
+  /usr/local/bin/forever --plain list | grep $search | grep -oP '\/root[^ ]+'
 }
 
 first_arg(){
