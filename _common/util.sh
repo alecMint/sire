@@ -85,7 +85,10 @@ forever_run(){
   torun1=`everything_but $1`
   file=`first_arg $1`
   script=`realpath $file`
-  torun=$script" "$torun1
+  torun=$script
+  if [ "$torun1" != "" ]; then # necessary check to prevent extra space if no $torun
+  	torun=$script" "$torun1
+  fi
   dir=/root/sire # @todo: pass and use $sireDir
 
   crontab_add "$script" "* * * * * $dir/bin/angel.sh \"$torun\" >> /var/log/angel.log 2>&1"
@@ -135,9 +138,7 @@ everything_but(){
     if [ "$a" == "0" ]; then
       a=1
     else
-    	if [ "$arg" != "" ]; then # necessary check to prevent forever_is_running to fail on extra space
-      	out=$out" "$arg
-      fi
+      out=$out" "$arg
     fi
   done
   echo $out
