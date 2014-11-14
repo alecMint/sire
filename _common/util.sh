@@ -135,7 +135,7 @@ everything_but(){
     if [ "$a" == "0" ]; then
       a=1
     else
-    	if [ "$arg" != "" ]; then
+    	if [ "$arg" != "" ]; then # necessary check to prevent forever_is_running to fail on extra space
       	out=$out" "$arg
       fi
     fi
