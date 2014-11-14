@@ -16,6 +16,9 @@ if [ "$CVERSION" != "$VERSION" ]; then
 
   # might need this to avoid npm install error
   #mkdir -p /root/.node-gyp/$VERSION
+
+  # forever was failing...
+  ln -s $PREFIX/bin/node /usr/bin/node
 else
   echo "node is already up to date!"
 fi
