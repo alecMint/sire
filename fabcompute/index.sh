@@ -43,6 +43,7 @@ cd $startpwd
 gen_add_line_to_file '/root/.profile' 'ulimit -Sn 4096' '0644'
 gen_add_line_to_file '/etc/security/limits.conf' 'root hard nofile 24096'
 gen_add_line_to_file '/etc/security/limits.conf' 'root soft nofile 24096'
+gen_add_line_to_file '/etc/sysctl.conf' 'fs.file-max = 24096'
 sessionFiles=/etc/pam.d/common-session*
 for f in $sessionFiles; do
 	gen_add_line_to_file "$f" 'session required pam_limits.so'
