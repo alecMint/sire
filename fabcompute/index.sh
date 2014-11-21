@@ -24,6 +24,7 @@ if [ ! -d "$installDir" ]; then
   git clone $gitRepo "$installDir"
 fi
 cd "$installDir"
+git fetch
 git checkout master
 git pull origin master
 npm install

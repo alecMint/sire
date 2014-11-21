@@ -15,6 +15,7 @@ if [ ! -d /var/www/guitar ]; then
   git clone $guitarRepo /var/www/guitar
 fi
 cd /var/www/guitar
+git fetch
 git checkout master
 git pull origin master
 

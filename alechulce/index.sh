@@ -20,6 +20,7 @@ if [ ! -d /var/www/alechulce ]; then
   git clone $alechulceRepo /var/www/alechulce
 fi
 cd /var/www/alechulce
+git fetch
 git checkout master
 git pull origin master
 
