@@ -2,6 +2,7 @@
 
 for env in "$@"; do
 	echo "$env"
+	echo $env[0]
 done
 exit;
 
