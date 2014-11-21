@@ -94,6 +94,7 @@ forever_run(){
   crontab_add "$script" "* * * * * $dir/bin/angel.sh \"$torun\" >> /var/log/angel.log 2>&1"
   forever_stop "$script"
 
+  echo `date`
   echo "torun1: $torun1"
   echo "file: $file"
   echo "script: $script"
