@@ -6,7 +6,7 @@ cat > /etc/nginx/sites-available/ace <<FILE
 server {
 	listen 80;
 
-	server_name www.ace.com local.ace.com;
+	server_name ace.fabfitfun.com;
 	root /var/www/ace/web;
 	autoindex off;
 
