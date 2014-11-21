@@ -32,3 +32,10 @@ cd $startpwd/hooky
 npmi
 forever_run "./index.js -t $githubHookAuthToken -a $IP -c $installDir/hooky.json"
 cd $startpwd
+
+
+#secret configs
+printf "<?php\n" > $installDir/web/config.local.php
+local_php_config_add "$installDir/web/config.local.php" hopeTwitterAppKey "$twitterAppKey"
+local_php_config_add "$installDir/web/config.localm,.php" hopeTwitterAppSecret "$twitterAppSecret"
+
