@@ -19,30 +19,29 @@ startpwd=`pwd`
 . ./crons.sh
 
 # repo
-if [ ! -d /var/www/hope ]; then
-  mkdir -p /var/www/hope
-  git clone $hopeRepo /var/www/hope
+if [ ! -d "$installDir" ]; then
+  mkdir -p "$installDir"
+  git clone $gitRepo "$installDir"
 fi
-cd /var/www/hope
+cd "$installDir"
 git checkout master
 git pull origin master
 
 
 # wordpress
 echo 'create database if not exists wordpress' | mysql -uroot
-mkdir /var/www/hope/web/wp-content/uploads
 # we need this file to be there immediately
-mkdir /var/www/hope/web/wp-content/uploads/x
-s3cmd get s3://$hopeS3Bucket/wp-content/uploads/x/style.css /var/www/hope/web/wp-content/uploads/x/style.css
+mkdir -p $installDir/web/wp-content/uploads/x
+s3cmd get s3://$hopeS3Bucket/wp-content/uploads/x/style.css $installDir/web/wp-content/uploads/x/style.css
 # we may have a problem when s3 pulls down a directory that wasnt previously given permissions...
-chown -R www-data /var/www/hope/web/wp-content/uploads
-chmod -R +w /var/www/hope/web/wp-content/uploads
+chown -R www-data $installDir/web/wp-content/uploads
+chmod -R +w $installDir/web/wp-content/uploads
 
 
 #secret configs
-printf "<?php\n" > /var/www/hope/web/config.override.php
-local_php_config_add /var/www/hope/web/config.override.php hopeTwitterAppKey "$hopeTwitterAppKey"
-local_php_config_add /var/www/hope/web/config.override.php hopeTwitterAppSecret "$hopeTwitterAppSecret"
+printf "<?php\n" > $installDir/web/config.override.php
+local_php_config_add "$installDir/web/config.override.php" hopeTwitterAppKey "$hopeTwitterAppKey"
+local_php_config_add "$installDir/web/config.override.php" hopeTwitterAppSecret "$hopeTwitterAppSecret"
 
 
 # test cname
@@ -51,17 +50,17 @@ localhost_add_cname 'local.hopechapellongbeach.com'
 
 # deploy hook service
 IP=`public_ip`
-echo '[{"repo":"/var/www/hope","branch":"master"}]' > '/var/www/hope/hooky.json'
+echo "[{\"repo\":\"$installDir\",\"branch\":\"master\"}]" > "$installDir/hooky.json"
 cd $startpwd/hooky
 npmi
-forever_run "./index.js -t $githubHookAuthToken -a $IP -c /var/www/hope/hooky.json"
+forever_run "./index.js -t $githubHookAuthToken -a $IP -c $installDir/hooky.json"
 cd $startpwd
 
 # s3 sync service
 # NOTE: the angel script is pointed to wrong location, need to update to use $sireDir
 cd $startpwd/../_common/s3dl
 npmi
-forever_run "./index.js -d /var/www/hope/web/wp-content/uploads -w /wp-content/uploads -b sire-hope/wp-content/uploads"
+forever_run "./index.js -d $installDir/web/wp-content/uploads -w /wp-content/uploads -b sire-hope/wp-content/uploads"
 cd $startpwd
 
 # fetch wordpress data
