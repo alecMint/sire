@@ -20,14 +20,19 @@ fi
 echo 'installing git...'
 ssh ubuntu@$serverName "sudo apt-get -y install git-core"
 
-echo "adding git's public key to known_hosts" # 2>&1 ?
+echo "adding git's public key to known_hosts"
 ssh ubuntu@$serverName "sudo ssh -oStrictHostKeyChecking=no git@github.com"
 
 echo 'setting up deployment repo...'
-ssh ubuntu@$serverName "sudo rm -fr $sireDir"
-ssh ubuntu@$serverName "sudo git clone $sireRepo $sireDir"
-# dont think i need this...
-#ssh ubuntu@$serverName "sudo mkdir -p $sireDir/_common/s3dl/node_modules && sudo npm install --prefix $sireDir/_common/s3dl"
+if [ -d "$sireDir/.git" ]; then
+	ssh ubuntu@$serverName "sudo git --git-dir=$sireDir/.git --work-tree=$sireDir checkout -f master"
+	ssh ubuntu@$serverName "sudo git --git-dir=$sireDir/.git --work-tree=$sireDir fetch"
+	ssh ubuntu@$serverName "sudo git --git-dir=$sireDir/.git --work-tree=$sireDir pull origin master"
+else
+	ssh ubuntu@$serverName "sudo rm -fr $sireDir"
+	ssh ubuntu@$serverName "sudo git clone $sireRepo $sireDir"
+	ssh ubuntu@$serverName "sudo mkdir -p $sireDir/_common/s3dl/node_modules && sudo npm install --prefix $sireDir/_common/s3dl"
+fi
 
 echo 'copying github tokens...'
 remote_config_add $serverName $sireDir/secrets githubHookAuthToken "$githubHookAuthToken"
