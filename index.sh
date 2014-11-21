@@ -1,10 +1,5 @@
 #!/bin/bash
 
-for env in "$@"; do
-	echo "$env"
-	echo $env[0]
-done
-exit;
 
 if [ "$1" == "_deploy" ] || [ "$1" == "_deploy/" ]; then
   if [ "`which realpath`" == "" ]; then
