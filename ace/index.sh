@@ -11,6 +11,9 @@ startpwd=`pwd`
 ../_common/forever.sh
 
 
+# nginx conf
+. ./nginx.sh
+
 # repo
 if [ ! -d "$installDir" ]; then
   mkdir -p "$installDir"
