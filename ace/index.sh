@@ -37,5 +37,5 @@ git pull origin master
 #secret configs
 printf "<?php\n" > $installDir/web/config.local.php
 local_php_config_add "$installDir/web/config.local.php" twitterAppKey "$hopeTwitterAppKey"
-local_php_config_add "$installDir/web/config.localm,.php" twitterAppSecret "$hopeTwitterAppSecret"
+local_php_config_add "$installDir/web/config.local.php" twitterAppSecret "$hopeTwitterAppSecret"
 
