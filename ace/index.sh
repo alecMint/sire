@@ -26,12 +26,12 @@ git pull origin master
 
 
 # deploy hook service
-IP=`public_ip`
-echo '[{"repo":"'$installDir'","branch":"master"}]' > $installDir'/hooky.json'
-cd $startpwd/hooky
-npmi
-forever_run "./index.js -t $githubHookAuthToken -a $IP -c $installDir/hooky.json"
-cd $startpwd
+#IP=`public_ip`
+#echo '[{"repo":"'$installDir'","branch":"master"}]' > $installDir'/hooky.json'
+#cd $startpwd/hooky
+#npmi
+#forever_run "./index.js -t $githubHookAuthToken -a $IP -c $installDir/hooky.json"
+#cd $startpwd
 
 
 #secret configs
