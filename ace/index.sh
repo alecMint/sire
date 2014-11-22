@@ -25,6 +25,10 @@ git checkout master
 git pull origin master
 #npm install
 
+# let php write to out
+#chmod -R 0666 $installDir/web/public-out
+chown -R www-data $installDir/web/public-out
+
 
 # deploy hook service
 #IP=`public_ip`
