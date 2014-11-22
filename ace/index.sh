@@ -26,7 +26,6 @@ git pull origin master
 #npm install
 
 # let php write to out
-#chmod -R 0666 $installDir/web/public-out
 chown -R www-data $installDir/web/public-out
 
 
@@ -43,4 +42,7 @@ chown -R www-data $installDir/web/public-out
 printf "<?php\n" > $installDir/web/config.local.php
 local_php_config_add "$installDir/web/config.local.php" twitterAppKey "$hopeTwitterAppKey"
 local_php_config_add "$installDir/web/config.local.php" twitterAppSecret "$hopeTwitterAppSecret"
+local_php_config_add "$installDir/web/config.local.php" sesKey "$sesKey"
+local_php_config_add "$installDir/web/config.local.php" sesSecret "$sesSecret"
+
 
