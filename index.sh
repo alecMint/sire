@@ -36,7 +36,7 @@ else
   deployed=""
   for env in "$@"; do
   	if [ "$env" == '-na' ]; then
-  		# skip
+  		echo '.'
     elif [ -d "$env" ]; then
       ./_common/deploy.sh "$refDir/$env"
       deployed=$deployed"$env "
