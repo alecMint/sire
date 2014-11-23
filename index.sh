@@ -18,13 +18,23 @@ refDir=`realpath $refDir`
 cd $refDir
 
 
+aptUpdate=1
+for arg in "$@"; do
+	if [ "$arg" == '-na' ]; then
+		aptUpdate=0
+	fi
+done
+export aptUpdate=aptUpdate
+
 if [ "$1" == "" ]; then
   echo "if you would like to deploy specific environment(s) please specify them as arguments"
 else
   oneInvalid=0
   deployed=""
   for env in "$@"; do
-    if [ -d "$env" ]; then
+  	if [ "$env" == '-na' ]; then
+  		# skip
+    else if [ -d "$env" ]; then
       ./_common/deploy.sh "$refDir/$env"
       deployed=$deployed"$env "
     else
