@@ -41,6 +41,7 @@ remote_config_add $serverName $sireDir/secrets githubHookAuthToken "$githubHookA
 echo 'copying amazon tokens...'
 remote_config_add $serverName $sireDir/secrets awsAccessKey "$awsAccessKey"
 remote_config_add $serverName $sireDir/secrets awsAccessSecret "$awsAccessSecret"
+remote_config_add $serverName $sireDir/secrets awsRegion "$awsRegion"
 
 echo 'copying service specific secrets...'
 remote_config_add $serverName $sireDir/secrets hopeTwitterAppKey "$hopeTwitterAppKey"
