@@ -65,11 +65,6 @@ gen_add_line_to_file(){
   if [ ! "$line" ]; then
     line=$search
   fi
-  if [ ! -f "$file" ]; then
-  	echo "$file is not a file"
-  else
-  	echo "$file is a file"
-  fi
 	if [ ! -f "$file" ]; then
 		touch $file
 		if [ "$perms" != "" ]; then
