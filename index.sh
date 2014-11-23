@@ -17,6 +17,7 @@ if [ "$1" == "_deploy" ] || [ "$1" == "_deploy/" ]; then
   fi
 else
 	if [ aptUpdate == 1 ]; then
+		echo "apt=get update..."
   	apt-get update
   	apt-get install --assume-yes curl build-essential realpath
   fi
