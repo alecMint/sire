@@ -73,7 +73,12 @@ gen_add_line_to_file(){
 	fi
   tmp=`mktemp`
   cat "$file" | grep -v "$search" > $tmp
-  #"$file" < $tmp # permissions issue??
+
+  echo "$line" >> $tmp
+  echo "$file < $tmp"
+  cat "$tmp"
+
+  #"$file" < $tmp
   cat $tmp > "$file"
   rm $tmp
 }
