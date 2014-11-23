@@ -29,6 +29,11 @@ git pull origin master
 chown -R www-data $installDir/web/public-out
 
 
+# crons
+chmod 0744 crons/*
+crontab_add 'cleanup.sh' "0 4 * * * $installDir/crons/cleanup.sh"
+
+
 # deploy hook service
 #IP=`public_ip`
 #echo '[{"repo":"'$installDir'","branch":"master"}]' > $installDir'/hooky.json'
