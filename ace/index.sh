@@ -25,13 +25,18 @@ git checkout master
 git pull origin master
 #npm install
 
+
+# until i fix multiple github hooks issue...
+gitsync_cron "$installDir" "master"
+
+
 # let php write to out
 chown -R www-data $installDir/web/public-out
 
 
 # crons
 chmod 0744 crons/*
-crontab_add 'cleanup.sh' "0 4 * * * $installDir/crons/cleanup.sh"
+crontab_add 'cleanup.sh' "0 4 * * * $installDir/crons/cleanup.sh '$installDir'"
 
 
 # deploy hook service

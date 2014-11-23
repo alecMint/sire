@@ -30,6 +30,14 @@ crontab_clear(){
   echo "crontab cleared tmp in "$tmp"_cron"
 }
 
+gitsync_cron(){
+	dir=$1
+	branch=$2
+	key="gitsync_cron[$dir $branch]"
+	cron="cd '$dir' && git fetch && git reset --hard HEAd && git checkout -f $branch && git pull origin $branch; sleep 15;"
+	crontab_add "$key" "* * * * * echo '$key'; $cron $cron $cron $cron"
+}
+
 remote_config_add(){
   serverName=$1
   file=$2
