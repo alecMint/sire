@@ -58,9 +58,9 @@ gen_add_line_to_file "$installDir/web/config.local.php" sesKey "\$sesKey='$sesKe
 gen_add_line_to_file "$installDir/web/config.local.php" sesSecret "\$sesSecret='$sesSecret'"
 gen_add_line_to_file "$installDir/web/config.local.php" awsRegion "\$awsRegion='$awsRegion'"
 
-gen_add_line_to_file "$installDir/web/config.local.json" sesKey "{"
-gen_add_line_to_file "$installDir/web/config.local.json" sesKey "\"sesKey\"=\"$sesKey\""
-gen_add_line_to_file "$installDir/web/config.local.json" sesSecret "\"sesSecret\"=\"$sesSecret\""
-gen_add_line_to_file "$installDir/web/config.local.json" awsRegion "\"awsRegion\"=\"$awsRegion\""
-gen_add_line_to_file "$installDir/web/config.local.json" sesKey "}"
+gen_add_line_to_file "$installDir/config.local.json" sesKey "{"
+gen_add_line_to_file "$installDir/config.local.json" sesKey "\"sesKey\"=\"$sesKey\""
+gen_add_line_to_file "$installDir/config.local.json" sesSecret "\"sesSecret\"=\"$sesSecret\""
+gen_add_line_to_file "$installDir/config.local.json" awsRegion "\"awsRegion\"=\"$awsRegion\""
+gen_add_line_to_file "$installDir/config.local.json" sesKey "}"
 
