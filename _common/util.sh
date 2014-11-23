@@ -33,7 +33,7 @@ crontab_clear(){
 gitsync_cron(){
 	dir=$1
 	branch=$2
-	key="gitsync_cron[$dir $branch]"
+	key="gitsync_cron $dir $branch"
 	cron="cd '$dir' && git fetch && git reset --hard HEAD && git checkout -f $branch && git pull origin $branch; sleep 15;"
 	crontab_add "$key" "* * * * * echo '$key'; $cron $cron $cron $cron"
 }
