@@ -83,7 +83,8 @@ gen_add_line_to_file(){
   echo "$file < $tmp"
   cat "$tmp"
 
-  "$file" < $tmp 
+  #"$file" < $tmp
+  cat $tmp > "$file"
   rm $tmp
 }
 
