@@ -23,6 +23,8 @@ cd "$installDir"
 git fetch
 git checkout master
 git pull origin master
+git submodule init
+git submodule update
 #npm install
 
 
