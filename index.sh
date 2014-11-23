@@ -15,9 +15,11 @@ if [ "$1" == "_deploy" ] || [ "$1" == "_deploy/" ]; then
       echo `cd "${1}";pwd`
     }
   fi
-else if [ aptUpdate == 1 ]; then
-  apt-get update
-  apt-get install --assume-yes curl build-essential realpath
+else
+	if [ aptUpdate == 1 ]; then
+  	apt-get update
+  	apt-get install --assume-yes curl build-essential realpath
+  fi
   export DEBIAN_FRONTEND=noninteractive # shhh!
 fi
 
