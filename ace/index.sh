@@ -25,7 +25,7 @@ git checkout master
 git pull origin master
 git submodule init
 git submodule update
-#npm install
+npm install
 
 
 # until i fix multiple github hooks issue...
