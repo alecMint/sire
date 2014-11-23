@@ -1,30 +1,31 @@
 #!/bin/bash
 
 
-if [ "$1" == "_deploy" ] || [ "$1" == "_deploy/" ]; then
-  if [ "`which realpath`" == "" ]; then
-    realpath() {
-      echo `cd "${1}";pwd`
-    }
-  fi
-else
-  apt-get update
-  export DEBIAN_FRONTEND=noninteractive # shhh!
-  apt-get install --assume-yes curl build-essential realpath
-fi
-
-refDir=`dirname $0`
-refDir=`realpath $refDir`
-cd $refDir
-
-
 aptUpdate=1
 for arg in "$@"; do
 	if [ "$arg" == '-na' ]; then
 		aptUpdate=0
 	fi
 done
-export aptUpdate=aptUpdate
+
+
+if [ "$1" == "_deploy" ] || [ "$1" == "_deploy/" ]; then
+  if [ "`which realpath`" == "" ]; then
+    realpath() {
+      echo `cd "${1}";pwd`
+    }
+  fi
+else if [ aptUpdate == 1 ]; then
+  apt-get update
+  apt-get install --assume-yes curl build-essential realpath
+  export DEBIAN_FRONTEND=noninteractive # shhh!
+fi
+
+
+refDir=`dirname $0`
+refDir=`realpath $refDir`
+cd $refDir
+
 
 if [ "$1" == "" ]; then
   echo "if you would like to deploy specific environment(s) please specify them as arguments"
