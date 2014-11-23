@@ -41,8 +41,8 @@ chmod -R +w $installDir/web/wp-content/uploads
 
 #secret configs
 printf "<?php\n" > $installDir/web/config.override.php
-local_php_config_add "$installDir/web/config.override.php" hopeTwitterAppKey "$hopeTwitterAppKey"
-local_php_config_add "$installDir/web/config.override.php" hopeTwitterAppSecret "$hopeTwitterAppSecret"
+config_add "$installDir/web/config.override.php" hopeTwitterAppKey "\$hopeTwitterAppKey='$hopeTwitterAppKey'"
+config_add "$installDir/web/config.override.php" hopeTwitterAppSecret "\$hopeTwitterAppSecret='$hopeTwitterAppSecret'"
 
 
 # test cname

@@ -57,32 +57,25 @@ localhost_add_cname(){
   fi
 }
 
-local_php_config_add(){
-  file=$1
-  key=$2
-  val=$3
-  search=`cat $file | grep "$key" | head -n1`
-  if [ "$search" == "" ]; then
-    echo "\$$key='$val';" >> $file
-  fi
-}
-
 gen_add_line_to_file(){
 	file=$1
-	line=$2
-	perms=$3
+	search=$2
+	line=$3
+	perms=$4
+  if [ ! "$line" ]; then
+    line=$search
+  fi
 	if [ ! -f "$file" ]; then
 		touch $file
 		if [ "$perms" != "" ]; then
 			chmod "$perms" $file
 		fi
 	fi
-	search=`cat $file | grep "$line" | head -n1`
-	if [ "$search" == "" ]; then
-		echo "$line" >> $file
-		echo '1'
-	fi
-	echo '0'
+  tmp=`mktemp`
+  cat "$file" | grep -v "$search" > $tmp
+  echo "$line" >> $tmp
+  "$file" < $tmp 
+  rm $tmp
 }
 
 forever_is_running(){

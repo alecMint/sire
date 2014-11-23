@@ -28,10 +28,6 @@ git submodule update
 npm install
 
 
-# until i fix multiple github hooks issue...
-gitsync_cron "$installDir" "master"
-
-
 # let php write to out
 chown -R www-data $installDir/web/public-out
 
@@ -49,13 +45,16 @@ crontab_add 'cleanup.sh' "0 4 * * * $installDir/crons/cleanup.sh '$installDir'"
 #forever_run "./index.js -t $githubHookAuthToken -a $IP -c $installDir/hooky.json"
 #cd $startpwd
 
+# until i fix multiple github hooks issue...
+gitsync_cron "$installDir" "master"
+
 
 #secret configs
 printf "<?php\n" > $installDir/web/config.local.php
-local_php_config_add "$installDir/web/config.local.php" twitterAppKey "$hopeTwitterAppKey"
-local_php_config_add "$installDir/web/config.local.php" twitterAppSecret "$hopeTwitterAppSecret"
-local_php_config_add "$installDir/web/config.local.php" sesKey "$sesKey"
-local_php_config_add "$installDir/web/config.local.php" sesSecret "$sesSecret"
-local_php_config_add "$installDir/web/config.local.php" awsRegion "$awsRegion"
+gen_add_line_to_file "$installDir/web/config.local.php" twitterAppKey "\$twitterAppKey='$hopeTwitterAppKey'"
+gen_add_line_to_file "$installDir/web/config.local.php" twitterAppSecret "\$twitterAppSecret='$hopeTwitterAppSecret'"
+gen_add_line_to_file "$installDir/web/config.local.php" sesKey "\$sesKey='$sesKey'"
+gen_add_line_to_file "$installDir/web/config.local.php" sesSecret "\$sesSecret='$sesSecret'"
+gen_add_line_to_file "$installDir/web/config.local.php" awsRegion "\$awsRegion='$awsRegion'"
 
 
