@@ -74,6 +74,7 @@ gen_add_line_to_file(){
   tmp=`mktemp`
   cat "$file" | grep -v "$search" > $tmp
   echo "$line" >> $tmp
+  echo "$line >> $tmp"
   "$file" < $tmp 
   rm $tmp
 }
