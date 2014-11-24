@@ -30,12 +30,9 @@ crontab_clear(){
   echo "crontab cleared tmp in "$tmp"_cron"
 }
 
-echo "OUTSIDE sireDir $sireDir"
 gitsync_cron(){
 	dir=$1
 	branch=$2
-	echo "INSIDE sireDir $sireDir"
-	sireDir=/root/sire # @todo: pass and use $sireDir
 	key="gitsync_cron $dir $branch"
 	cron="$sireDir/_common/gitsync.sh '$dir' '$branch'; sleep 15;"
 	crontab_add "$key" "* * * * * echo '$key'; $cron $cron $cron $cron"
@@ -94,9 +91,9 @@ forever_run(){
   if [ "$torun1" != "" ]; then # necessary check to prevent extra space if no $torun
   	torun=$script" "$torun1
   fi
-  dir=/root/sire # @todo: pass and use $sireDir
+  #dir=/root/sire # @todo: pass and use $sireDir
 
-  crontab_add "$script" "* * * * * $dir/bin/angel.sh \"$torun\" >> /var/log/angel.log 2>&1"
+  crontab_add "$script" "* * * * * $sireDir/bin/angel.sh \"$torun\" >> /var/log/angel.log 2>&1"
   forever_stop "$script"
 
   echo `date`
@@ -104,7 +101,7 @@ forever_run(){
   echo "file: $file"
   echo "script: $script"
   echo "torun: $torun"
-  echo "dir: $dir"
+  echo "dir: $sireDir"
   /usr/local/bin/forever start --spinSleepTime 1000 --minUptime 500 $torun
 }
 
