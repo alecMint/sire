@@ -1,4 +1,6 @@
 #!/bin/bash
+# Ex: ./index.sh ace alechulce -na
+# -na will skip installing basics
 
 
 aptUpdate=1
