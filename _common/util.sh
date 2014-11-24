@@ -30,6 +30,7 @@ crontab_clear(){
   echo "crontab cleared tmp in "$tmp"_cron"
 }
 
+echo "OUTSIDE sireDir $sireDir"
 gitsync_cron(){
 	dir=$1
 	branch=$2
