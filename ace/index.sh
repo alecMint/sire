@@ -58,6 +58,7 @@ gen_add_line_to_file "$installDir/web/config.local.php" awsAccessKey "\$awsAcces
 gen_add_line_to_file "$installDir/web/config.local.php" awsAccessSecret "\$awsAccessSecret='$awsAccessSecret'"
 gen_add_line_to_file "$installDir/web/config.local.php" awsRegion "\$awsRegion='$awsRegion'"
 
+rm $installDir/config.local.json
 gen_add_line_to_file "$installDir/config.local.json" '{'
 gen_add_line_to_file "$installDir/config.local.json" awsAccessKey "\"awsAccessKey\": \"$awsAccessKey\""
 gen_add_line_to_file "$installDir/config.local.json" awsAccessSecret ",\"awsAccessSecret\": \"$awsAccessSecret\""
