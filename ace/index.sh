@@ -29,7 +29,9 @@ npm install
 
 
 # let php do stuff
-echo "WEFWEFWEF $sireDir"
+if [ -f "$installDir/post-gitsync.sh" ]; then
+	$installDir/post-gitsync.sh
+fi
 
 # crons
 chmod 0744 crons/*
