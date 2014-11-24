@@ -46,8 +46,6 @@ remote_config_add $serverName $sireDir/secrets awsRegion "$awsRegion"
 echo 'copying service specific secrets...'
 remote_config_add $serverName $sireDir/secrets hopeTwitterAppKey "$hopeTwitterAppKey"
 remote_config_add $serverName $sireDir/secrets hopeTwitterAppSecret "$hopeTwitterAppSecret"
-remote_config_add $serverName $sireDir/secrets sesKey "$sesKey"
-remote_config_add $serverName $sireDir/secrets sesSecret "$sesSecret"
 
 if [ "$machineSshKeyPublic" != '' ]; then
 	echo 'copying machine ssh keys...'
