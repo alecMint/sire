@@ -19,6 +19,19 @@ killall node
 
 
 ### Example launch (using hope)
+Copy config.sh to config.chef.sh inside ./_deploy and edit:
+```
+export updateAptGet=1
+export ec2Cert='/Users/ahulce/.ssh/mycert.pem'
+export serverName='54.198.208.221' // or domain e.g. ec2-54-84-227-188.compute-1.amazonaws.com
+export sshKey='ssh-rsa AAAAB3...'
+export githubHookAuthToken='a713c...'
+export hopeTwitterAppKey="HFUe..."
+export hopeTwitterAppSecret="kMBn..."
+export awsRegion='us-east-1'
+export machineSshKeyPublic='ssh-rsa AAAAB3N...'
+export machineSshKeyPrivate=$'-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIB...'
+```
 Local:
 ```
 ./index.sh _deploy
