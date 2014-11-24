@@ -1,2 +1,2 @@
 
-export alechulceRepo="https://github.com/fluffybunnies/alechulce.git"
+export gitRepo="https://github.com/fluffybunnies/alechulce.git"

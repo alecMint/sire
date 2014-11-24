@@ -15,18 +15,13 @@ startpwd=`pwd`
 # nginx conf
 . ./nginx.sh
 
+
 # crons
 . ./crons.sh
 
-# repo
-if [ ! -d "$installDir" ]; then
-  mkdir -p "$installDir"
-  git clone $gitRepo "$installDir"
-fi
-cd "$installDir"
-git fetch
-git checkout master
-git pull origin master
+
+# install repo
+install_repo "$installDir" "$gitRepo"
 
 
 # wordpress

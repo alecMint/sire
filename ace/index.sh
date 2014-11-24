@@ -14,22 +14,10 @@ startpwd=`pwd`
 # nginx conf
 . ./nginx.sh
 
-# repo
-if [ ! -d "$installDir" ]; then
-  mkdir -p "$installDir"
-  git clone $gitRepo "$installDir"
-fi
-cd "$installDir"
-git fetch
-git checkout master
-git pull origin master
-git submodule init
-git submodule update
-npm install
 
-if [ -f "$installDir/post-gitsync.sh" ]; then
-	$installDir/post-gitsync.sh
-fi
+# install repo
+install_repo "$installDir" "$gitRepo"
+
 
 # crons
 chmod 0744 crons/*

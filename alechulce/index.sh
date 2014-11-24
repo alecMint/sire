@@ -14,15 +14,9 @@ startpwd=`pwd`
 # nginx conf
 . ./nginx.sh
 
-# repo
-if [ ! -d /var/www/alechulce ]; then
-  mkdir -p /var/www/alechulce
-  git clone $alechulceRepo /var/www/alechulce
-fi
-cd /var/www/alechulce
-git fetch
-git checkout master
-git pull origin master
+
+# install repo
+install_repo "$installDir" "$gitRepo"
 
 
 # deploy hook service

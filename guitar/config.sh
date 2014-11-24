@@ -1,2 +1,2 @@
 
-export guitarRepo="https://github.com/fluffybunnies/guitar.git"
+export gitRepo="https://github.com/fluffybunnies/guitar.git"

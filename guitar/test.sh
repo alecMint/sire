@@ -15,7 +15,7 @@ else
   echo "nginx conf passed"
 fi
 
-if [ "`cat /var/www/guitar/.git/config | grep -oP "${guitarRepo}$"`" != $guitarRepo ]; then
+if [ "`cat $installDir/.git/config | grep -oP "${gitRepo}$"`" != $gitRepo ]; then
   echo "repo missing"
   exit 1
 else

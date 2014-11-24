@@ -30,14 +30,6 @@ crontab_clear(){
   echo "crontab cleared tmp in "$tmp"_cron"
 }
 
-gitsync_cron(){
-	dir=$1
-	branch=$2
-	key="gitsync_cron $dir $branch"
-	cron="$sireDir/_common/gitsync.sh '$dir' '$branch'; sleep 15;"
-	crontab_add "$key" "* * * * * echo '$key'; $cron $cron $cron $cron"
-}
-
 remote_config_add(){
   serverName=$1
   file=$2
@@ -151,5 +143,29 @@ public_ip(){
   curl http://169.254.169.254/latest/meta-data/public-ipv4
 }
 
+gitsync_cron(){
+	dir=$1
+	branch=$2
+	if [ "$branch" == "" ]; then
+		branch='master'
+	fi
+	key="gitsync_cron $dir $branch"
+	cron="$sireDir/_common/gitsync.sh '$dir' '$branch'; sleep 15;"
+	crontab_add "$key" "* * * * * echo '$key'; $cron $cron $cron $cron"
+}
+
+install_repo(){
+	dir=$1
+	repo=$2
+	branch=$3
+	if [ "$branch" == "" ]; then
+		branch='master'
+	fi
+	if [ ! -d "$dir" ]; then
+	  mkdir -p "$dir"
+	  git clone $repo "$dir"
+	fi
+	$sireDir/_common/gitsync.sh "$dir" "$branch"
+}
 
 

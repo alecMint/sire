@@ -1,5 +1,5 @@
 
-if [ "`cat /var/www/scripts/.git/config | grep -oP "${gitRepo}$"`" != $gitRepo ]; then
+if [ "`cat $installDir/.git/config | grep -oP "${gitRepo}$"`" != $gitRepo ]; then
   echo "repo missing"
   exit 1
 else
