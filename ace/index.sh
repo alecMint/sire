@@ -28,8 +28,9 @@ git submodule update
 npm install
 
 
-# let php write to out
+# let php do stuff
 chown -R www-data $installDir/web/public-out
+chown www-data $installDir/bin/*
 
 
 # crons
