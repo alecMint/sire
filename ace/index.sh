@@ -51,6 +51,7 @@ gitsync_cron "$installDir" "master"
 
 #secret configs
 #printf "<?php\n" > $installDir/web/config.local.php
+rm $installDir/web/config.local.php
 gen_add_line_to_file "$installDir/web/config.local.php" '<?php' '<?php'
 gen_add_line_to_file "$installDir/web/config.local.php" twitterAppKey "\$twitterAppKey='$hopeTwitterAppKey';"
 gen_add_line_to_file "$installDir/web/config.local.php" twitterAppSecret "\$twitterAppSecret='$hopeTwitterAppSecret';"
