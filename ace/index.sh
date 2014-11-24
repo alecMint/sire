@@ -20,7 +20,7 @@ install_repo "$installDir" "$gitRepo"
 
 
 # crons
-chmod 0744 crons/*
+chmod 0744 $installDir/crons/*
 crontab_add 'cleanup.sh' "0 4 * * * $installDir/crons/cleanup.sh '$installDir'"
 
 
