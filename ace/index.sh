@@ -54,13 +54,13 @@ gitsync_cron "$installDir" "master"
 gen_add_line_to_file "$installDir/web/config.local.php" '<?php' '<?php'
 gen_add_line_to_file "$installDir/web/config.local.php" twitterAppKey "\$twitterAppKey='$hopeTwitterAppKey'"
 gen_add_line_to_file "$installDir/web/config.local.php" twitterAppSecret "\$twitterAppSecret='$hopeTwitterAppSecret'"
-gen_add_line_to_file "$installDir/web/config.local.php" sesKey "\$sesKey='$sesKey'"
-gen_add_line_to_file "$installDir/web/config.local.php" sesSecret "\$sesSecret='$sesSecret'"
+gen_add_line_to_file "$installDir/web/config.local.php" awsAccessKey "\$awsAccessKey='$awsAccessKey'"
+gen_add_line_to_file "$installDir/web/config.local.php" awsAccessSecret "\$awsAccessSecret='$awsAccessSecret'"
 gen_add_line_to_file "$installDir/web/config.local.php" awsRegion "\$awsRegion='$awsRegion'"
 
 gen_add_line_to_file "$installDir/config.local.json" '{'
-gen_add_line_to_file "$installDir/config.local.json" sesKey "\"sesKey\": \"$sesKey\""
-gen_add_line_to_file "$installDir/config.local.json" sesSecret ",\"sesSecret\": \"$sesSecret\""
+gen_add_line_to_file "$installDir/config.local.json" awsAccessKey "\"awsAccessKey\": \"$awsAccessKey\""
+gen_add_line_to_file "$installDir/config.local.json" awsAccessSecret ",\"awsAccessSecret\": \"$awsAccessSecret\""
 gen_add_line_to_file "$installDir/config.local.json" awsRegion ",\"awsRegion\": \"$awsRegion\""
 gen_add_line_to_file "$installDir/config.local.json" '}'
 
