@@ -32,11 +32,11 @@ export awsRegion='us-east-1'
 export machineSshKeyPublic='ssh-rsa AAAAB3N...'
 export machineSshKeyPrivate=$'-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIB...'
 ```
-Local:
+Deploy sire to remote server (run this locally):
 ```
 ./index.sh _deploy
 ```
-Remote:
+Deploy hope module on remote server (run this remotely):
 ```
 cd /root/sire
 ./index.sh hope
