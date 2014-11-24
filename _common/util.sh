@@ -36,7 +36,9 @@ gitsync_cron(){
 	key="gitsync_cron $dir $branch"
 	echo "SIRE DIR $sireDir"
 	#sireDir=/root/sire # @todo: pass and use $sireDir
-	cron="$sireDir/_common/gitsync.sh '$dir' '$branch'; sleep 15;"
+	cron="echo 'gitsync_cron /var/www/ace master'; \
+	$sireDir/_common/gitsync.sh '$dir' '$branch'; \
+	sleep 15;"
 	crontab_add "$key" "* * * * * echo '$key'; $cron $cron $cron $cron"
 }
 
