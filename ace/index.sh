@@ -27,8 +27,6 @@ git submodule init
 git submodule update
 npm install
 
-
-# let php do stuff
 if [ -f "$installDir/post-gitsync.sh" ]; then
 	$installDir/post-gitsync.sh
 fi
