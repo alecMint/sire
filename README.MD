@@ -38,6 +38,5 @@ Deploy sire to remote server (run this locally):
 ```
 Deploy hope module on remote server (run this remotely):
 ```
-cd /root/sire
-./index.sh hope
+/root/sire/index.sh hope
 ```
