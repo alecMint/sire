@@ -29,9 +29,7 @@ npm install
 
 
 # let php do stuff
-chown -R www-data $installDir/web/public-out
-chown -R www-data $installDir/bin/*
-
+echo "WEFWEFWEF $sireDir"
 
 # crons
 chmod 0744 crons/*
