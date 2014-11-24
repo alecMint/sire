@@ -18,8 +18,8 @@ killall node
 ```
 
 
-### Example launch (using hope)
-Locally:
+### Launch (using hope)
+Local:
 ```
 ./index.sh _deploy
 ```
