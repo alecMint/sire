@@ -34,7 +34,7 @@ echo "OUTSIDE sireDir $sireDir"
 gitsync_cron(){
 	dir=$1
 	branch=$2
-	echo "SIRE DIR $sireDir"
+	echo "INSIDE sireDir $sireDir"
 	sireDir=/root/sire # @todo: pass and use $sireDir
 	key="gitsync_cron $dir $branch"
 	cron="$sireDir/_common/gitsync.sh '$dir' '$branch'; sleep 15;"
