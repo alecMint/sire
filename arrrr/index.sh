@@ -30,4 +30,4 @@ crontab_add 'cleanup.sh' "0 4 * * * $installDir/crons/cleanup.sh '$installDir'"
 
 
 # start it up
-forever_run "$installDir/index.js --port 3001"
+forever_run "$installDir/index.js --port 8001"
