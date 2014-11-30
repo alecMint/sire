@@ -3,7 +3,7 @@ dir=`dirname $0`
 cd $dir
 . ../_common/util.sh
 
-
+echo "angel.sh \"$1\" "`date`
 #echo "about2: running = forever_is_running \"$1\""
 running=`forever_is_running "$1"`
 #echo "running = $running"
