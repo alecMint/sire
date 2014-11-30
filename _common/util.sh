@@ -76,6 +76,7 @@ forever_is_running(){
 }
 
 forever_run(){
+	echo "forever_run "`date`
   torun1=`everything_but $1`
   file=`first_arg $1`
   script=`realpath $file`
