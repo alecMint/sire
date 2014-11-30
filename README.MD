@@ -11,6 +11,7 @@ This example deploys the "hope" module (see hope/ dir in this repo). Once run, a
 - Codebase deployed from https://github.com/fluffybunnies/hope
 - SQL + uploads synced from previous instance via S3
 - Githooks installed for instant release of codebase changes
+- File watch hooks + crons set up to push DB/uploads to S3
 
 Copy config.sh to config.chef.sh inside ./_deploy and edit:
 ```
