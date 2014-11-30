@@ -6,7 +6,12 @@ Team effort with ma main man Ryan Day (github.com/soldair)
 
 
 
-### Example launch (using hope)
+### Example launch
+This example deploys the "hope" module (hope/ dir in this repo). Once run, a wordpress site will be up and running.
+- Codebase deployed from https://github.com/fluffybunnies/hope
+- SQL + uploads synced from previous instance via S3
+- Githooks installed for instant release of codebase changes
+
 Copy config.sh to config.chef.sh inside ./_deploy and edit:
 ```
 export updateAptGet=1
@@ -30,8 +35,9 @@ Deploy hope module on remote server (run this remotely):
 ```
 
 
-
 ### Example custom boot down (using hope)
+This example uses the "hope" module to show how Sire may be used to to back up a wordpress site for seamless deployment to a new server.
+
 ```
 node /root/sire/_common/s3dl/bin/baksql.js -d wordpress -b sire-hope/sql
 node /root/sire/_common/s3dl/bin/shuv.js -d /var/www/hope/web/wp-content/uploads -b sire-hope/wp-content/uploads
