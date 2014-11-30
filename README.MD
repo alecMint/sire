@@ -7,7 +7,7 @@ Team effort with ma main man Ryan Day (github.com/soldair)
 
 
 ### Example launch
-This example deploys the "hope" module (hope/ dir in this repo). Once run, a wordpress site will be up and running.
+This example deploys the "hope" module (hope/ dir in this repo). Once run, a wordpress site will be up and running with:
 - Codebase deployed from https://github.com/fluffybunnies/hope
 - SQL + uploads synced from previous instance via S3
 - Githooks installed for instant release of codebase changes
