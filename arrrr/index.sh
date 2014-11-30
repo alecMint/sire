@@ -29,16 +29,5 @@ crontab_add 'cleanup.sh' "0 4 * * * $installDir/crons/cleanup.sh '$installDir'"
 #gitsync_cron "$installDir" "master"
 
 
-#secret configs
-if [ -f $installDir/config.local.json ]; then
-	rm $installDir/config.local.json
-fi
-gen_add_line_to_file "$installDir/config.local.json" '{'
-if [ "$port" != "" ]; then
-	gen_add_line_to_file "$installDir/config.local.json" port "\"port\": \"$port\""
-fi
-gen_add_line_to_file "$installDir/config.local.json" '}'
-
-
 # start it up
-#forever_run "$installDir/index.js"
+forever_run "$installDir/index.js --port 3001"
