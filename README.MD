@@ -1,6 +1,6 @@
 Sire
 ===
-Deploys modules and supporting software (e.g. nginx, node, etc) to remote *nix servers. Fully tested on fresh Amazon EC2 Ubuntu instances. Other AMIs may require some tweaking.
+Deploys modules and supporting software (e.g. nginx, node, etc) to remote *nix servers. Fully tested on fresh Amazon EC2 Ubuntu instances (with the following ports open to TCP: 22, 80, 8000-8999, 9998). Other AMIs may require some tweaking.
 
 Team effort with ma main man Ryan Day (github.com/soldair)
 
