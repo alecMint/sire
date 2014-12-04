@@ -23,7 +23,7 @@ module.exports.backup = function(dbName,bucket,cb){
       	return cb('failed to mysqldump | gzip > '+localPath);
       s3cmd(['put',localPath,remotePath],function(err){
         try {
-          //fs.unlinkSync(localPath);
+          fs.unlinkSync(localPath);
         } catch (e){
           console.log('failed to clean up local '+localPath,e);
         }
