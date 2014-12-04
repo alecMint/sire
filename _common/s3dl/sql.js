@@ -64,11 +64,9 @@ module.exports.load = function(bucket,dbName,cb){
     s3cmd(['get',list[0].p,localPath],function(err){
       if (err)
         return cb(err);
-      console.log('CALL zcat '+localPath+' | mysql')
       cp.exec('zcat '+localPath+' | mysql -uroot',function(err){
-      	console.log('RESPONSE zcat '+localPath+' | mysql',err)
         try {
-          //fs.unlinkSync(localPath);
+          fs.unlinkSync(localPath);
         } catch (e){
           console.log('failed to clean up local '+localPath,e);
         }
