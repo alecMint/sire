@@ -17,10 +17,12 @@ module.exports.backup = function(dbName,bucket,cb){
     cp.exec('mysqldump --opt --databases --add-drop-database '+dbName+' | gzip > '+localPath,function(err){
       if (err)
         return cb(err);
-      console.log('STAT ',fs.statSync(localPath));
+      console.log('STAT ',localPath,fs.statSync(localPath));
+      if (fs.statSync(localPath).size < 100)
+      	return cb('failed to mysqldump | gzip > '+localPath);
       s3cmd(['put',localPath,remotePath],function(err){
         try {
-          fs.unlinkSync(localPath);
+          //fs.unlinkSync(localPath);
         } catch (e){
           console.log('failed to clean up local '+localPath,e);
         }
