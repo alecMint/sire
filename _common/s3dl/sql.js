@@ -14,7 +14,7 @@ module.exports.backup = function(dbName,bucket,cb){
     ,localPath = tmpDir+fn
     ,remotePath = 's3://'+path.join(bucket,fn)
     ;
-    cp.exec('mysqldump --opt --databases --add-drop-database '+dbName+' | gzip --force > '+localPath,function(err){
+    cp.exec('mysqldump --opt --databases --add-drop-database '+dbName+' | gzip > '+localPath,function(err){
       if (err)
         return cb(err);
       console.log('STAT ',fs.statSync(localPath));
@@ -61,7 +61,7 @@ module.exports.load = function(bucket,dbName,cb){
       return cb();
     var fn = path.basename(list[0].p)
     ,localPath = tmpDir+fn
-    s3cmd(['get',list[0].p,localPath],function(err){
+    s3cmd(['get','--force',list[0].p,localPath],function(err){
       if (err)
         return cb(err);
       cp.exec('zcat '+localPath+' | mysql -uroot',function(err){
