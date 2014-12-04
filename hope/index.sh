@@ -33,7 +33,7 @@ s3cmd get s3://$hopeS3Bucket/wp-content/uploads/x/style.css $installDir/web/wp-c
 chown -R www-data $installDir/web/wp-content/uploads
 chmod -R +w $installDir/web/wp-content/uploads
 # fetch wordpress db
-node ../_common/s3dl/bin/loadsql.js -d wordpress -b sire-hope/sql
+node ./_common/s3dl/bin/loadsql.js -d wordpress -b sire-hope/sql
 
 
 # secret configs
