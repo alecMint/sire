@@ -53,7 +53,9 @@ module.exports.clean = function(bucket,dbName,histNum,cb){
 }
 
 module.exports.load = function(bucket,dbName,cb){
+	console.log('LOAD: ',bucket,dbName);
   getBakList(bucket,dbName,function(err,list){
+  	console.log('GETBACKLIST-R: ',err,list);
     if (err)
       return cb(err);
     if (!list[0])
