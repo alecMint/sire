@@ -14,6 +14,7 @@ module.exports.backup = function(dbName,bucket,cb){
     ,localPath = tmpDir+fn
     ,remotePath = 's3://'+path.join(bucket,fn)
     ;
+    console.log('STAT ',fs.statSync(localPath));
     cp.exec('mysqldump --opt --databases --add-drop-database '+dbName+' | gzip > '+localPath,function(err){
       if (err)
         return cb(err);
