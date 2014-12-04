@@ -36,10 +36,14 @@ chmod -R +w $installDir/web/wp-content/uploads
 node ../_common/s3dl/bin/loadsql.js -d wordpress -b sire-hope/sql
 
 
-#secret configs
-printf "<?php\n" > $installDir/web/config.override.php
-config_add "$installDir/web/config.override.php" hopeTwitterAppKey "\$hopeTwitterAppKey='$hopeTwitterAppKey'"
-config_add "$installDir/web/config.override.php" hopeTwitterAppSecret "\$hopeTwitterAppSecret='$hopeTwitterAppSecret'"
+# secret configs
+if [ -f $installDir/web/config.local.php ]; then
+	rm $installDir/web/config.local.php
+fi
+gen_add_line_to_file "$installDir/web/config.local.php" '<?php' '<?php'
+gen_add_line_to_file "$installDir/web/config.local.php" twitterAppKey "\$twitterAppKey='$hopeTwitterAppKey';"
+gen_add_line_to_file "$installDir/web/config.local.php" twitterAppSecret "\$twitterAppSecret='$hopeTwitterAppSecret';"
+gen_add_line_to_file "$installDir/web/config.local.php" awsRegion "\$googleAnalyticsId='$googleAnalyticsId';"
 
 
 # test cname
