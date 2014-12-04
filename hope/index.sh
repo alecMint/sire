@@ -28,7 +28,7 @@ install_repo "$installDir" "$gitRepo"
 echo 'create database if not exists wordpress' | mysql -uroot
 # we need this file to be there immediately
 mkdir -p $installDir/web/wp-content/uploads/x
-s3cmd get s3://$hopeS3Bucket/wp-content/uploads/x/style.css $installDir/web/wp-content/uploads/x/style.css
+s3cmd get --skip-existing s3://$hopeS3Bucket/wp-content/uploads/x/style.css $installDir/web/wp-content/uploads/x/style.css
 # we may have a problem when s3 pulls down a directory that wasnt previously given permissions...
 chown -R www-data $installDir/web/wp-content/uploads
 chmod -R +w $installDir/web/wp-content/uploads
