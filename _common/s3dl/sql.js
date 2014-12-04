@@ -17,8 +17,9 @@ module.exports.backup = function(dbName,bucket,cb){
     cp.exec('mysqldump --opt --databases --add-drop-database '+dbName+' | gzip > '+localPath,function(err){
       if (err)
         return cb(err);
-      console.log('STAT ',localPath,fs.statSync(localPath));
-      if (fs.statSync(localPath).size < 100)
+      var size = localPath,fs.statSync(localPath).size;
+      console.log('backup-sql-size: '+size);
+      if (size <= 200)
       	return cb('failed to mysqldump | gzip > '+localPath);
       s3cmd(['put',localPath,remotePath],function(err){
         try {
