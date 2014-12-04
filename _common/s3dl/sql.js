@@ -63,8 +63,9 @@ module.exports.load = function(bucket,dbName,cb){
     s3cmd(['get',list[0].p,localPath],function(err){
       if (err)
         return cb(err);
-      console.log('zcat '+localPath+' | mysql')
-      cp.exec('zcat '+localPath+' | mysql',function(err){
+      console.log('CALL zcat '+localPath+' | mysql')
+      cp.exec('zcat '+localPath+' | mysql -uroot',function(err){
+      	console.log('RESPONSE zcat '+localPath+' | mysql')
         try {
           fs.unlinkSync(localPath);
         } catch (e){
