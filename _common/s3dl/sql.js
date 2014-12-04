@@ -3,6 +3,7 @@ var path = require('path')
 ,fs = require('fs')
 ,s3cmd = require('./s3cmd')
 ,tmpDir = '/tmp/sire-dbbak/'
+,tempHack_ReasonableBytesOfSqlData = 2000
 ;
 
 
@@ -19,7 +20,7 @@ module.exports.backup = function(dbName,bucket,cb){
         return cb(err);
       var size = fs.statSync(localPath).size;
       console.log('backup-sql-size: '+size);
-      if (size <= 200)
+      if (size <= tempHack_ReasonableBytesOfSqlData)
       	return cb('failed to mysqldump | gzip > '+localPath);
       s3cmd(['put',localPath,remotePath],function(err){
         try {
