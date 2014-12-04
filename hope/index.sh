@@ -32,6 +32,8 @@ s3cmd get s3://$hopeS3Bucket/wp-content/uploads/x/style.css $installDir/web/wp-c
 # we may have a problem when s3 pulls down a directory that wasnt previously given permissions...
 chown -R www-data $installDir/web/wp-content/uploads
 chmod -R +w $installDir/web/wp-content/uploads
+# fetch wordpress db
+node ../_common/s3dl/bin/loadsql.js -d wordpress -b sire-hope/sql
 
 
 #secret configs
@@ -59,6 +61,4 @@ npmi
 forever_run "./index.js -d $installDir/web/wp-content/uploads -w /wp-content/uploads -b sire-hope/wp-content/uploads"
 cd $startpwd
 
-# fetch wordpress data
-node ../_common/s3dl/bin/loadsql.js -d wordpress -b sire-hope/sql
 
