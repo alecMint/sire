@@ -21,15 +21,16 @@ module.exports.backup = function(dbName,bucket,cb){
       var size = fs.statSync(localPath).size;
       console.log('backup-sql-size: '+size);
       if (size <= tempHack_ReasonableBytesOfSqlData)
-      	return cb('failed to mysqldump | gzip > '+localPath);
-      s3cmd(['put',localPath,remotePath],function(err){
+      	return unlinkAndDone('failed to mysqldump | gzip > '+localPath+': bakked file is too small');
+      s3cmd(['put',localPath,remotePath],unlinkAndDone);
+      function unlinkAndDone(err){
         try {
           fs.unlinkSync(localPath);
         } catch (e){
           console.log('failed to clean up local '+localPath,e);
         }
         cb(err);
-      });
+      }
     });
   });
 }
