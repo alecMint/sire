@@ -8,6 +8,7 @@ var bucket = argv.b || argv.bucket
 ,dbName = argv.d || argv.database
 ,numBaks = +(argv.n || argv.numbaks || 30)
 ;
+console.log(new Date);
 if (!bucket || !dbName) throw 'db and bucket required';
 if (isNaN(numBaks)) throw 'num baks should be an integer';
 
