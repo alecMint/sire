@@ -42,6 +42,11 @@ forever_run "./index.js -t $githubHookAuthToken -a $IP -c $installDir/hooky.json
 cd $startpwd
 
 
+# crons
+chmod 0744 $installDir/crons/*
+crontab_add 'cleanup.sh' "0 3 * * * $installDir/crons/cleanup.sh '$installDir'"
+
+
 # BEGIN set file open limit
 gen_add_line_to_file '/root/.profile' 'ulimit -Sn' 'ulimit -Sn 4096' '0644'
 gen_add_line_to_file '/etc/security/limits.conf' 'root soft nofile' 'root soft nofile 4096'
