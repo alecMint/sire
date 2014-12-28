@@ -13,23 +13,16 @@ startpwd=`pwd`
 
 # reboot hook
 sed -i '/exit 0/d' /etc/rc.local
-gen_add_line_to_file '/etc/rc.local' '/root/sire/fabcompute/onstartup.sh'
+gen_add_line_to_file '/etc/rc.local' "$sireDir/fabcompute/onstartup.sh"
 gen_add_line_to_file '/etc/rc.local' 'exit 0'
 #crontab_add 'FABCOMPUTE_REBOOT' '@reboot export FABCOMPUTE_REBOOT=1; /root/sire/index.sh fabcompute; unset FABCOMPUTE_REBOOT'
 
 
 # repo
-if [ ! -d "$installDir" ]; then
-  mkdir -p "$installDir"
-  git clone $gitRepo "$installDir"
-fi
-cd "$installDir"
-git fetch
-git checkout master
-git pull origin master
-npm install
+install_repo "$installDir" "$gitRepo"
+
 # give ubuntu access to uploads directory
-chown ubuntu /var/www/scripts/uploads
+chown ubuntu $installDir/uploads
 forever_run ./server.js
 
 
