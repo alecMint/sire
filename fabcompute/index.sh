@@ -37,7 +37,7 @@ cd $startpwd
 
 # crons
 chmod 0744 $installDir/crons/*
-crontab_add 'cleanup.sh' "0 3 * * * $installDir/crons/cleanup.sh '$installDir'"
+crontab_add "$installDir/crons/cleanup.sh" "0 3 * * * $installDir/crons/cleanup.sh '$installDir'"
 
 
 # BEGIN set file open limit

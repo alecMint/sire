@@ -21,7 +21,7 @@ install_repo "$installDir" "$gitRepo"
 
 # crons
 chmod 0744 $installDir/crons/*
-crontab_add 'cleanup.sh' "0 4 * * * $installDir/crons/cleanup.sh '$installDir'"
+crontab_add "$installDir/crons/cleanup.sh" "0 4 * * * $installDir/crons/cleanup.sh '$installDir'"
 
 
 # deploy hook service
