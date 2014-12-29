@@ -44,3 +44,9 @@ if [ "$machineSshKeyPublic" != '' ]; then
 		echo "machine private key installed"
 	fi
 fi
+
+
+echo ''
+echo "ssh ubuntu@$serverName"
+echo ''
+

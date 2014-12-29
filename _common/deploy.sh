@@ -14,7 +14,3 @@ if [ -f ./config.sh ]; then
     fi
 fi
 . ./index.sh
-
-echo ''
-echo "ssh ubuntu@$serverName"
-echo ''
