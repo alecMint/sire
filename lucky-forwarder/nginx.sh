@@ -2,15 +2,20 @@
 
 nginxBackend="127.0.0.1:9000"
 
-cat > /etc/nginx/sites-available/lucky-redir <<FILE
+cat > /etc/nginx/sites-available/lucky-forwarder <<FILE
+server {
+	listen 80;
+	server_name luckymag.com;
+	return 301 http://www.luckymag.com\$request_uri;
+}
 server {
 	listen 80;
 
-	server_name redir.luckyshops.com;
-	root /var/www/lucky-redir/web;
+	server_name www.luckymag.com;
+	root $installDir/web;
 	autoindex off;
 
-	access_log /var/log/nginx/lucky-redir_access_log.log;
+	access_log /var/log/nginx/lucky-forwarder_access_log.log;
 
 	gzip on; # use gzip compression
 	gzip_min_length 1100;
@@ -45,6 +50,6 @@ server {
 }
 FILE
 rm /etc/nginx/sites-enabled/default 2> /dev/null
-ln -f /etc/nginx/sites-available/lucky-redir /etc/nginx/sites-enabled/lucky-redir
+ln -f /etc/nginx/sites-available/lucky-forwarder /etc/nginx/sites-enabled/lucky-forwarder
 
 /etc/init.d/nginx reload
