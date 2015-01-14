@@ -34,6 +34,7 @@ else
 	ssh ubuntu@$serverName "sudo mkdir -p $sireDir/_common/s3dl/node_modules && sudo npm install --prefix $sireDir/_common/s3dl"
 fi
 
+# keep this here for (1) test.sh and (2) put at least something in secrets
 echo 'copying github tokens...'
 remote_config_add $serverName $sireDir/secrets githubHookAuthToken "$githubHookAuthToken"
 #ssh ubuntu@$serverName "echo '{\"githubHookAuthToken\":\"$githubHookAuthToken\"}' | sudo tee $sireDir/config.local.json > /dev/null"
