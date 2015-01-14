@@ -16,6 +16,7 @@ startpwd=`pwd`
 # install repo
 install_repo "$installDir" "$gitRepo"
 if [ -f "$installDir/install.sh" ]; then
+	echo "running repo's install.sh"
 	"$installDir/install.sh"
 fi
 
