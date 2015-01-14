@@ -14,7 +14,7 @@ startpwd=`pwd`
 
 
 # create local db
-echo "create database if not exists lucky_redirs" | /usr/bin/mysql -uroot
+echo "create database if not exists lucky_forwarder" | /usr/bin/mysql -uroot
 
 
 # install repo
