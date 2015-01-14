@@ -13,6 +13,10 @@ startpwd=`pwd`
 . ./nginx.sh
 
 
+# create local db
+echo "create database if not exists lucky_redirs" | /usr/bin/mysql -uroot
+
+
 # install repo
 install_repo "$installDir" "$gitRepo"
 if [ -f "$installDir/install.sh" ]; then
