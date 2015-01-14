@@ -34,21 +34,29 @@ else
 	ssh ubuntu@$serverName "sudo mkdir -p $sireDir/_common/s3dl/node_modules && sudo npm install --prefix $sireDir/_common/s3dl"
 fi
 
-echo 'copying github tokens...'
-remote_config_add $serverName $sireDir/secrets githubHookAuthToken "$githubHookAuthToken"
-#ssh ubuntu@$serverName "echo '{\"githubHookAuthToken\":\"$githubHookAuthToken\"}' | sudo tee $sireDir/config.local.json > /dev/null"
+if [ "$githubHookAuthToken" != "" ]; then
+	echo 'copying github tokens...'
+	remote_config_add $serverName $sireDir/secrets githubHookAuthToken "$githubHookAuthToken"
+	#ssh ubuntu@$serverName "echo '{\"githubHookAuthToken\":\"$githubHookAuthToken\"}' | sudo tee $sireDir/config.local.json > /dev/null"
+fi
 
-echo 'copying amazon tokens...'
-remote_config_add $serverName $sireDir/secrets awsAccessKey "$awsAccessKey"
-remote_config_add $serverName $sireDir/secrets awsAccessSecret "$awsAccessSecret"
-remote_config_add $serverName $sireDir/secrets awsRegion "$awsRegion"
+if [ "$awsAccessKey" != "" ]; then
+	echo 'copying amazon tokens...'
+	remote_config_add $serverName $sireDir/secrets awsAccessKey "$awsAccessKey"
+	remote_config_add $serverName $sireDir/secrets awsAccessSecret "$awsAccessSecret"
+	remote_config_add $serverName $sireDir/secrets awsRegion "$awsRegion"
+fi
 
-echo 'copying google analytics id...'
-remote_config_add $serverName $sireDir/secrets googleAnalyticsId "$googleAnalyticsId"
+if [ "$googleAnalyticsId" != "" ]; then
+	echo 'copying google analytics id...'
+	remote_config_add $serverName $sireDir/secrets googleAnalyticsId "$googleAnalyticsId"
+fi
 
-echo 'copying service specific secrets...'
-remote_config_add $serverName $sireDir/secrets hopeTwitterAppKey "$hopeTwitterAppKey"
-remote_config_add $serverName $sireDir/secrets hopeTwitterAppSecret "$hopeTwitterAppSecret"
+if [ "$hopeTwitterAppKey" != "" ]; then
+	echo 'copying service specific secrets...'
+	remote_config_add $serverName $sireDir/secrets hopeTwitterAppKey "$hopeTwitterAppKey"
+	remote_config_add $serverName $sireDir/secrets hopeTwitterAppSecret "$hopeTwitterAppSecret"
+fi
 
 if [ "$machineSshKeyPublic" != '' ]; then
 	echo 'copying machine ssh keys...'
