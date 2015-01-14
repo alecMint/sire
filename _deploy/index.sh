@@ -34,11 +34,9 @@ else
 	ssh ubuntu@$serverName "sudo mkdir -p $sireDir/_common/s3dl/node_modules && sudo npm install --prefix $sireDir/_common/s3dl"
 fi
 
-if [ "$githubHookAuthToken" != "" ]; then
-	echo 'copying github tokens...'
-	remote_config_add $serverName $sireDir/secrets githubHookAuthToken "$githubHookAuthToken"
-	#ssh ubuntu@$serverName "echo '{\"githubHookAuthToken\":\"$githubHookAuthToken\"}' | sudo tee $sireDir/config.local.json > /dev/null"
-fi
+echo 'copying github tokens...'
+remote_config_add $serverName $sireDir/secrets githubHookAuthToken "$githubHookAuthToken"
+#ssh ubuntu@$serverName "echo '{\"githubHookAuthToken\":\"$githubHookAuthToken\"}' | sudo tee $sireDir/config.local.json > /dev/null"
 
 if [ "$awsAccessKey" != "" ]; then
 	echo 'copying amazon tokens...'
