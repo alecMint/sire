@@ -51,12 +51,15 @@ localhost_add_cname 'local.hopechapellongbeach.com'
 
 
 # deploy hook service
-IP=`public_ip`
-echo "[{\"repo\":\"$installDir\",\"branch\":\"master\"}]" > "$installDir/hooky.json"
-cd $startpwd/hooky
-npmi
-forever_run "./index.js -t $githubHookAuthToken -a $IP -c $installDir/hooky.json"
-cd $startpwd
+#IP=`public_ip`
+#echo "[{\"repo\":\"$installDir\",\"branch\":\"master\"}]" > "$installDir/hooky.json"
+#cd $startpwd/hooky
+#npmi
+#forever_run "./index.js -t $githubHookAuthToken -a $IP -c $installDir/hooky.json"
+#cd $startpwd
+
+# until i fix multiple github hooks issue...
+gitsync_cron "$installDir" "master"
 
 # s3 sync service
 # NOTE: the angel script is pointed to wrong location, need to update to use $sireDir
