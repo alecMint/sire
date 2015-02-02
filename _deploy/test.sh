@@ -49,6 +49,7 @@ fi
 
 
 echo ''
-echo "ssh ubuntu@$serverName"
+echo 'Example module deploy:'
+echo "ssh ubuntu@$serverName 'sudo $sireDir/index.sh lucky-forwarder'"
 echo ''
 
