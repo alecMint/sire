@@ -13,5 +13,6 @@ export serverName='123.123.123.123' # or ec2-123-123-123-123.compute-1.amazonaws
 
 # Public + private keys of deploy github user
 # This user should have read-only access to your repos
+# Can also set the value to point at a file
 export machineSshKeyPublic='ssh-rsa AAAAB3N...'
 export machineSshKeyPrivate=$'-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIB...'
