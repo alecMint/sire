@@ -8,6 +8,9 @@ echo 'ec2Cert: '$ec2Cert
 
 if [ "`ssh -oStrictHostKeyChecking=no ubuntu@$serverName 'echo "ok"'`" != "ok" ]; then
 	echo 'copying ssh public key...'
+	if [ -f "$sshKey" ]; then
+		sshKey=`cat "$sshKey"`
+	fi
 	ssh -oStrictHostKeyChecking=no -i"$ec2Cert" ubuntu@$serverName "echo '$sshKey' >> ~/.ssh/authorized_keys"
 else
 	echo 'user already has access to ec2, skipping cert copy'
@@ -59,6 +62,12 @@ fi
 
 if [ "$machineSshKeyPublic" != '' ]; then
 	echo 'copying machine ssh keys...'
+	if [ -f "$machineSshKeyPublic" ]; then
+		machineSshKeyPublic=`cat "$machineSshKeyPublic"`
+	fi
+	if [ -f "$machineSshKeyPrivate" ]; then
+		machineSshKeyPrivate=`cat "$machineSshKeyPrivate"`
+	fi
 	ssh ubuntu@$serverName "echo \"echo '$machineSshKeyPublic' > /root/.ssh/id_rsa.pub\" | sudo -s"
 	ssh ubuntu@$serverName "echo \"echo '$machineSshKeyPrivate' > /root/.ssh/id_rsa\" | sudo -s"
 	ssh ubuntu@$serverName "sudo chmod 0400 /root/.ssh/id_rsa"
