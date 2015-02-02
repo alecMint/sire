@@ -20,12 +20,14 @@ else
 	echo "sire repo deployed"
 fi
 
-t=`ssh ubuntu@$serverName "sudo cat /root/sire/secrets | grep githubHookAuthToken | head -n1 | grep -oP '\".+\"'"`
-if [ "$t" != "\"$githubHookAuthToken\"" ]; then
-	echo "config missing githubHookAuthToken"
-	exit 1
-else
-	echo "config contains githubHookAuthToken"
+if [ "$githubHookAuthToken" != "" ]; then
+	t=`ssh ubuntu@$serverName "sudo cat /root/sire/secrets | grep githubHookAuthToken | head -n1 | grep -oP '\".+\"'"`
+	if [ "$t" != "\"$githubHookAuthToken\"" ]; then
+		echo "config missing githubHookAuthToken"
+		exit 1
+	else
+		echo "config contains githubHookAuthToken"
+	fi
 fi
 
 if [ "$machineSshKeyPublic" != '' ]; then
