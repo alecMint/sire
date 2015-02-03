@@ -3,15 +3,15 @@
 nginxBackend="127.0.0.1:9000"
 
 cat > /etc/nginx/sites-available/lucky-forwarder <<FILE
-server {
-	listen 80;
-	server_name luckymag.com;
-	return 301 http://www.luckymag.com\$request_uri;
-}
+#server {
+#	listen 80;
+#	server_name luckymag.com;
+#	return 301 http://www.luckymag.com\$request_uri;
+#}
 server {
 	listen 80;
 
-	server_name www.luckymag.com m.luckymag.com promo.luckymag.com;
+	server_name www.luckymag.com luckymag.com m.luckymag.com promo.luckymag.com;
 	root $installDir/web;
 	autoindex off;
 
