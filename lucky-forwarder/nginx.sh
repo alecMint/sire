@@ -11,7 +11,7 @@ server {
 server {
 	listen 80;
 
-	server_name www.luckymag.com;
+	server_name www.luckymag.com m.luckymag.com promo.luckymag.com;
 	root $installDir/web;
 	autoindex off;
 
