@@ -26,5 +26,5 @@ fi
 
 
 # until i fix multiple github hooks issue...
-#gitsync_cron "$installDir" "master"
+gitsync_cron "$installDir" "prod"
 
