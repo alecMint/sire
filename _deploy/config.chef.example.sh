@@ -16,3 +16,7 @@ export serverName='123.123.123.123' # or ec2-123-123-123-123.compute-1.amazonaws
 # Can also set the value to point at a file
 export machineSshKeyPublic='ssh-rsa AAAAB3N...'
 export machineSshKeyPrivate=$'-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIB...'
+
+# Keys for s3
+export awsAccessKey=''
+export awsAccessSecret=''
