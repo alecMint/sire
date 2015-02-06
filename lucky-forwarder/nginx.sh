@@ -11,7 +11,7 @@ cat > /etc/nginx/sites-available/lucky-forwarder <<FILE
 server {
 	listen 80;
 
-	server_name www.luckymag.com luckymag.com m.luckymag.com promo.luckymag.com;
+	server_name www.luckymag.com luckymag.com m.luckymag.com promo.luckymag.com legacy.luckymag.com;
 	root $installDir/web;
 	autoindex off;
 
