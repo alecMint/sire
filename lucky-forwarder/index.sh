@@ -7,14 +7,11 @@ startpwd=`pwd`
 ../_common/nginx.sh
 ../_common/php.sh
 ../_common/mysql.sh
+../_common/s3.sh
 
 
 # nginx conf
 . ./nginx.sh
-
-
-# create local db
-echo "create database if not exists lucky_forwarder" | /usr/bin/mysql -uroot
 
 
 # install repo
