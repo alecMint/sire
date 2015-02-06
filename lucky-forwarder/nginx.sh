@@ -51,7 +51,7 @@ server {
 }
 
 server {
-	listen 443 default;
+	listen 443;
 
 	server_name www.luckymag.com luckymag.com m.luckymag.com promo.luckymag.com legacy.luckymag.com;
 	root $installDir/web;
