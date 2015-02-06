@@ -2,6 +2,7 @@
 # Ex: ./index.sh ace alechulce -na
 # -na will skip installing basics
 
+echo 'whoami: '`whoami`
 
 aptUpdate=1
 for arg in "$@"; do
