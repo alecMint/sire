@@ -13,10 +13,10 @@ if [ "`ssh -oStrictHostKeyChecking=no ubuntu@$serverName 'echo "ok"'`" != "ok" ]
 	fi
 	if [ "$ec2Cert" == "" ]; then
 		echo "using ec2Cert"
-		ssh -oStrictHostKeyChecking=no ubuntu@$serverName "echo '$sshKey' >> ~/.ssh/authorized_keys"
+		ssh -oStrictHostKeyChecking=no ubuntu@$serverName "echo '$sshKey' >> /home/ubuntu/.ssh/authorized_keys"
 	else
 		echo "using default identity file"
-		ssh -oStrictHostKeyChecking=no -i"$ec2Cert" ubuntu@$serverName "echo '$sshKey' >> ~/.ssh/authorized_keys"
+		ssh -oStrictHostKeyChecking=no -i"$ec2Cert" ubuntu@$serverName "echo '$sshKey' >> /home/ubuntu/.ssh/authorized_keys"
 	fi
 else
 	echo 'user already has access to ec2, skipping cert copy'
