@@ -11,7 +11,11 @@ if [ "`ssh -oStrictHostKeyChecking=no ubuntu@$serverName 'echo "ok"'`" != "ok" ]
 	if [ -f "$sshKey" ]; then
 		sshKey=`cat "$sshKey"`
 	fi
-	ssh -oStrictHostKeyChecking=no -i"$ec2Cert" ubuntu@$serverName "echo '$sshKey' >> ~/.ssh/authorized_keys"
+	if [ "$ec2Cert" == "" ]; then
+		ssh -oStrictHostKeyChecking=no -i"$ec2Cert" ubuntu@$serverName "echo '$sshKey' >> ~/.ssh/authorized_keys"
+	else
+		ssh -oStrictHostKeyChecking=no ubuntu@$serverName "echo '$sshKey' >> ~/.ssh/authorized_keys"
+	fi
 else
 	echo 'user already has access to ec2, skipping cert copy'
 fi
