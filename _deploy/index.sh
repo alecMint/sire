@@ -12,8 +12,10 @@ if [ "`ssh -oStrictHostKeyChecking=no ubuntu@$serverName 'echo "ok"'`" != "ok" ]
 		sshKey=`cat "$sshKey"`
 	fi
 	if [ "$ec2Cert" == "" ]; then
+		echo "using ec2Cert"
 		ssh -oStrictHostKeyChecking=no -i"$ec2Cert" ubuntu@$serverName "echo '$sshKey' >> ~/.ssh/authorized_keys"
 	else
+		echo "using default identity file"
 		ssh -oStrictHostKeyChecking=no ubuntu@$serverName "echo '$sshKey' >> ~/.ssh/authorized_keys"
 	fi
 else
