@@ -36,7 +36,7 @@ echo "setting up deployment repo ($sireBranch)..."
 # todo: fix this check, it needs to check remote directory, not local directory
 if [ -d "$sireDir/.git" ]; then
 	echo "updating existing repo"
-	ssh ubuntu@$serverName "sudo git --git-dir=$sireDir/.git --work-tree=$sireDir checkout -f master"
+	ssh ubuntu@$serverName "sudo git --git-dir=$sireDir/.git --work-tree=$sireDir checkout -f $sireBranch"
 	ssh ubuntu@$serverName "sudo git --git-dir=$sireDir/.git --work-tree=$sireDir fetch"
 	ssh ubuntu@$serverName "sudo git --git-dir=$sireDir/.git --work-tree=$sireDir pull origin $sireBranch"
 else
