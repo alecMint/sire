@@ -36,10 +36,11 @@ echo 'setting up deployment repo...'
 if [ -d "$sireDir/.git" ]; then
 	ssh ubuntu@$serverName "sudo git --git-dir=$sireDir/.git --work-tree=$sireDir checkout -f master"
 	ssh ubuntu@$serverName "sudo git --git-dir=$sireDir/.git --work-tree=$sireDir fetch"
-	ssh ubuntu@$serverName "sudo git --git-dir=$sireDir/.git --work-tree=$sireDir pull origin master"
+	ssh ubuntu@$serverName "sudo git --git-dir=$sireDir/.git --work-tree=$sireDir pull origin $sireBranch"
 else
 	ssh ubuntu@$serverName "sudo rm -fr $sireDir"
 	ssh ubuntu@$serverName "sudo git clone $sireRepo $sireDir"
+	ssh ubuntu@$serverName "sudo git --git-dir=$sireDir/.git --work-tree=$sireDir pull origin $sireBranch"
 	ssh ubuntu@$serverName "sudo mkdir -p $sireDir/_common/s3dl/node_modules && sudo npm install --prefix $sireDir/_common/s3dl"
 fi
 
