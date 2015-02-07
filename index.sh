@@ -12,19 +12,21 @@ for arg in "$@"; do
 done
 
 
-if [ "$1" == "_deploy" ] || [ "$1" == "_deploy/" ]; then
-	if [ "`which realpath`" == "" ]; then
-		realpath() {
-			echo `cd "${1}";pwd`
-		}
-	fi
-else
+if [ "`which apt-get`" != "" ]; then
+	echo "we have apt-get"
 	if [ $aptUpdate == 1 ]; then
 		echo 'apt-get update...'
 		apt-get update
 		apt-get install --assume-yes curl build-essential realpath
 	fi
 	export DEBIAN_FRONTEND=noninteractive # shhh!
+fi
+
+if [ "`which realpath`" == "" ]; then
+	echo "we dont have realpath"
+	realpath() {
+		echo `cd "${1}";pwd`
+	}
 fi
 
 
