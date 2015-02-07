@@ -48,3 +48,4 @@ killall node
 ### To Do
 - Package hooky and remove dups
 - Fix issue where only one hooky can be running at once due to port conflict
+- Fix faulty logic inside _deploy/index.sh where it checks for existence of local sire .git when it should check remote .git

@@ -33,7 +33,7 @@ echo "adding git's public key to known_hosts"
 ssh ubuntu@$serverName "sudo ssh -oStrictHostKeyChecking=no git@github.com"
 
 echo "setting up deployment repo ($sireBranch)..."
-# todo: fix this check, it needs to check remote directory, not local directory
+# @todo: fix this check, it needs to check remote directory, not local directory
 if [ -d "$sireDir/.git" ]; then
 	echo "updating existing repo"
 	ssh ubuntu@$serverName "sudo git --git-dir=$sireDir/.git --work-tree=$sireDir checkout -f $sireBranch"
