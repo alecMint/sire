@@ -43,10 +43,10 @@ server {
 		fastcgi_param SCRIPT_FILENAME \$document_root/index.php;
 		fastcgi_param SCRIPT_NAME /index.php;
 		# pass nonexistants to index.php
-		if (!-f \$request_filename) {
+		#if (!-f \$request_filename) {
 			fastcgi_pass $nginxBackend;
 			break;
-		}
+		#}
 	}
 }
 
@@ -90,10 +90,10 @@ server {
 		fastcgi_param SCRIPT_FILENAME \$document_root/index.php;
 		fastcgi_param SCRIPT_NAME /index.php;
 		# pass nonexistants to index.php
-		if (!-f \$request_filename) {
+		#if (!-f \$request_filename) {
 			fastcgi_pass $nginxBackend;
 			break;
-		}
+		#}
 	}
 }
 FILE
