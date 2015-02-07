@@ -45,6 +45,11 @@ use_https = True
 verbosity = WARNING
 FILE
 
+# temp hack for problem i havent solved yet where s3cmd is looking in home/ubuntu even though i sudo
+if [ -d /home/ubuntu ]; then
+	cp /root/.s3cfg /home/ubuntu/
+fi
+
 echo "s3cmd configured";
 
 else
