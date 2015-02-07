@@ -43,6 +43,7 @@ else
 	echo "cloning new repo"
 	ssh ubuntu@$serverName "sudo rm -fr $sireDir"
 	ssh ubuntu@$serverName "sudo git clone $sireRepo $sireDir"
+	ssh ubuntu@$serverName "sudo git --git-dir=$sireDir/.git --work-tree=$sireDir checkout $sireBranch"
 	ssh ubuntu@$serverName "sudo git --git-dir=$sireDir/.git --work-tree=$sireDir pull origin $sireBranch"
 	ssh ubuntu@$serverName "sudo mkdir -p $sireDir/_common/s3dl/node_modules && sudo npm install --prefix $sireDir/_common/s3dl"
 fi
