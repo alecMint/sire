@@ -32,7 +32,7 @@ ssh ubuntu@$serverName "sudo apt-get -y install git-core"
 echo "adding git's public key to known_hosts"
 ssh ubuntu@$serverName "sudo ssh -oStrictHostKeyChecking=no git@github.com"
 
-echo 'setting up deployment repo...'
+echo "setting up deployment repo ($sireBranch)..."
 if [ -d "$sireDir/.git" ]; then
 	ssh ubuntu@$serverName "sudo git --git-dir=$sireDir/.git --work-tree=$sireDir checkout -f master"
 	ssh ubuntu@$serverName "sudo git --git-dir=$sireDir/.git --work-tree=$sireDir fetch"
