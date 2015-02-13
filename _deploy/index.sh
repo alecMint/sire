@@ -65,10 +65,10 @@ if [ "$googleAnalyticsId" != "" ]; then
 	remote_config_add $serverName $sireDir/secrets googleAnalyticsId "$googleAnalyticsId"
 fi
 
-if [ "$hopeTwitterAppKey" != "" ]; then
+if [ "$twitterAppKey" != "" ]; then
 	echo 'copying service specific secrets...'
-	remote_config_add $serverName $sireDir/secrets hopeTwitterAppKey "$hopeTwitterAppKey"
-	remote_config_add $serverName $sireDir/secrets hopeTwitterAppSecret "$hopeTwitterAppSecret"
+	remote_config_add $serverName $sireDir/secrets twitterAppKey "$twitterAppKey"
+	remote_config_add $serverName $sireDir/secrets twitterAppSecret "$twitterAppSecret"
 fi
 
 if [ "$machineSshKeyPublic" != '' ]; then

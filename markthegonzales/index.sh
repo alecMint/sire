@@ -41,8 +41,8 @@ if [ -f $installDir/web/config.local.php ]; then
 	rm $installDir/web/config.local.php
 fi
 gen_add_line_to_file "$installDir/web/config.local.php" '<?php' '<?php'
-gen_add_line_to_file "$installDir/web/config.local.php" twitterAppKey "\$twitterAppKey='$hopeTwitterAppKey';"
-gen_add_line_to_file "$installDir/web/config.local.php" twitterAppSecret "\$twitterAppSecret='$hopeTwitterAppSecret';"
+gen_add_line_to_file "$installDir/web/config.local.php" twitterAppKey "\$twitterAppKey='$twitterAppKey';"
+gen_add_line_to_file "$installDir/web/config.local.php" twitterAppSecret "\$twitterAppSecret='$twitterAppSecret';"
 gen_add_line_to_file "$installDir/web/config.local.php" awsRegion "\$googleAnalyticsId='$googleAnalyticsId';"
 
 

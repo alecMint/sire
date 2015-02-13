@@ -19,8 +19,8 @@ export ec2Cert='/Users/ahulce/.ssh/mycert.pem'
 export serverName='123.123.123.123' # or domain e.g. ec2-123-123-123-123.compute-1.amazonaws.com
 export sshKey='ssh-rsa AAAAB3...'
 export githubHookAuthToken='a713c...'
-export hopeTwitterAppKey="HFUe..."
-export hopeTwitterAppSecret="kMBn..."
+export twitterAppKey="HFUe..."
+export twitterAppSecret="kMBn..."
 export machineSshKeyPublic='ssh-rsa AAAAB3N...'
 export machineSshKeyPrivate=$'-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIB...'
 ```
