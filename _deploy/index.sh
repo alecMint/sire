@@ -45,7 +45,6 @@ echo "setting up deployment repo ($sireBranch)..."
 	ssh ubuntu@$serverName "sudo git clone $sireRepo $sireDir"
 	ssh ubuntu@$serverName "sudo git --git-dir=$sireDir/.git --work-tree=$sireDir checkout $sireBranch"
 	ssh ubuntu@$serverName "sudo git --git-dir=$sireDir/.git --work-tree=$sireDir pull origin $sireBranch"
-	ssh ubuntu@$serverName "sudo mkdir -p $sireDir/_common/s3dl/node_modules && sudo npm install --prefix $sireDir/_common/s3dl"
 #fi
 
 # keep this here for (1) test.sh and (2) put at least something in secrets

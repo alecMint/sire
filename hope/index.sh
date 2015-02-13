@@ -10,6 +10,7 @@ startpwd=`pwd`
 ../_common/mysql.sh
 ../_common/nodejs.sh
 ../_common/forever.sh
+../_common/s3dl.sh
 
 
 # nginx conf
