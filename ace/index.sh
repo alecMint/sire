@@ -46,7 +46,7 @@ gen_add_line_to_file "$installDir/web/config.local.php" twitterAppSecret "\$twit
 gen_add_line_to_file "$installDir/web/config.local.php" awsAccessKey "\$awsAccessKey='$awsAccessKey';"
 gen_add_line_to_file "$installDir/web/config.local.php" awsAccessSecret "\$awsAccessSecret='$awsAccessSecret';"
 gen_add_line_to_file "$installDir/web/config.local.php" awsRegion "\$awsRegion='$awsRegion';"
-gen_add_line_to_file "$installDir/web/config.local.php" awsRegion "\$googleAnalyticsId='$googleAnalyticsId';"
+gen_add_line_to_file "$installDir/web/config.local.php" googleAnalyticsId "\$googleAnalyticsId='$googleAnalyticsId';"
 
 if [ -f $installDir/config.local.json ]; then
 	rm $installDir/config.local.json
