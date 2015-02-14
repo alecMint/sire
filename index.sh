@@ -22,6 +22,9 @@ if [ "`which apt-get`" != "" ]; then
 	export DEBIAN_FRONTEND=noninteractive # shhh!
 fi
 
+# so sick and tired of this, figure out later...
+apt-get realpath
+
 if [ "`which realpath`" == "" ]; then
 	echo "we dont have realpath"
 	realpath() {
