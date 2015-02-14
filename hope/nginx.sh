@@ -4,6 +4,11 @@ nginxBackend="127.0.0.1:9000"
 
 cat > /etc/nginx/sites-available/hope <<FILE
 server {
+	listen 80;
+	server_name luckymag.com;
+	return 301 http://www.hopechapellongbeach.com\$request_uri;
+}
+server {
     listen 80;
 
     server_name hopechapellongbeach.com local.hopechapellongbeach.com;
