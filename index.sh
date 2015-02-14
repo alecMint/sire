@@ -17,9 +17,9 @@ if [ -f /usr/bin/apt-get ]; then
 	if [ $aptUpdate == 1 ]; then
 		echo 'apt-get update...'
 		apt-get update
-		apt-get install --assume-yes curl build-essential
+		apt-get install --assume-yes curl build-essential realpath
 	fi
-	apt-get --assume-yes install realpath
+	#apt-get --assume-yes install realpath
 	export DEBIAN_FRONTEND=noninteractive # shhh!
 fi
 
