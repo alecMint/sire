@@ -1,5 +1,7 @@
 # nginx conf
 
+echo "inside nginx"
+
 nginxBackend="127.0.0.1:9000"
 
 cat > /etc/nginx/sites-available/hope <<FILE

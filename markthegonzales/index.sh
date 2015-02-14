@@ -14,6 +14,7 @@ startpwd=`pwd`
 
 
 # nginx conf
+echo "calling nginx"
 . ./nginx.sh
 
 
