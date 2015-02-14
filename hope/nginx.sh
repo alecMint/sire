@@ -5,13 +5,13 @@ nginxBackend="127.0.0.1:9000"
 cat > /etc/nginx/sites-available/hope <<FILE
 server {
 	listen 80;
-	server_name luckymag.com;
+	server_name hopechapellongbeach.com;
 	return 301 http://www.hopechapellongbeach.com\$request_uri;
 }
 server {
     listen 80;
 
-    server_name hopechapellongbeach.com local.hopechapellongbeach.com;
+    server_name www.hopechapellongbeach.com local.hopechapellongbeach.com;
     root /var/www/hope/web;
     autoindex off;
 
