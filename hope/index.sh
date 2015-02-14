@@ -17,10 +17,6 @@ startpwd=`pwd`
 . ./nginx.sh
 
 
-# crons
-. ./crons.sh
-
-
 # install repo
 install_repo "$installDir" "$gitRepo"
 
@@ -62,6 +58,13 @@ cd $startpwd
 
 # until i fix multiple github hooks issue...
 #gitsync_cron "$installDir" "master"
+
+
+# bak sql
+cron="0 3 * * * /usr/local/bin/node $sireDir/_common/s3dl/bin/baksql.js -d $mysqlDb -b $s3Bucket/sql >> /var/log/hope_baksql.log 2>&1 #hope_bakSql"
+echo "installing crontab: $cron"
+crontab_add '#hope_bakSql' "$cron"
+
 
 # s3 sync service
 # NOTE: the angel script is pointed to wrong location, need to update to use $sireDir
