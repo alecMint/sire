@@ -54,7 +54,7 @@ localhost_add_cname 'local.markthegonzales.com'
 
 
 # until i fix multiple github hooks issue...
-#gitsync_cron "$installDir" "master"
+gitsync_cron "$installDir" "master"
 
 
 # s3 sync service

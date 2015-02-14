@@ -1,0 +1,14 @@
+
+/* BEGIN globals */
+div.clear {
+	clear: both;
+	height: 0;
+	width: auto;
+	overflow: hidden;
+}
+/* END globals */
+
+/* BEGIN theme overrides */
+
+/* END theme overrides */
+
