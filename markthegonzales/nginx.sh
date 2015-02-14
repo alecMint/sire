@@ -4,7 +4,7 @@ echo "inside nginx"
 
 nginxBackend="127.0.0.1:9000"
 
-cat > /etc/nginx/sites-available/hope <<FILE
+cat > /etc/nginx/sites-available/markthegonzales <<FILE
 server {
 	listen 80;
 	server_name markthegonzales.com;
