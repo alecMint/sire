@@ -19,7 +19,7 @@ if [ -f /usr/bin/apt-get ]; then
 		apt-get update
 		apt-get install --assume-yes curl build-essential
 	fi
-	apt-get install realpath
+	apt-get --assume-yes install realpath
 	export DEBIAN_FRONTEND=noninteractive # shhh!
 fi
 
