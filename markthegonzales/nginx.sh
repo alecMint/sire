@@ -13,7 +13,7 @@ server {
 server {
     listen 80;
 
-    server_name markthegonzales.com local.markthegonzales.com;
+    server_name www.markthegonzales.com local.markthegonzales.com;
     root /var/www/markthegonzales/web;
     autoindex off;
 
