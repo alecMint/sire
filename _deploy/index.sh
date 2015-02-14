@@ -59,11 +59,6 @@ if [ "$awsAccessKey" != "" ]; then
 	remote_config_add $serverName $sireDir/secrets awsRegion "$awsRegion"
 fi
 
-if [ "$googleAnalyticsId" != "" ]; then
-	echo 'copying google analytics id...'
-	remote_config_add $serverName $sireDir/secrets googleAnalyticsId "$googleAnalyticsId"
-fi
-
 if [ "$twitterAppKey" != "" ]; then
 	echo 'copying service specific secrets...'
 	remote_config_add $serverName $sireDir/secrets twitterAppKey "$twitterAppKey"

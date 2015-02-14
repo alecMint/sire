@@ -44,7 +44,9 @@ fi
 gen_add_line_to_file "$installDir/web/config.local.php" '<?php' '<?php'
 gen_add_line_to_file "$installDir/web/config.local.php" twitterAppKey "\$twitterAppKey='$twitterAppKey';"
 gen_add_line_to_file "$installDir/web/config.local.php" twitterAppSecret "\$twitterAppSecret='$twitterAppSecret';"
-gen_add_line_to_file "$installDir/web/config.local.php" googleAnalyticsId "\$googleAnalyticsId='$googleAnalyticsId';"
+if [ "$googleAnalyticsId" != "" ]; then
+	gen_add_line_to_file "$installDir/web/config.local.php" googleAnalyticsId "\$googleAnalyticsId='$googleAnalyticsId';"
+fi
 
 
 # test cname
