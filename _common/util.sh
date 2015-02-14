@@ -78,7 +78,7 @@ forever_is_running(){
 forever_run(){
 	torun1=`everything_but $1`
 	file=`first_arg $1`
-	script=`realpath $file`
+	script=`/usr/bin/realpath $file`
 	torun=$script
 	if [ "$torun1" != "" ]; then # necessary check to prevent extra space if no $torun
 		torun=$script" "$torun1

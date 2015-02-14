@@ -12,7 +12,7 @@ fi
 
 
 
-p=`realpath $d/../bin/foreverlogs.sh`
+p=`/usr/bin/realpath $d/../bin/foreverlogs.sh`
 echo "forever cron $d"
 echo "realpath $p"
 

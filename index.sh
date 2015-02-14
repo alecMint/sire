@@ -34,7 +34,7 @@ fi
 
 
 refDir=`dirname $0`
-refDir=`realpath $refDir`
+refDir=`/usr/bin/realpath $refDir`
 cd $refDir
 
 
