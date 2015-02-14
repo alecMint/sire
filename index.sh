@@ -12,18 +12,17 @@ for arg in "$@"; do
 done
 
 
-if [ "`which apt-get`" != "" ]; then
+if [ -f /usr/bin/apt-get ]; then
 	echo "we have apt-get"
 	if [ $aptUpdate == 1 ]; then
 		echo 'apt-get update...'
 		apt-get update
-		apt-get install --assume-yes curl build-essential realpath
+		apt-get install --assume-yes curl build-essential
 	fi
+	apt-get install realpath
 	export DEBIAN_FRONTEND=noninteractive # shhh!
 fi
 
-# so sick and tired of this, figure out later...
-apt-get realpath
 
 if [ "`which realpath`" == "" ]; then
 	echo "we dont have realpath"
