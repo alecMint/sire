@@ -26,15 +26,15 @@ install_repo "$installDir" "$gitRepo"
 
 
 # wordpress
-echo 'create database if not exists wordpress' | mysql -uroot
+echo "create database if not exists $mysqlDb" | mysql -uroot
 # we need this file to be there immediately
 mkdir -p $installDir/web/wp-content/uploads/x
-s3cmd get --skip-existing s3://$hopeS3Bucket/wp-content/uploads/x/style.css $installDir/web/wp-content/uploads/x/style.css
+s3cmd get --skip-existing s3://$s3Bucket/wp-content/uploads/x/style.css $installDir/web/wp-content/uploads/x/style.css
 # we may have a problem when s3 pulls down a directory that wasnt previously given permissions...
 chown -R www-data $installDir/web/wp-content/uploads
 chmod -R +w $installDir/web/wp-content/uploads
 # fetch wordpress db
-node ../_common/s3dl/bin/loadsql.js -d wordpress -b sire-hope/sql
+node ../_common/s3dl/bin/loadsql.js -d $mysqlDb -b $s3Bucket/sql
 
 
 # secret configs
@@ -67,7 +67,7 @@ cd $startpwd
 # NOTE: the angel script is pointed to wrong location, need to update to use $sireDir
 cd $startpwd/../_common/s3dl
 npmi
-forever_run "./index.js -d $installDir/web/wp-content/uploads -w /wp-content/uploads -b sire-hope/wp-content/uploads"
+forever_run "./index.js -d $installDir/web/wp-content/uploads -w /wp-content/uploads -b $s3Bucket/wp-content/uploads"
 cd $startpwd
 
 
