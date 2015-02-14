@@ -61,10 +61,9 @@ crontab_add '#markthegonzales_bakSql' "$cron"
 
 
 # s3 sync service
-# NOTE: the angel script is pointed to wrong location, need to update to use $sireDir
-cd $startpwd/../_common/s3dl
+cd $sireDir/_common/s3dl
 npmi
-forever_run "./index.js -d $installDir/web/wp-content/uploads -w /wp-content/uploads -b $s3Bucket/wp-content/uploads"
+forever_run "$sireDir/_common/s3dl/index.js -d $installDir/web/wp-content/uploads -w /wp-content/uploads -b $s3Bucket/wp-content/uploads"
 cd $startpwd
 
 
