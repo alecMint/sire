@@ -17,7 +17,7 @@ Copy config.chef.example.sh to config.chef.sh inside ./_deploy and edit:
 ```
 export ec2Cert='/Users/ahulce/.ssh/mycert.pem'
 export serverName='123.123.123.123' # or domain e.g. ec2-123-123-123-123.compute-1.amazonaws.com
-export sshKey='ssh-rsa AAAAC4...'
+export sshKey='/Users/ahulce/.ssh/id_rsa.pub'
 export githubHookAuthToken='b926g...'
 export twitterAppKey="HLXu..."
 export twitterAppSecret="pNJi..."
