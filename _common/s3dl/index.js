@@ -12,7 +12,7 @@ var localDir = argv.d || argv.dir;
 var bucket = argv.b || argv.bucket;
 var webDir = argv.w || argv.webdir;
 var deleteLocal = argv.l || argv.localdel;
-var portConfig = getPortConfig(argv.port,9991);
+var portConfig = getPortConfig(argv.p,9991);
 
 if(!localDir || !webDir || !bucket)  throw "both dir and webdir and bucket are required!";
 
@@ -111,7 +111,7 @@ function getPortConfig(arg, defaultPort){
 		return {targetPort:defaultPort};
 	if (typeof arg != 'string' || arg.indexOf(',') == -1)
 		return {targetPort:+arg};
-	var m = arg.match(/([0-9]+),([0-9]+)x([0-9]+)/);
+	var m = arg.match(/([0-9]+),([0-9]+)-([0-9]+)/);
 	if (!m)
 		return {targetPort:defaultPort};
 	return {
