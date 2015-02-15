@@ -88,8 +88,8 @@ function createServer(port){
 		var re = new RegExp('proxy_pass http://localhost:'+portConfig.target+';','g');
 		var newCnf = cnf.replace(re, 'proxy_pass http://localhost:'+portConfig.attempting+';');
 		console.log(newCnf);
-		fs.writeFileSync(portConfig.nginxCnf, [newCnf]);
-		cp.spawn('/etc/init.d/nginx','reload');
+		fs.writeFileSync(portConfig.nginxCnf, newCnf);
+		cp.spawn('/etc/init.d/nginx',['reload']);
 	});
 }
 createServer(portConfig.target);
