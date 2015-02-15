@@ -81,7 +81,7 @@ function createServer(port){
 }
 createServer(portConfig.targetPort);
 process.on('uncaughtException',function(err){
-	if (!(err.syscall == 'listen' && err.code == 'EADDRINUSE'))
+	if (!(err.syscall == 'listen' && err.code == 'EADDRINUSE' && portConfig.altPorts))
 		throw err;
 	if (portConfig.attempted && ++portConfig.numAttempted >= portConfig.numAttemptable)
 		throw new Error('alt ports depleted; '+JSON.stringify(portConfig));
