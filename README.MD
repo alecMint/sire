@@ -42,6 +42,7 @@ node /root/sire/_common/s3dl/bin/baksql.js -d wordpress -b sire-hope/sql
 node /root/sire/_common/s3dl/bin/shuv.js -d /var/www/hope/web/wp-content/uploads -b sire-hope/wp-content/uploads
 crontab -r
 killall node
+# ec2-stop-instances
 ```
 
 
