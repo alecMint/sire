@@ -86,7 +86,7 @@ forever_run(){
 
 	echo "forever_run sireDir: $sireDir"
 	crontab_add "$torun" "* * * * * $sireDir/bin/angel.sh \"$torun\" >> /var/log/angel.log 2>&1"
-	echo "forever_stop '$torun'"
+	echo "forever_run calling forever_stop '$torun'"
 	forever_stop "$torun" # needs to be super unique
 
 	echo `date`
@@ -101,7 +101,6 @@ forever_run(){
 forever_stop(){
 	#index=`forever_uid '$1'` # was using forever_index before, but had issues when stopping index 0
 	index=`/usr/local/bin/forever list | grep "$1" | awk '{print $3}' | sed -e 's/\[\|\]//g' | head -n1` # for some reason the above isnt working, dont have time to figure out why atm
-	echo "forever_stop index=$index"
 	if [ "$index" == "" ]; then
 		echo "forever stop> $1 not running"
 	else
