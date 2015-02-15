@@ -83,7 +83,7 @@ function createServer(port){
 	server.on('listening',function(){
 		if (!portConfig.nginxCnf)
 			return console.log('nginxCnf not passed',portConfig);
-		var cnf = fs.readFileSync(portConfig.nginxCnf);
+		var cnf = fs.readFileSync(portConfig.nginxCnf).toString();
 		console.log(cnf);
 		var re = new RegExp('proxy_pass http://localhost:'+portConfig.target+';','g');
 		var newCnf = cnf.replace(re, 'proxy_pass http://localhost:'+portConfig.attempting+';');
