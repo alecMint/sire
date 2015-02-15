@@ -12,70 +12,95 @@ var localDir = argv.d || argv.dir;
 var bucket = argv.b || argv.bucket;
 var webDir = argv.w || argv.webdir;
 var deleteLocal = argv.l || argv.localdel;
-var port = argv.p || 9991;
+var portConfig = getPortConfig(argv.port,9991);
 
 if(!localDir || !webDir || !bucket)  throw "both dir and webdir and bucket are required!";
 
-console.log(new Date,'watch',localDir,bucket,deleteLocal,port);
+console.log(new Date,'watch',localDir,bucket,deleteLocal,portConfig);
 watch(localDir,bucket,deleteLocal);
 
 
 var server;
-server = http.createServer(function(req,res){
-  var inWebDir = false;
-  if (req.url.indexOf(webDir) == 0) {
-    inWebDir = true;
-    req.url = req.url.replace(webDir,'');
-  }
+function createServer(port){
+	try {
+		server = http.createServer(function(req,res){
+		  var inWebDir = false;
+		  if (req.url.indexOf(webDir) == 0) {
+		    inWebDir = true;
+		    req.url = req.url.replace(webDir,'');
+		  }
 
-  var parsed = url.parse(req.url,true);
-  var targetFile = parsed.path;
+		  var parsed = url.parse(req.url,true);
+		  var targetFile = parsed.path;
 
 
-  fetch(localDir,bucket,parsed.path,function(err,name){
+		  fetch(localDir,bucket,parsed.path,function(err,name){
 
-    var o = {};
-    if(err) o.error = err+'';
-    o.data = name;
+		    var o = {};
+		    if(err) o.error = err+'';
+		    o.data = name;
 
-    if (inWebDir) {
-      if (err) {
-        res.writeHead(404,{
-          //'xerr': err+' '+localDir+' '+bucket+' '+req.url
-          'xerr': err
-        });
-        return res.end('');
-      }
+		    if (inWebDir) {
+		      if (err) {
+		        res.writeHead(404,{
+		          //'xerr': err+' '+localDir+' '+bucket+' '+req.url
+		          'xerr': err
+		        });
+		        return res.end('');
+		      }
 
-      res.setHeader('xyay',1);
+		      res.setHeader('xyay',1);
 
-      var qs = parsed.query||{};
-      if(req.url.indexOf(".php") == req.url.length-4) {
-        qs.path = true;// for php files never return file contents.  
-      }
+		      var qs = parsed.query||{};
+		      if(req.url.indexOf(".php") == req.url.length-4) {
+		        qs.path = true;// for php files never return file contents.  
+		      }
 
-      if(qs.path) {
-        // send data.
-        res.end(JSON.stringify(o)+"\n");
-      } else {
+		      if(qs.path) {
+		        // send data.
+		        res.end(JSON.stringify(o)+"\n");
+		      } else {
 
-        res.setHeader('Content-Type',mime.lookup(req.url));
-        fs.createReadStream(name).pipe(res).on('finish',function(){
-          if (!deleteLocal)
-            return;
-          // wait until we're sure we read the whole file
-          console.log('deleter()',name,'s3://'+path.join(bucket,req.url));
-          deleter(name, 's3://'+path.join(bucket,req.url));
-        });
-      }
-    } else {
-      res.end(JSON.stringify(o)+"\n");
-    }
+		        res.setHeader('Content-Type',mime.lookup(req.url));
+		        fs.createReadStream(name).pipe(res).on('finish',function(){
+		          if (!deleteLocal)
+		            return;
+		          // wait until we're sure we read the whole file
+		          console.log('deleter()',name,'s3://'+path.join(bucket,req.url));
+		          deleter(name, 's3://'+path.join(bucket,req.url));
+		        });
+		      }
+		    } else {
+		      res.end(JSON.stringify(o)+"\n");
+		    }
 
-  });
-}).listen(port,'127.0.0.1',function(){// only listen on localhost
-  console.log("s3dl running on ",server.address(),new Date);
-});
+		  });
+		}).listen(port,'127.0.0.1',function(){// only listen on localhost
+		  console.log("s3dl running on ",server.address(),new Date);
+		});
+	} catch (e) {
+		console.log('createServer Exception',JSON.stringify(e));
+		throw e;
+	}
+}
+createServer(portConfig.targetPort);
 
 fetch.tmpdir(localDir);
+
+
+
+function getPortConfig(arg, defaultPort){
+	if (!arg)
+		return {targetPort:defaultPort};
+	if (typeof arg != 'string' || arg.indexOf(',') == -1)
+		return {targetPort:+arg};
+	var m = arg.match(/([0-9]+),([0-9]+)-([0-9]+)/);
+	if (!m)
+		return {targetPort:defaultPort};
+	return {
+		targetPort: +m[1]
+		,altPorts: [+m[2], +m[3]]
+	}
+}
+
 
