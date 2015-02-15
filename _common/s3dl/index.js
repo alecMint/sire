@@ -16,6 +16,7 @@ var port = argv.p || 9991;
 
 if(!localDir || !webDir || !bucket)  throw "both dir and webdir and bucket are required!";
 
+console.log(new Date,'watch',localDir,bucket,deleteLocal);
 watch(localDir,bucket,deleteLocal);
 
 
