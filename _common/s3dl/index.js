@@ -12,6 +12,7 @@ var localDir = argv.d || argv.dir;
 var bucket = argv.b || argv.bucket;
 var webDir = argv.w || argv.webdir;
 var deleteLocal = argv.l || argv.localdel;
+var port = argv.p || 9991;
 
 if(!localDir || !webDir || !bucket)  throw "both dir and webdir and bucket are required!";
 
@@ -71,7 +72,7 @@ server = http.createServer(function(req,res){
     }
 
   });
-}).listen(9991,'127.0.0.1',function(){// only listen on localhost
+}).listen(port,'127.0.0.1',function(){// only listen on localhost
   console.log("s3dl running on ",server.address());
 });
 
