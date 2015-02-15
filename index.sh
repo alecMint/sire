@@ -23,7 +23,7 @@ if [ -f /usr/bin/apt-get ]; then
 fi
 
 
-if [ "`which realpath`" == "" ]; then
+if [ -f /usr/bin/apt-get ]; then
 	echo "we dont have realpath"
 	realpath() {
 		echo `cd "${1}";pwd`
