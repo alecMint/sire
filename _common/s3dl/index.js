@@ -22,68 +22,67 @@ watch(localDir,bucket,deleteLocal);
 
 var server;
 function createServer(port){
-	try {
-		server = http.createServer(function(req,res){
-		  var inWebDir = false;
-		  if (req.url.indexOf(webDir) == 0) {
-		    inWebDir = true;
-		    req.url = req.url.replace(webDir,'');
-		  }
+	server = http.createServer(function(req,res){
+	  var inWebDir = false;
+	  if (req.url.indexOf(webDir) == 0) {
+	    inWebDir = true;
+	    req.url = req.url.replace(webDir,'');
+	  }
 
-		  var parsed = url.parse(req.url,true);
-		  var targetFile = parsed.path;
+	  var parsed = url.parse(req.url,true);
+	  var targetFile = parsed.path;
 
 
-		  fetch(localDir,bucket,parsed.path,function(err,name){
+	  fetch(localDir,bucket,parsed.path,function(err,name){
 
-		    var o = {};
-		    if(err) o.error = err+'';
-		    o.data = name;
+	    var o = {};
+	    if(err) o.error = err+'';
+	    o.data = name;
 
-		    if (inWebDir) {
-		      if (err) {
-		        res.writeHead(404,{
-		          //'xerr': err+' '+localDir+' '+bucket+' '+req.url
-		          'xerr': err
-		        });
-		        return res.end('');
-		      }
+	    if (inWebDir) {
+	      if (err) {
+	        res.writeHead(404,{
+	          //'xerr': err+' '+localDir+' '+bucket+' '+req.url
+	          'xerr': err
+	        });
+	        return res.end('');
+	      }
 
-		      res.setHeader('xyay',1);
+	      res.setHeader('xyay',1);
 
-		      var qs = parsed.query||{};
-		      if(req.url.indexOf(".php") == req.url.length-4) {
-		        qs.path = true;// for php files never return file contents.  
-		      }
+	      var qs = parsed.query||{};
+	      if(req.url.indexOf(".php") == req.url.length-4) {
+	        qs.path = true;// for php files never return file contents.  
+	      }
 
-		      if(qs.path) {
-		        // send data.
-		        res.end(JSON.stringify(o)+"\n");
-		      } else {
+	      if(qs.path) {
+	        // send data.
+	        res.end(JSON.stringify(o)+"\n");
+	      } else {
 
-		        res.setHeader('Content-Type',mime.lookup(req.url));
-		        fs.createReadStream(name).pipe(res).on('finish',function(){
-		          if (!deleteLocal)
-		            return;
-		          // wait until we're sure we read the whole file
-		          console.log('deleter()',name,'s3://'+path.join(bucket,req.url));
-		          deleter(name, 's3://'+path.join(bucket,req.url));
-		        });
-		      }
-		    } else {
-		      res.end(JSON.stringify(o)+"\n");
-		    }
+	        res.setHeader('Content-Type',mime.lookup(req.url));
+	        fs.createReadStream(name).pipe(res).on('finish',function(){
+	          if (!deleteLocal)
+	            return;
+	          // wait until we're sure we read the whole file
+	          console.log('deleter()',name,'s3://'+path.join(bucket,req.url));
+	          deleter(name, 's3://'+path.join(bucket,req.url));
+	        });
+	      }
+	    } else {
+	      res.end(JSON.stringify(o)+"\n");
+	    }
 
-		  });
-		}).listen(port,'127.0.0.1',function(){// only listen on localhost
-		  console.log("s3dl running on ",server.address(),new Date);
-		});
-	} catch (e) {
-		console.log('createServer Exception',JSON.stringify(e));
-		throw e;
-	}
+	  });
+	}).listen(port,'127.0.0.1',function(){// only listen on localhost
+	  console.log("s3dl running on ",server.address(),new Date);
+	});
 }
 createServer(portConfig.targetPort);
+process.on('uncaughtException',function(err){
+	console.log('uncaughtException',JSON.stringify(err),server);
+	throw err;
+});
 
 fetch.tmpdir(localDir);
 
