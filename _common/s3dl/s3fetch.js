@@ -99,10 +99,10 @@ function moveTmpFile(tmp,targetPath,cb){
   fs.stat(tmp,function(err,stat){
     if (err) return cb(err);
     mkdirp(path.dirname(targetPath),function(err){
-    	console.log('moveTmpFile mkdirp',arguments);
+    	//console.log('moveTmpFile mkdirp',arguments);
       if (err) return cb(err);
       fs.rename(tmp,targetPath,function(err){
-      	console.log('moveTmpFile mkdirp rename',arguments);
+      	//console.log('moveTmpFile mkdirp rename',arguments);
         if (err) return cb(err);
         cb(false,stat);
       });
