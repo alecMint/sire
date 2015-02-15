@@ -96,6 +96,7 @@ process.on('uncaughtException',function(err){
 		portConfig.numAttempted = 1;
 		if ((nextPort = portConfig.altPorts[0]+Math.round(Math.random()*portConfig.numInRange)) == portConfig.altPorts[0])
 			++nextPort;
+		console.log('portConfig',JSON.stringify(portConfig));
 	}
 	if (nextPort == portConfig.targetPort || nextPort > portConfig.altPorts[1])
 		nextPort = portConfig.altPorts[0];
