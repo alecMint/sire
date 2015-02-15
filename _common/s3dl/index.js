@@ -85,7 +85,6 @@ process.on('uncaughtException',function(err){
 		throw err;
 	if (portConfig.attempted && ++portConfig.numAttempted >= portConfig.numAttemptable)
 		throw new Error('alt ports depleted; '+JSON.stringify(portConfig));
-	console.log('EADDRINUSE','attempting next port');
 	var nextPort = portConfig.attempting+1;
 	if (!portConfig.attempted) {
 		portConfig.attempted = {};
@@ -100,7 +99,7 @@ process.on('uncaughtException',function(err){
 	}
 	if (nextPort == portConfig.targetPort || nextPort > portConfig.altPorts[1])
 		nextPort = portConfig.altPorts[0];
-	console.log('uncaughtException next','nextPort',nextPort,'portConfig',JSON.stringify(portConfig));
+	console.log('EADDRINUSE','nextPort',nextPort,'portConfig',JSON.stringify(portConfig));
 	createServer(nextPort);
 });
 
