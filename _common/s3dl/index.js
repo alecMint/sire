@@ -7,6 +7,8 @@ var path = require('path');
 var mime = require('mime');
 var fs = require('fs');
 var deleter = require('./s3deleter');
+var fs = require('fs');
+var cp = require('child_process');
 
 var localDir = argv.d || argv.dir;
 var bucket = argv.b || argv.bucket;
@@ -78,8 +80,19 @@ function createServer(port){
 	}).listen(port,'127.0.0.1',function(){// only listen on localhost
 	  console.log("s3dl running on ",server.address(),new Date);
 	});
+	server.on('listening',function(){
+		if (!portConfig.nginxCnf)
+			return console.log('nginxCnf not passed',portConfig);
+		var cnf = fs.readFileSync(portConfig.nginxCnf);
+		console.log(cnf);
+		var re = new RegExp('proxy_pass http://localhost:'+portConfig.target+';','g');
+		var newCnf = cnf.replace(re, 'proxy_pass http://localhost:'+portConfig.attempting+';');
+		console.log(newCnf);
+		fs.writeFileSync(portConfig.nginxCnf, newCnf);
+		cp.spawn('/etc/init.d/nginx','reload');
+	});
 }
-createServer(portConfig.targetPort);
+createServer(portConfig.target);
 process.on('uncaughtException',function(err){
 	if (!(err.syscall == 'listen' && err.code == 'EADDRINUSE' && portConfig.altPorts))
 		throw err;
@@ -91,13 +104,13 @@ process.on('uncaughtException',function(err){
 		portConfig.numAttemptable = portConfig.altPorts[1]-portConfig.altPorts[0];
 		if (portConfig.numAttemptable <= 0)
 			throw err;
-		if (portConfig.targetPort < portConfig.altPorts[0] || portConfig.targetPort > portConfig.altPorts[1])
+		if (portConfig.target < portConfig.altPorts[0] || portConfig.target > portConfig.altPorts[1])
 			++portConfig.numAttemptable;
 		portConfig.numAttempted = 1;
 		if ((nextPort = portConfig.altPorts[0]+Math.round(Math.random()*portConfig.numAttemptable)) == portConfig.altPorts[0])
 			++nextPort;
 	}
-	if (nextPort == portConfig.targetPort || nextPort > portConfig.altPorts[1])
+	if (nextPort == portConfig.target || nextPort > portConfig.altPorts[1])
 		nextPort = portConfig.altPorts[0];
 	console.log('EADDRINUSE','nextPort',nextPort,'portConfig',JSON.stringify(portConfig));
 	createServer(nextPort);
@@ -109,15 +122,16 @@ fetch.tmpdir(localDir);
 
 function getPortConfig(arg, defaultPort){
 	if (!arg)
-		return {targetPort:defaultPort};
+		return {target:defaultPort};
 	if (typeof arg != 'string' || arg.indexOf(',') == -1)
-		return {targetPort:+arg};
-	var m = arg.match(/([0-9]+),([0-9]+)-([0-9]+)/);
-	if (!m)
-		return {targetPort:defaultPort};
+		return {target:+arg};
+	var m = arg.match(/([0-9]+),([0-9]+)-([0-9]+),(.+)/);
+	if (!m && m[4])
+		return {target:defaultPort};
 	return {
-		targetPort: +m[1]
+		target: +m[1]
 		,altPorts: [+m[2], +m[3]]
+		,nginxCnf: m[4]
 	}
 }
 

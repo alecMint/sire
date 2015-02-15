@@ -63,7 +63,7 @@ crontab_add '#markthegonzales_bakSql' "$cron"
 # s3 sync service
 cd $sireDir/_common/s3dl
 npmi
-forever_run "$sireDir/_common/s3dl/index.js -d $installDir/web/wp-content/uploads -w /wp-content/uploads -b $s3Bucket/wp-content/uploads -p 9992,9000-9100"
+forever_run "$sireDir/_common/s3dl/index.js -d $installDir/web/wp-content/uploads -w /wp-content/uploads -b $s3Bucket/wp-content/uploads -p 9992,9000-9100,/var/sites-available/markthegonzales"
 cd $startpwd
 
 
