@@ -84,7 +84,9 @@ forever_run(){
 		torun=$script" "$torun1
 	fi
 
-	crontab_add "$torun" "* * * * * $sireDir/bin/angel.sh \"$torun\" >> /var/log/angel.log 2>&1"
+	echo "forever_run sireDir: $sireDir"
+	#crontab_add "$torun" "* * * * * $sireDir/bin/angel.sh \"$torun\" >> /var/log/angel.log 2>&1"
+	crontab_add "$torun" "* * * * * /root/sire/bin/angel.sh \"$torun\" >> /var/log/angel.log 2>&1"
 	echo "forever_stop '$torun'"
 	forever_stop "$torun" # needs to be super unique
 
