@@ -98,7 +98,7 @@ forever_run(){
 }
 
 forever_stop(){
-	index=`forever_uid $1` # was using index before, but had issues when stopping index 0
+	index=`forever_uid $1` # was using forever_index before, but had issues when stopping index 0
 	if [ "$index" == "" ]; then
 		echo "forever stop> $1 not running"
 	else
@@ -109,11 +109,11 @@ forever_stop(){
 }
 
 forever_uid(){
-	/usr/local/bin/forever list | grep $1 | awk '{print $3}' | sed -e 's/\[\|\]//g'
+	/usr/local/bin/forever list | grep $1 | awk '{print $3}' | sed -e 's/\[\|\]//g' | head -n1
 }
 
 forever_index(){
-	/usr/local/bin/forever list | grep $1 | awk '{print $2}' | sed -e 's/\[\|\]//g'
+	/usr/local/bin/forever list | grep $1 | awk '{print $2}' | sed -e 's/\[\|\]//g' | head -n1
 }
 
 forever_logfile(){
