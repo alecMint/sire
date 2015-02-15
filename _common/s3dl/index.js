@@ -84,7 +84,7 @@ process.on('uncaughtException',function(err){
 	if (!(err.syscall == 'listen' && err.code == 'EADDRINUSE'))
 		throw err;
 	if (portConfig.attempted && ++portConfig.numAttempted >= portConfig.numAttemptable)
-		throw new Error('alt ports depleted; '+JSON.stringify(portConfig)));
+		throw new Error('alt ports depleted; '+JSON.stringify(portConfig));
 	var nextPort = portConfig.attempting+1;
 	if (!portConfig.attempted) {
 		portConfig.attempted = {};
