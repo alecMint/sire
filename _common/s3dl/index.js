@@ -77,6 +77,9 @@ function createServer(port){
 	}).listen(port,'127.0.0.1',function(){// only listen on localhost
 	  console.log("s3dl running on ",server.address(),new Date);
 	});
+	server.on('listening',function(){
+		console.log('LISTENING!!!',arguments);
+	});
 }
 createServer(portConfig.targetPort);
 process.on('uncaughtException',function(err){
