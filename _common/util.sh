@@ -102,7 +102,7 @@ forever_stop(){
 	if [ "$index" == "" ]; then
 		echo "forever stop> $1 not running"
 	else
-		echo "inside forever_stop, index: $index"
+		echo "forever_stop, index: $index"
 		/usr/local/bin/forever list
 		/usr/local/bin/forever stop $index
 	fi
