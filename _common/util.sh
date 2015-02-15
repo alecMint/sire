@@ -99,6 +99,7 @@ forever_run(){
 }
 
 forever_stop(){
+	echo "forever_stop forever_uid '$1'"
 	index=`forever_uid '$1'` # was using forever_index before, but had issues when stopping index 0
 	if [ "$index" == "" ]; then
 		echo "forever stop> $1 not running"
