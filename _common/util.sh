@@ -110,11 +110,11 @@ forever_stop(){
 }
 
 forever_uid(){
-	/usr/local/bin/forever list | grep $1 | awk '{print $3}' | sed -e 's/\[\|\]//g' | head -n1
+	/usr/local/bin/forever list | grep "$1" | awk '{print $3}' | sed -e 's/\[\|\]//g' | head -n1
 }
 
 forever_index(){
-	/usr/local/bin/forever list | grep $1 | awk '{print $2}' | sed -e 's/\[\|\]//g' | head -n1
+	/usr/local/bin/forever list | grep "$1" | awk '{print $2}' | sed -e 's/\[\|\]//g' | head -n1
 }
 
 forever_logfile(){
