@@ -85,7 +85,7 @@ forever_run(){
 	fi
 
 	crontab_add "$script" "* * * * * $sireDir/bin/angel.sh \"$torun\" >> /var/log/angel.log 2>&1"
-	forever_stop "$script"
+	forever_stop "$torun" # needs to be super unique
 
 	echo `date`
 	echo "torun1: $torun1"
