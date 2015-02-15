@@ -15,7 +15,7 @@ This example deploys the "hope" module (see hope/ dir in this repo). Once run, a
 
 Copy config.chef.example.sh to config.chef.sh inside ./_deploy and edit:
 ```
-export ec2Cert='/Users/ahulce/.ssh/mycert.pem'
+export ec2Cert='/Users/ahulce/.ssh/my-aws-private-key.pem'
 export serverName='123.123.123.123' # or domain e.g. ec2-123-123-123-123.compute-1.amazonaws.com
 export sshKey='/Users/ahulce/.ssh/id_rsa.pub'
 export githubHookAuthToken='b926g...'
