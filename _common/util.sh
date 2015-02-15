@@ -102,14 +102,13 @@ forever_stop(){
 	if [ "$index" == "" ]; then
 		echo "forever stop> $1 not running"
 	else
+		echo "inside forever_stop, index: $index"
 		/usr/local/bin/forever list
 		/usr/local/bin/forever stop $index
 	fi
 }
 
 forever_uid(){
-	echo "forever_uid"
-	echo "/usr/local/bin/forever list | grep '$1' | awk '{print $3}' | sed -e 's/\[\|\]//g'"
 	/usr/local/bin/forever list | grep $1 | awk '{print $3}' | sed -e 's/\[\|\]//g'
 }
 
