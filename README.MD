@@ -17,12 +17,12 @@ Copy config.chef.example.sh to config.chef.sh inside ./_deploy and edit:
 ```
 export ec2Cert='/Users/ahulce/.ssh/mycert.pem'
 export serverName='123.123.123.123' # or domain e.g. ec2-123-123-123-123.compute-1.amazonaws.com
-export sshKey='ssh-rsa AAAAB3...'
-export githubHookAuthToken='a713c...'
-export twitterAppKey="HFUe..."
-export twitterAppSecret="kMBn..."
-export machineSshKeyPublic='ssh-rsa AAAAB3N...'
-export machineSshKeyPrivate=$'-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIB...'
+export sshKey='ssh-rsa AAAAC4...'
+export githubHookAuthToken='b926g...'
+export twitterAppKey="HLXu..."
+export twitterAppSecret="pNJi..."
+export machineSshKeyPublic='ssh-rsa AAAAC4G...'
+export machineSshKeyPrivate=$'-----BEGIN RSA PRIVATE KEY-----\nMIIFnAGB...'
 ```
 Deploy sire to remote server (run this locally):
 ```
@@ -49,3 +49,5 @@ killall node
 - Package hooky and remove dups
 - Fix issue where only one hooky can be running at once due to port conflict
 - Fix faulty logic inside _deploy/index.sh where it checks for existence of local sire .git when it should check remote .git
+- Make crontab easier to read with whitespace
+
