@@ -94,7 +94,7 @@ process.on('uncaughtException',function(err){
 		if (portConfig.targetPort < portConfig.altPorts[0] || portConfig.targetPort > portConfig.altPorts[1])
 			++portConfig.numAttemptable;
 		portConfig.numAttempted = 1;
-		if ((nextPort = portConfig.altPorts[0]+Math.round(Math.random()*portConfig.numInRange)) == portConfig.altPorts[0])
+		if ((nextPort = portConfig.altPorts[0]+Math.round(Math.random()*portConfig.numAttemptable)) == portConfig.altPorts[0])
 			++nextPort;
 	}
 	if (nextPort == portConfig.targetPort || nextPort > portConfig.altPorts[1])
