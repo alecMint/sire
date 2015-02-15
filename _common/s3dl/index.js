@@ -111,7 +111,7 @@ function getPortConfig(arg, defaultPort){
 		return {targetPort:defaultPort};
 	if (typeof arg != 'string' || arg.indexOf(',') == -1)
 		return {targetPort:+arg};
-	var m = arg.match(/([0-9]+),([0-9]+)-([0-9]+)/);
+	var m = arg.match(/([0-9]+),([0-9]+)x([0-9]+)/);
 	if (!m)
 		return {targetPort:defaultPort};
 	return {
