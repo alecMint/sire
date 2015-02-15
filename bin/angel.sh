@@ -5,6 +5,7 @@ cd $dir
 
 # hack: set $sireDir for forever_run
 sireDir=`realpath $dir/..`
+echo "sireDir: $sireDir"
 
 #echo "angel.sh \"$1\" "`date`
 running=`forever_is_running "$1"`
