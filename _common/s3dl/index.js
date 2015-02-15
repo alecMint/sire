@@ -73,7 +73,7 @@ server = http.createServer(function(req,res){
 
   });
 }).listen(port,'127.0.0.1',function(){// only listen on localhost
-  console.log("s3dl running on ",server.address());
+  console.log("s3dl running on ",server.address(),new Date);
 });
 
 fetch.tmpdir(localDir);
