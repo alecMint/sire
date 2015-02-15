@@ -22,6 +22,7 @@ watch(localDir,bucket,deleteLocal);
 
 var server;
 function createServer(port){
+	portConfig.attempting = port;
 	server = http.createServer(function(req,res){
 	  var inWebDir = false;
 	  if (req.url.indexOf(webDir) == 0) {
@@ -77,14 +78,28 @@ function createServer(port){
 	}).listen(port,'127.0.0.1',function(){// only listen on localhost
 	  console.log("s3dl running on ",server.address(),new Date);
 	});
-	server.on('listening',function(){
-		console.log('LISTENING!!!',arguments);
-	});
 }
 createServer(portConfig.targetPort);
 process.on('uncaughtException',function(err){
-	console.log('uncaughtException',JSON.stringify(err),server);
-	throw err;
+	if (!(err.syscall == 'listen' && err.code == 'EADDRINUSE'))
+		throw err;
+	if (portConfig.attempted && ++portConfig.numAttempted >= portConfig.numAttemptable)
+		throw new Error('alt ports depleted; '+JSON.stringify(portConfig)));
+	var nextPort = portConfig.attempting+1;
+	if (!portConfig.attempted) {
+		portConfig.attempted = {};
+		portConfig.numAttemptable = portConfig.altPorts[1]-portConfig.altPorts[0];
+		if (portConfig.numAttemptable <= 0)
+			throw err;
+		if (portConfig.targetPort < portConfig.altPorts[0] || portConfig.targetPort > portConfig.altPorts[1])
+			++portConfig.numAttemptable;
+		portConfig.numAttempted = 1;
+		if ((nextPort = portConfig.altPorts[0]+Math.round(Math.random()*portConfig.numInRange)) == portConfig.altPorts[0])
+			++nextPort;
+	}
+	if (nextPort == portConfig.targetPort || nextPort > portConfig.altPorts[1])
+		nextPort = portConfig.altPorts[0];
+	createServer(nextPort);
 });
 
 fetch.tmpdir(localDir);
