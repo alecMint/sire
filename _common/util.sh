@@ -85,6 +85,7 @@ forever_run(){
 	fi
 
 	crontab_add "$script" "* * * * * $sireDir/bin/angel.sh \"$torun\" >> /var/log/angel.log 2>&1"
+	echo "forever_stop '$torun'"
 	forever_stop "$torun" # needs to be super unique
 
 	echo `date`
@@ -108,6 +109,8 @@ forever_stop(){
 }
 
 forever_uid(){
+	echo "forever_uid"
+	echo "/usr/local/bin/forever list | grep '$1' | awk '{print $3}' | sed -e 's/\[\|\]//g'"
 	/usr/local/bin/forever list | grep $1 | awk '{print $3}' | sed -e 's/\[\|\]//g'
 }
 
