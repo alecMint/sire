@@ -100,6 +100,7 @@ forever_run(){
 
 forever_stop(){
 	echo "forever_stop forever_uid '$1'"
+	echo "manual: "`/usr/local/bin/forever list | grep "$1" | awk '{print $3}' | sed -e 's/\[\|\]//g' | head -n1`
 	index=`forever_uid '$1'` # was using forever_index before, but had issues when stopping index 0
 	echo "forever_stop index = $index"
 	if [ "$index" == "" ]; then
