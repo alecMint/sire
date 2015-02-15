@@ -19,7 +19,6 @@ if [ -f /usr/bin/apt-get ]; then
 		apt-get update
 		apt-get install --assume-yes curl build-essential realpath
 	fi
-	#apt-get --assume-yes install realpath
 	export DEBIAN_FRONTEND=noninteractive # shhh!
 fi
 
@@ -34,6 +33,7 @@ fi
 
 refDir=`dirname $0`
 refDir=`/usr/bin/realpath $refDir`
+echo "cd $refDir"
 cd $refDir
 
 
