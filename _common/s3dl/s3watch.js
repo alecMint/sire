@@ -16,7 +16,7 @@ module.exports = function(localdir,bucket,deleteLocal){
         // f is a new file and i was not just fetched
         // could change this to check md5 5 seconds is a long time and will create inconstsencies 
         // for any opperations which add and remove files at a greater interval
-        put(f,localdir,bucket,function(err){
+        put(f,localdir,bucket,deleteLocal,function(err){
           if(err) console.error('error putting> ',f,err);
         });
       } else {
@@ -30,7 +30,7 @@ module.exports = function(localdir,bucket,deleteLocal){
 
       // f was changed and is not a log
       // i better sync it..
-      put(f,localdir,bucket,function(err){
+      put(f,localdir,bucket,deleteLocal,function(err){
         if(err) console.error('error putting changed> ',f,err);
       })      
     }
@@ -45,7 +45,7 @@ var max = 5;
 // if im asked to do more than max.
 var q = [];
 
-function put(localfile,localdir,bucket,cb){
+function put(localfile,localdir,bucket,deleteLocal,cb){
 
   if(pending[localfile]) return pending[localfile].push(cb);
   if(Object.keys(pending).length >= max) return q.push(arguments);
