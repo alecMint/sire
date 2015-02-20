@@ -64,9 +64,10 @@ cd $startpwd
 
 
 # bak sql
-cron="0 3 * * * /usr/local/bin/node $sireDir/_common/s3dl/bin/baksql.js -d $mysqlDb -b $s3Bucket/sql >> /var/log/hope_baksql.log 2>&1 #hope_bakSql"
+baksql_log=/var/log/$key_baksql.log
+cron="0 3 * * * /usr/local/bin/node $sireDir/_common/s3dl/bin/baksql.js -d $mysqlDb -b $s3Bucket/sql >> $baksql_log 2>&1 #$key_bakSql"
 echo "installing crontab: $cron"
-crontab_add '#hope_bakSql' "$cron"
+crontab_add '#$key_bakSql' "$cron"
 
 
 # s3 sync service
@@ -74,5 +75,14 @@ cd $sireDir/_common/s3dl
 npmi
 forever_run "$sireDir/_common/s3dl/index.js -d $installDir/web/wp-content/uploads -w /wp-content/uploads -b $s3Bucket/wp-content/uploads"
 cd $startpwd
+
+
+# rotate logs
+logrotate_log=$installDir/out/logrotate.log
+nginx_access_log=`grep access_log /etc/nginx/sites-enabled/$key | head -n1 | awk '{print $2}' | tr -d ';'`
+nginx_error_log=`grep error_log /etc/nginx/sites-enabled/$key | head -n1 | awk '{print $2}' | tr -d ';'`
+cron="0 2 * * * /bin/bash $sireDir/bin/logrotate.sh 10 '$baksql_log' '$nginx_access_log' '$nginx_error_log' '$logrotate_log' 2>&1 >> '$logrotate_log' #$key_rotateLogs"
+echo "installing crontab: $cron"
+crontab_add '#$key_rotateLogs' "$cron"
 
 

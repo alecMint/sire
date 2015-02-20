@@ -34,3 +34,8 @@ gitsync_cron "$installDir" "master"
 # test cname
 localhost_add_cname 'local.alechulce.com'
 
+
+# rotate logs
+cron="0 2 * * * /bin/bash $sireDir/bin/logrotate.sh 10 '$nginx_access_log' '$nginx_error_log' '$logrotate_log' 2>&1 >> '$logrotate_log' #$key_rotateLogs"
+echo "installing crontab: $cron"
+crontab_add '#$key_rotateLogs' "$cron"

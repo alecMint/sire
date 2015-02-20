@@ -2,7 +2,7 @@
 
 nginxBackend="127.0.0.1:9000"
 
-cat > /etc/nginx/sites-available/ace <<FILE
+cat > /etc/nginx/sites-available/$key <<FILE
 server {
 	listen 80;
 
@@ -46,6 +46,6 @@ server {
 }
 FILE
 rm /etc/nginx/sites-enabled/default 2> /dev/null
-ln -f /etc/nginx/sites-available/ace /etc/nginx/sites-enabled/ace
+ln -f /etc/nginx/sites-available/$key /etc/nginx/sites-enabled/$key
 
 /etc/init.d/nginx reload

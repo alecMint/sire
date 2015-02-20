@@ -2,7 +2,7 @@
 
 nginxBackend="127.0.0.1:9000"
 
-cat > /etc/nginx/sites-available/alechulce <<FILE
+cat > /etc/nginx/sites-available/$key <<FILE
 server {
 	listen 80;
 	server_name alechulce.com;
@@ -16,6 +16,7 @@ server {
 	autoindex off;
 
 	access_log /var/log/nginx/alechulce_access_log.log;
+	error_log /var/log/nginx/alechulce_error_log.log;
 
 	gzip on; # use gzip compression
 	gzip_min_length 1100;
@@ -50,6 +51,6 @@ server {
 }
 FILE
 rm /etc/nginx/sites-enabled/default 2> /dev/null
-ln -f /etc/nginx/sites-available/alechulce /etc/nginx/sites-enabled/alechulce
+ln -f /etc/nginx/sites-available/$key /etc/nginx/sites-enabled/$key
 
 /etc/init.d/nginx reload
