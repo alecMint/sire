@@ -33,6 +33,9 @@ chmod -R +w $installDir/web/wp-content/uploads
 node ../_common/s3dl/bin/loadsql.js -d $mysqlDb -b $s3Bucket/sql
 
 
+chown www-data $dir/web/public-out
+
+
 # secret configs
 if [ -f $installDir/web/config.local.php ]; then
 	rm $installDir/web/config.local.php
