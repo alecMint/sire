@@ -5,7 +5,7 @@ branch=$2
 cd $dir
 git fetch
 git reset --hard HEAD
-git checkout -f $branch
+git checkout -f origin/$branch
 git pull origin $branch
 git submodule update
 
