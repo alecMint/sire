@@ -11,6 +11,7 @@ server {
 	autoindex off;
 
 	access_log /var/log/nginx/ace_access_log.log;
+	error_log /var/log/nginx/ace_error_log.log;
 
 	gzip on; # use gzip compression
 	gzip_min_length 1100;
