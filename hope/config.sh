@@ -1,5 +1,4 @@
 
-export key='hope'
 export installDir='/var/www/hope'
 export gitRepo="https://github.com/fluffybunnies/hope.git"
 export s3Bucket="sire-hope"

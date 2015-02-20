@@ -4,7 +4,7 @@ echo "inside nginx"
 
 nginxBackend="127.0.0.1:9000"
 
-cat > /etc/nginx/sites-available/$key <<FILE
+cat > /etc/nginx/sites-available/markthegonzales <<FILE
 server {
 	listen 80;
 	server_name markthegonzales.com;
@@ -62,6 +62,6 @@ server {
 }
 FILE
 rm /etc/nginx/sites-enabled/default 2> /dev/null
-ln -f /etc/nginx/sites-available/$key /etc/nginx/sites-enabled/$key
+ln -f /etc/nginx/sites-available/markthegonzales /etc/nginx/sites-enabled/markthegonzales
 
 /etc/init.d/nginx reload
