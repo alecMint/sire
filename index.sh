@@ -23,8 +23,8 @@ if [ -f /usr/bin/apt-get ]; then
 fi
 
 
-if [ ! -f /usr/bin/apt-get ]; then
-	echo "we dont have realpath"
+if [ "`which realpath`" == "" ]; then
+	echo "we dont have realpath, making one that works on directories only" # e.g. from my mac
 	realpath() {
 		echo `cd "${1}";pwd`
 	}
@@ -32,7 +32,7 @@ fi
 
 
 refDir=`dirname $0`
-refDir=`/usr/bin/realpath $refDir`
+refDir=`realpath $refDir`
 echo "cd $refDir"
 cd $refDir
 

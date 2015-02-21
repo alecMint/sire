@@ -17,12 +17,15 @@ fi
 echo "preDeletionHook: $preDeletionHook"
 
 if [ ! -f /usr/bin/realpath ]; then
-	echo "realpath not found, making one"
-	realpath() {
-		echo `cd "${1}";pwd`
-	}
+	echo "realpath not found, installing..."
+	apt-get --assume-yes install realpath
+	if [ ! -f /usr/bin/realpath ]; then
+		echo "realpath failed to install in usual loc. jumping ship."
+		exit 1
+	fi
 fi
 
+dropNginxFileHandler=0
 
 rotate(){
 	logFile=$1
@@ -47,12 +50,7 @@ rotate(){
 
 	# if looks like nginx log, make nginx drop its file handler
 	if [ "`echo "$logFile" | grep nginx`" != "" ]; then
-		echo "identified nginx log file: $logFile"
-		if [ -f /var/run/nginx.pid ]; then
-			kill -USR1 `cat /var/run/nginx.pid` && sleep 1 && echo "dropped nginx file handler" || echo "failed to drop nginx file handler :("
-		else
-			echo "failed to drop nginx file handler: /var/run/nginx.pid is not a file"
-		fi
+		dropNginxFileHandler=1
 	fi
 
 }
@@ -64,5 +62,14 @@ for arg in "$@"; do
 	filePath=`/usr/bin/realpath "$arg"`
 	rotate "$filePath" $maxFiles
 done
+
+if [ "$dropNginxFileHandler" == "1" ]; then
+	echo "identified at least one nginx log file: $logFile"
+	if [ -f /var/run/nginx.pid ]; then
+		kill -USR1 `cat /var/run/nginx.pid` && sleep 1 && echo "dropped nginx file handler" || echo "failed to drop nginx file handler :("
+	else
+		echo "failed to drop nginx file handler: /var/run/nginx.pid is not a file"
+	fi
+fi
 
 date
