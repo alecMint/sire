@@ -1,5 +1,6 @@
 #!/bin/bash
 # ./bin/logrotate.sh 10 ./out/mylog.log ./out/anotherlog.log 2>&1 >> /var/log/logrotate.log
+# note: paths should be absolute, i stopped messing with realpath to keep logic simple
 
 date
 
@@ -16,20 +17,12 @@ if [ "`echo "$2" | grep '.sh'`" != "" ]; then
 fi
 echo "preDeletionHook: $preDeletionHook"
 
-if [ ! -f /usr/bin/realpath ]; then
-	echo "realpath not found, installing..."
-	apt-get --assume-yes install realpath
-	if [ ! -f /usr/bin/realpath ]; then
-		echo "realpath failed to install in usual loc. jumping ship."
-		exit 1
-	fi
-fi
-
 dropNginxFileHandler=0
 
 rotate(){
 	logFile=$1
 	maxFiles=$2
+	echo $'\n'"rotate() $logFile"
 	for ((i=$maxFiles;i>=0;i--)); do
 		[ $i == 0 ] && suf='' || suf=".$i"
 		[ ! -f "$logFile$suf" ] && continue
@@ -59,8 +52,7 @@ n=0
 for arg in "$@"; do
 	n=$[n+1]
 	[ $n == 1 ] && continue
-	filePath=`/usr/bin/realpath "$arg"`
-	rotate "$filePath" $maxFiles
+	rotate "$arg" $maxFiles
 done
 
 if [ "$dropNginxFileHandler" == "1" ]; then
