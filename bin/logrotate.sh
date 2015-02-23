@@ -1,6 +1,7 @@
 #!/bin/bash
 # ./bin/logrotate.sh 10 ./out/mylog.log ./out/anotherlog.log 2>&1 >> /var/log/logrotate.log
 # note: paths should be absolute, i stopped messing with realpath to keep logic simple
+# @todo: fix script so it doesnt try to rotate $preDeletionHook
 
 date
 
