@@ -170,4 +170,9 @@ install_repo(){
 	$sireDir/_common/gitsync.sh "$dir" "$branch"
 }
 
-
+rotate_logs(){
+	when=$1
+	logfiles=`everything_but "$when"`
+	echo "when: $when"
+	echo "logfiles: $logfiles"
+}
