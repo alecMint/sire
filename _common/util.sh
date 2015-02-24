@@ -171,7 +171,7 @@ install_repo(){
 }
 
 rotate_logs(){
-	for arg in $@; do
+	for arg in "$@"; do
 		echo "arg: $arg"
 		if [ "$when" == "" ]; then
 			when=$arg
