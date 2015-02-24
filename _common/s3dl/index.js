@@ -1,3 +1,10 @@
+/*
+ex port config opt:
+	-p 9991,9900-9997,/etc/nginx/sites-available/markthegonzales
+		9991 = desired port
+		9900-9997 = alternate ports to attempt if desired port is unavailable
+		/etc/nginx/sites-available/markthegonzales = if alt port is used, desired port will be replaced
+*/
 var http = require('http');
 var argv = require('optimist').argv;
 var url = require('url');

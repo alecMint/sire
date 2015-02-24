@@ -74,7 +74,7 @@ crontab_add '#hope_bakSql' "$cron"
 # s3 sync service
 cd $sireDir/_common/s3dl
 npmi
-forever_run "$sireDir/_common/s3dl/index.js -d $installDir/web/wp-content/uploads -w /wp-content/uploads -b $s3Bucket/wp-content/uploads -p 9991,9900-9997,/etc/nginx/sites-available/hope"
+forever_run "$sireDir/_common/s3dl/index.js -d $installDir/web/wp-content/uploads -w /wp-content/uploads -b $s3Bucket/wp-content/uploads -p 9991,9900-9995,/etc/nginx/sites-available/hope"
 cd $startpwd
 
 
