@@ -193,8 +193,6 @@ rotate_logs(){
 			rl_nextInputIsWhen=0
 		elif [ "$rl_id" == "" ]; then
 			rl_id=$arg
-		elif [ "$rl_maxBaks" == "" ]; then
-			rl_maxBaks=$arg
 		else
 			rl_logFiles=$rl_logFiles" '$arg'"
 		fi
