@@ -40,5 +40,4 @@ logrotate_log=$installDir/out/logrotate.log
 nginx_access_log=`grep access_log /etc/nginx/sites-enabled/alechulce | head -n1 | awk '{print $2}' | tr -d ';'`
 nginx_error_log=`grep error_log /etc/nginx/sites-enabled/alechulce | head -n1 | awk '{print $2}' | tr -d ';'`
 cron="0 2 * * * /bin/bash $sireDir/bin/logrotate.sh 10 '$nginx_access_log' '$nginx_error_log' '$logrotate_log' 2>&1 >> '$logrotate_log' #alechulce_rotateLogs"
-echo "installing crontab: $cron"
 crontab_add '#alechulce_rotateLogs' "$cron"

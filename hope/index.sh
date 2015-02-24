@@ -67,7 +67,6 @@ cd $startpwd
 # bak sql
 baksql_log=/var/log/hope_baksql.log
 cron="0 3 * * * /usr/local/bin/node $sireDir/_common/s3dl/bin/baksql.js -d $mysqlDb -b $s3Bucket/sql >> $baksql_log 2>&1 #hope_bakSql"
-echo "installing crontab: $cron"
 crontab_add '#hope_bakSql' "$cron"
 
 
@@ -83,7 +82,6 @@ logrotate_log=$installDir/out/logrotate.log
 nginx_access_log=`grep access_log /etc/nginx/sites-enabled/hope | head -n1 | awk '{print $2}' | tr -d ';'`
 nginx_error_log=`grep error_log /etc/nginx/sites-enabled/hope | head -n1 | awk '{print $2}' | tr -d ';'`
 cron="0 2 * * * /bin/bash $sireDir/bin/logrotate.sh 10 '$baksql_log' '$nginx_access_log' '$nginx_error_log' '$logrotate_log' 2>&1 >> '$logrotate_log' #hope_rotateLogs"
-echo "installing crontab: $cron"
 crontab_add '#hope_rotateLogs' "$cron"
 
 

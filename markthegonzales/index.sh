@@ -62,7 +62,6 @@ gitsync_cron "$installDir" "master"
 # backup sql
 baksql_log=/var/log/markthegonzales_baksql.log
 cron="0 2 * * * /usr/local/bin/node $sireDir/_common/s3dl/bin/baksql.js -d $mysqlDb -b $s3Bucket/sql 2>&1 >> $baksql_log #markthegonzales_bakSql"
-echo "installing crontab: $cron"
 crontab_add '#markthegonzales_bakSql' "$cron"
 
 
@@ -78,7 +77,6 @@ logrotate_log=$installDir/out/logrotate.log
 nginx_access_log=`grep access_log /etc/nginx/sites-enabled/markthegonzales | head -n1 | awk '{print $2}' | tr -d ';'`
 nginx_error_log=`grep error_log /etc/nginx/sites-enabled/markthegonzales | head -n1 | awk '{print $2}' | tr -d ';'`
 cron="0 2 * * * /bin/bash $sireDir/bin/logrotate.sh 10 '$baksql_log' '$nginx_access_log' '$nginx_error_log' '$logrotate_log' 2>&1 >> '$logrotate_log' #markthegonzales_rotateLogs"
-echo "installing crontab: $cron"
 crontab_add '#markthegonzales_rotateLogs' "$cron"
 
 

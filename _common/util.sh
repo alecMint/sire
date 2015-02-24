@@ -7,7 +7,7 @@ crontab_add(){
 		line=$search
 	fi
 
-	echo "installing crontab $line"
+	echo "installing crontab: $line"
 	tmp=`mktemp`
 	crontab -l | grep -v "$search" > $tmp
 	echo "$line" >> $tmp
