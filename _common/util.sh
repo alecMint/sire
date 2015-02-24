@@ -171,14 +171,50 @@ install_repo(){
 }
 
 rotate_logs(){
+	# rotate_logs uniqueId '0 2 * * *' 10 /var/log/log1.log /var/log/log2.log -o /var/log/self_output.log
 	for arg in "$@"; do
 		echo "arg: $arg"
-		if [ "$when" == "" ]; then
+		if [ "$arg" == "-o" ]; then
+			nextInputIsOutput=1
+		fi
+		if [ "$nextInputIsOutput" == "1" ]; then
+			outputLog=$arg
+			nextInputIsOutput=0
+		fi
+		elif [ "$id" == "" ]; then
+			id=$arg
+		elif [ "$when" == "" ]; then
 			when=$arg
+		elif [ "$maxBaks" == "" ]; then
+			maxBaks=$arg
+		elif [ "$selfOutput" == "" ] && ; then
+			selfOutput=$arg
 		else
-			logfiles=$logfiles" '$arg'"
+			logFiles=$logFiles" '$arg'"
 		fi
 	done
+	echo "id: $id"
 	echo "when: $when"
-	echo "logfiles: $logfiles"
+	echo "maxBaks: $maxBaks"
+	echo "outputLog: $outputLog"
+	echo "logFiles: $logFiles"
+#	if [ "$id" != "" ] && [ "$when" != "" ] && [ "$maxBaks" != "" ] && [ "$logFiles" != "" ]; then
+#		if [ !-d $sireDir/bin/node_modules/shlog-rotate ]; then
+#			if [ "`which npm`" == "" ]; then
+#				echo "rotate_logs() failed: npm not installed"
+#				exit 1
+#			fi
+#			mkdir -p $sireDir/bin/node_modules
+#			npm install --prefix $sireDir/bin shlog-rotate
+#		fi
+#		cron=$when /bin/bash $sireDir/bin/node_modules/shlog-rotate/index.sh $maxBaks $logFiles
+#		if [ "$outputLog" != "" ]; then
+#			cron=$cron" 2>&1 >> '$outputLog'"
+#		fi
+#		cron=$cron" #$id"
+#		echo "rotate_logs() installing crontab: $cron"
+#		crontab_add "#$id" "$cron"
+#	else
+#		echo "rotate_logs() failed: missing input"
+#	fi
 }
