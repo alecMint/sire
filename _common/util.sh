@@ -172,7 +172,7 @@ install_repo(){
 }
 
 rotate_logs(){
-	# rotate_logs uniqueId '0 2 * * *' 10 /var/log/log1.log /var/log/log2.log -o /var/log/self_output.log
+	# rotate_logs uniqueId -t '0 3 * * *' -m 8 -o /var/log/self_output.log /var/log/log1.log /var/log/log2.log
 	echo
 	rl_when='0 2 * * *'
 	rl_maxBaks=10
@@ -187,7 +187,7 @@ rotate_logs(){
 		elif [ "$rl_nextInputIsMaxBaks" == "1" ]; then
 			rl_maxBaks=$arg
 			rl_nextInputIsMaxBaks=0
-		elif [ "$arg" == "-w" ]; then
+		elif [ "$arg" == "-t" ]; then
 			rl_nextInputIsWhen=1
 		elif [ "$rl_nextInputIsWhen" == "1" ]; then
 			rl_when=$arg
