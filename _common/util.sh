@@ -172,7 +172,6 @@ install_repo(){
 
 rotate_logs(){
 	# rotate_logs uniqueId '0 2 * * *' 10 /var/log/log1.log /var/log/log2.log -o /var/log/self_output.log
-	echo "\$\@ = $@"
 	rl_when='0 2 * * *'
 	rl_maxBaks=10
 	for arg in "$@"; do
