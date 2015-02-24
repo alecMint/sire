@@ -7,6 +7,7 @@ crontab_add(){
 		line=$search
 	fi
 
+	echo "installing crontab $line"
 	tmp=`mktemp`
 	crontab -l | grep -v "$search" > $tmp
 	echo "$line" >> $tmp
@@ -223,7 +224,7 @@ rotate_logs(){
 	fi
 	cron=$cron" #$rl_id"
 	if [ "$rl_error" == "" ]; then
-		echo "rotate_logs() installing crontab: $cron"
+		echo "rotate_logs() crontab_add \"#$id\" \"$cron\""
 		#crontab_add "#$id" "$cron"
 	else
 		echo "rotate_logs() failed: $rl_error"
