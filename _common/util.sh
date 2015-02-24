@@ -212,7 +212,7 @@ rotate_logs(){
 		if [ "`which npm`" == "" ]; then
 			error="npm not installed"
 		else
-			echo "shlog-rotate not installed. installing..."
+			echo "shlog-rotate not installed. installing in $sireDir..."
 			mkdir -p $sireDir/bin/node_modules
 			npm install --prefix $sireDir/bin shlog-rotate
 		fi
