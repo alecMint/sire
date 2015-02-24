@@ -78,7 +78,5 @@ cd $startpwd
 
 
 # rotate logs
-logrotate_log=$installDir/out/logrotate.log
-nginx_access_log=`grep access_log /etc/nginx/sites-enabled/hope | head -n1 | awk '{print $2}' | tr -d ';'`
-nginx_error_log=`grep error_log /etc/nginx/sites-enabled/hope | head -n1 | awk '{print $2}' | tr -d ';'`
-rotate_logs 'alechulce_rotateLogs' '$baksql_log' '$nginx_access_log' '$nginx_error_log' '$logrotate_log' -o '$logrotate_log'
+logrotate_log=/var/log/logrotate_hope.log
+rotate_logs 'alechulce' "$baksql_log" "`accessLogLocation hope`" "`errorLogLocation hope`" "$logrotate_log" -o "$logrotate_log"

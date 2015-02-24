@@ -171,6 +171,16 @@ install_repo(){
 	$sireDir/_common/gitsync.sh "$dir" "$branch"
 }
 
+accessLogLocation(){
+	key=$1
+	grep access_log /etc/nginx/sites-enabled/$key | head -n1 | awk '{print $2}' | tr -d ';'
+}
+
+errorLogLocation(){
+	key=$1
+	grep error_log /etc/nginx/sites-enabled/ace | head -n1 | awk '{print $2}' | tr -d ';'
+}
+
 rotate_logs(){
 	# rotate_logs uniqueId -t '0 3 * * *' -m 8 -o /var/log/self_output.log /var/log/log1.log /var/log/log2.log
 	echo

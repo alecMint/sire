@@ -36,7 +36,5 @@ localhost_add_cname 'local.alechulce.com'
 
 
 # rotate logs
-logrotate_log=$installDir/out/logrotate.log
-nginx_access_log=`grep access_log /etc/nginx/sites-enabled/alechulce | head -n1 | awk '{print $2}' | tr -d ';'`
-nginx_error_log=`grep error_log /etc/nginx/sites-enabled/alechulce | head -n1 | awk '{print $2}' | tr -d ';'`
-rotate_logs 'alechulce_rotateLogs' '$nginx_access_log' '$nginx_error_log' '$logrotate_log' -o '$logrotate_log'
+logrotate_log=/var/log/logrotate_alechulce.log
+rotate_logs 'alechulce' "`accessLogLocation alechulce`" "`errorLogLocation alechulce`" "$logrotate_log" -o "$logrotate_log"
