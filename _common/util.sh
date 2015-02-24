@@ -173,6 +173,7 @@ install_repo(){
 rotate_logs(){
 	# rotate_logs uniqueId '0 2 * * *' 10 /var/log/log1.log /var/log/log2.log -o /var/log/self_output.log
 	echo "\$\@ = $@"
+	rl_when='0 2 * * *'
 	rl_maxBaks=10
 	for arg in "$@"; do
 		if [ "$arg" == "-o" ]; then
@@ -185,6 +186,11 @@ rotate_logs(){
 		elif [ "$rl_nextInputIsMaxBaks" == "1" ]; then
 			rl_maxBaks=$arg
 			rl_nextInputIsMaxBaks=0
+		elif [ "$arg" == "-w" ]; then
+			rl_nextInputIsWhen=1
+		elif [ "$rl_nextInputIsWhen" == "1" ]; then
+			rl_when=$arg
+			rl_nextInputIsWhen=0
 		elif [ "$rl_id" == "" ]; then
 			rl_id=$arg
 		elif [ "$rl_when" == "" ]; then
