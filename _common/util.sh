@@ -218,6 +218,9 @@ rotate_logs(){
 			npm install --prefix $sireDir/bin shlog-rotate
 		fi
 	fi
+	if [ ! -f /bin/node_modules/shlog-rotate/index.sh ]; then
+		rl_error=$rl_error"; shlog-rotate main not found"
+	fi
 	cron="$rl_when /bin/bash $sireDir/bin/node_modules/shlog-rotate/index.sh $rl_maxBaks $rl_logFiles"
 	if [ "$rl_outputLog" != "" ]; then
 		cron=$cron" 2>&1 >> '$rl_outputLog'"
