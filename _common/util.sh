@@ -173,33 +173,33 @@ install_repo(){
 rotate_logs(){
 	# rotate_logs uniqueId '0 2 * * *' 10 /var/log/log1.log /var/log/log2.log -o /var/log/self_output.log
 	echo "\$\@ = $@"
-	maxBaks=10
+	rl_maxBaks=10
 	for arg in "$@"; do
 		if [ "$arg" == "-o" ]; then
-			nextInputIsOutput=1
-		elif [ "$nextInputIsOutput" == "1" ]; then
-			outputLog=$arg
-			nextInputIsOutput=0
+			rl_nextInputIsOutput=1
+		elif [ "$rl_nextInputIsOutput" == "1" ]; then
+			rl_outputLog=$arg
+			rl_nextInputIsOutput=0
 		elif [ "$arg" == "-m" ]; then
-			nextInputIsMaxBaks=1
-		elif [ "$nextInputIsMaxBaks" == "1" ]; then
-			maxBaks=$arg
-			nextInputIsMaxBaks=0
-		elif [ "$id" == "" ]; then
-			id=$arg
-		elif [ "$when" == "" ]; then
-			when=$arg
-		elif [ "$maxBaks" == "" ]; then
-			maxBaks=$arg
+			rl_nextInputIsMaxBaks=1
+		elif [ "$rl_nextInputIsMaxBaks" == "1" ]; then
+			rl_maxBaks=$arg
+			rl_nextInputIsMaxBaks=0
+		elif [ "$rl_id" == "" ]; then
+			rl_id=$arg
+		elif [ "$rl_when" == "" ]; then
+			rl_when=$arg
+		elif [ "$rl_maxBaks" == "" ]; then
+			rl_maxBaks=$arg
 		else
-			logFiles=$logFiles" '$arg'"
+			rl_logFiles=$rl_logFiles" '$arg'"
 		fi
 	done
-	echo "id: $id"
-	echo "when: $when"
-	echo "maxBaks: $maxBaks"
-	echo "outputLog: $outputLog"
-	echo "logFiles: $logFiles"
+	echo "rl_id: $rl_id"
+	echo "rl_when: $rl_when"
+	echo "rl_maxBaks: $rl_maxBaks"
+	echo "rl_outputLog: $rl_outputLog"
+	echo "rl_logFiles: $rl_logFiles"
 #	if [ "$id" != "" ] && [ "$when" != "" ] && [ "$logFiles" != "" ]; then
 #		if [ !-d $sireDir/bin/node_modules/shlog-rotate ]; then
 #			if [ "`which npm`" == "" ]; then
@@ -219,4 +219,9 @@ rotate_logs(){
 #	else
 #		echo "rotate_logs() failed: missing input"
 #	fi
+	unset rl_id
+	unset rl_when
+	unset rl_maxBaks
+	unset rl_outputLog
+	unset rl_logFiles
 }
