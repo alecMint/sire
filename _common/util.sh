@@ -208,14 +208,15 @@ rotate_logs(){
 			rl_logFiles=$rl_logFiles" '$arg'"
 		fi
 	done
+	if [ "$rl_id" == "" ] || [ "$rl_when" == "" ] || [ "$rl_logFiles" == "" ]; then
+		rl_error="missing input"
+	fi
+	rl_id=$rl_id"_rotateLogs"
 	echo "rl_id: $rl_id"
 	echo "rl_when: $rl_when"
 	echo "rl_maxBaks: $rl_maxBaks"
 	echo "rl_outputLog: $rl_outputLog"
 	echo "rl_logFiles: $rl_logFiles"
-	if [ "$rl_id" == "" ] || [ "$rl_when" == "" ] || [ "$rl_logFiles" == "" ]; then
-		rl_error="missing input"
-	fi
 	if [ ! -d $sireDir/bin/node_modules/shlog-rotate ]; then
 		if [ "`which npm`" == "" ]; then
 			rl_error="npm not installed"
@@ -249,4 +250,5 @@ rotate_logs(){
 	unset rl_outputLog
 	unset rl_logFiles
 	unset rl_error
+	unset rl_cron
 }
