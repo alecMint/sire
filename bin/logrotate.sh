@@ -52,7 +52,11 @@ rotate(){
 n=0
 for arg in "$@"; do
 	n=$[n+1]
-	[ $n == 1 ] && continue
+	argsToSkip=1
+	if [ "$preDeletionHook" != "" ]; then
+		argsToSkip=2
+	fi
+	[ $n -le $argsToSkip ] && continue
 	rotate "$arg" $maxFiles
 done
 
