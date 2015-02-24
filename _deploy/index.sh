@@ -33,19 +33,19 @@ echo "adding git's public key to known_hosts"
 ssh ubuntu@$serverName "sudo ssh -oStrictHostKeyChecking=no git@github.com"
 
 echo "setting up deployment repo ($sireBranch)..."
-# @todo: fix this check, it needs to check remote directory, not local directory
-#if [ -d "$sireDir/.git" ]; then
-#	echo "updating existing repo"
-#	ssh ubuntu@$serverName "sudo git --git-dir=$sireDir/.git --work-tree=$sireDir checkout -f $sireBranch"
-#	ssh ubuntu@$serverName "sudo git --git-dir=$sireDir/.git --work-tree=$sireDir fetch"
-#	ssh ubuntu@$serverName "sudo git --git-dir=$sireDir/.git --work-tree=$sireDir pull origin $sireBranch"
-#else
-	echo "cloning new repo"
+echo "ssh ubuntu@$serverName 'sudo cat $sireDir/.git/config'"
+if [ "`ssh ubuntu@$serverName 'sudo cat $sireDir/.git/config'`" == "" ]; then
+	echo "cloning new sire repo"
 	ssh ubuntu@$serverName "sudo rm -fr $sireDir"
 	ssh ubuntu@$serverName "sudo git clone $sireRepo $sireDir"
 	ssh ubuntu@$serverName "sudo git --git-dir=$sireDir/.git --work-tree=$sireDir checkout $sireBranch"
 	ssh ubuntu@$serverName "sudo git --git-dir=$sireDir/.git --work-tree=$sireDir pull origin $sireBranch"
-#fi
+else
+	echo "sire already installed; updating..."
+	ssh ubuntu@$serverName "sudo git --git-dir=$sireDir/.git --work-tree=$sireDir checkout -f $sireBranch"
+	ssh ubuntu@$serverName "sudo git --git-dir=$sireDir/.git --work-tree=$sireDir fetch"
+	ssh ubuntu@$serverName "sudo git --git-dir=$sireDir/.git --work-tree=$sireDir pull origin $sireBranch"
+fi
 
 # keep this here for (1) test.sh and (2) put at least something in secrets
 echo 'copying github tokens...'
