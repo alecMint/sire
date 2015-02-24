@@ -225,7 +225,7 @@ rotate_logs(){
 	cron=$cron" #$rl_id"
 	if [ "$rl_error" == "" ]; then
 		echo "rotate_logs() crontab_add \"#$id\" \"$cron\""
-		#crontab_add "#$id" "$cron"
+		crontab_add "#$id" "$cron"
 	else
 		echo "rotate_logs() failed: $rl_error"
 	fi
