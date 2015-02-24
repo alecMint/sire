@@ -208,7 +208,7 @@ rotate_logs(){
 	if [ "$rl_id" == "" ] || [ "$rl_when" == "" ] || [ "$rl_logFiles" == "" ]; then
 		error="missing input"
 	fi
-	if [ !-d $sireDir/bin/node_modules/shlog-rotate ]; then
+	if [ ! -d $sireDir/bin/node_modules/shlog-rotate ]; then
 		if [ "`which npm`" == "" ]; then
 			error="npm not installed"
 		else
