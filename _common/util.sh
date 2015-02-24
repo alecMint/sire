@@ -172,13 +172,18 @@ install_repo(){
 
 rotate_logs(){
 	# rotate_logs uniqueId '0 2 * * *' 10 /var/log/log1.log /var/log/log2.log -o /var/log/self_output.log
+	maxBaks=10
 	for arg in "$@"; do
-		echo "arg: $arg"
 		if [ "$arg" == "-o" ]; then
 			nextInputIsOutput=1
 		elif [ "$nextInputIsOutput" == "1" ]; then
 			outputLog=$arg
 			nextInputIsOutput=0
+		elif [ "$arg" == "-m" ]; then
+			nextInputIsMaxBaks=1
+		elif [ "$nextInputIsMaxBaks" == "1" ]; then
+			maxBaks=$arg
+			nextInputIsMaxBaks=0
 		elif [ "$id" == "" ]; then
 			id=$arg
 		elif [ "$when" == "" ]; then
@@ -194,7 +199,7 @@ rotate_logs(){
 	echo "maxBaks: $maxBaks"
 	echo "outputLog: $outputLog"
 	echo "logFiles: $logFiles"
-#	if [ "$id" != "" ] && [ "$when" != "" ] && [ "$maxBaks" != "" ] && [ "$logFiles" != "" ]; then
+#	if [ "$id" != "" ] && [ "$when" != "" ] && [ "$logFiles" != "" ]; then
 #		if [ !-d $sireDir/bin/node_modules/shlog-rotate ]; then
 #			if [ "`which npm`" == "" ]; then
 #				echo "rotate_logs() failed: npm not installed"
