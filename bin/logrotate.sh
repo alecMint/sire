@@ -1,6 +1,8 @@
 #!/bin/bash
-# ./bin/logrotate.sh 10 ./out/mylog.log ./out/anotherlog.log 2>&1 >> /var/log/logrotate.log
+# /root/sire/bin/logrotate.sh 10 /var/log/nginx/access.log /var/www/mysite/out/app.log /var/log/logrotate.log 2>&1 >> /var/log/logrotate.log
 # note: paths should be absolute, i stopped messing with realpath to keep logic simple
+# with pre-deletion hook...
+# /root/sire/bin/logrotate.sh 10 /var/www/mysite/bin/upload_log_to_s3.sh /var/log/nginx/access.log 2>&1 >> /var/log/logrotate.log
 
 date
 
