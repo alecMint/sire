@@ -228,14 +228,14 @@ rotate_logs(){
 	if [ ! -f /bin/node_modules/shlog-rotate/index.sh ]; then
 		rl_error=$rl_error"; shlog-rotate main not found"
 	fi
-	cron="$rl_when /bin/bash $sireDir/bin/node_modules/shlog-rotate/index.sh $rl_maxBaks $rl_logFiles"
+	rl_cron="$rl_when /bin/bash $sireDir/bin/node_modules/shlog-rotate/index.sh $rl_maxBaks $rl_logFiles"
 	if [ "$rl_outputLog" != "" ]; then
-		cron=$cron" 2>&1 >> '$rl_outputLog'"
+		rl_cron=$rl_cron" 2>&1 >> '$rl_outputLog'"
 	fi
-	cron=$cron" #$rl_id"
+	rl_cron=$rl_cron" #$rl_id"
 	if [ "$rl_error" == "" ]; then
-		echo "rotate_logs() crontab_add \"#$id\" \"$cron\""
-		crontab_add "#$id" "$cron"
+		echo "rotate_logs() crontab_add \"#$rl_id\" \"$rl_cron\""
+		crontab_add "#$rl_id" "$rl_cron"
 	else
 		echo "rotate_logs() failed: $rl_error"
 	fi
