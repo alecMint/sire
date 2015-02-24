@@ -33,8 +33,7 @@ echo "adding git's public key to known_hosts"
 ssh ubuntu@$serverName "sudo ssh -oStrictHostKeyChecking=no git@github.com"
 
 echo "setting up deployment repo ($sireBranch)..."
-echo "ssh ubuntu@$serverName 'sudo cat $sireDir/.git/config'"
-if [ "`ssh ubuntu@$serverName 'sudo cat $sireDir/.git/config'`" == "" ]; then
+if [ "`ssh -t ubuntu@$serverName 'sudo cat $sireDir/.git/config'`" == "" ]; then
 	echo "cloning new sire repo"
 	ssh ubuntu@$serverName "sudo rm -fr $sireDir"
 	ssh ubuntu@$serverName "sudo git clone $sireRepo $sireDir"
