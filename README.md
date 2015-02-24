@@ -47,6 +47,9 @@ killall node
 
 
 ### To Do
+- Use arguments as alternative to config for _deploy module
+-- If module == _deploy, source an arg-to-export file
+-- Add instructions to readme
 - Package hooky and remove dups
 - Fix issue where only one hooky can be running at once due to port conflict
 -- Temp solution would be to run on alternate ports
