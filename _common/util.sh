@@ -185,8 +185,6 @@ rotate_logs(){
 			when=$arg
 		elif [ "$maxBaks" == "" ]; then
 			maxBaks=$arg
-		elif [ "$selfOutput" == "" ] && ; then
-			selfOutput=$arg
 		else
 			logFiles=$logFiles" '$arg'"
 		fi
