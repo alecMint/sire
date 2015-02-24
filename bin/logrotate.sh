@@ -22,7 +22,7 @@ dropNginxFileHandler=0
 rotate(){
 	logFile=$1
 	maxFiles=$2
-	echo $'\n'"rotate() $logFile"
+	echo $'\n'"rotate() logFile=$logFile maxFiles=$maxFiles"
 	for ((i=$maxFiles;i>=0;i--)); do
 		[ $i == 0 ] && suf='' || suf=".$i"
 		[ ! -f "$logFile$suf" ] && continue
