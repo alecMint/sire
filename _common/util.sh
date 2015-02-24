@@ -206,11 +206,11 @@ rotate_logs(){
 	echo "rl_outputLog: $rl_outputLog"
 	echo "rl_logFiles: $rl_logFiles"
 	if [ "$rl_id" == "" ] || [ "$rl_when" == "" ] || [ "$rl_logFiles" == "" ]; then
-		error="missing input"
+		rl_error="missing input"
 	fi
 	if [ ! -d $sireDir/bin/node_modules/shlog-rotate ]; then
 		if [ "`which npm`" == "" ]; then
-			error="npm not installed"
+			rl_error="npm not installed"
 		else
 			echo "shlog-rotate not installed. installing in $sireDir..."
 			mkdir -p $sireDir/bin/node_modules
@@ -222,15 +222,16 @@ rotate_logs(){
 		cron=$cron" 2>&1 >> '$outputLog'"
 	fi
 	cron=$cron" #$id"
-	if [ "$error" == "" ]; then
+	if [ "$rl_error" == "" ]; then
 		echo "rotate_logs() installing crontab: $cron"
 		#crontab_add "#$id" "$cron"
 	else
-		"rotate_logs() failed: $error"
+		"rotate_logs() failed: $rl_error"
 	fi
 	unset rl_id
 	unset rl_when
 	unset rl_maxBaks
 	unset rl_outputLog
 	unset rl_logFiles
+	unset rl_error
 }
