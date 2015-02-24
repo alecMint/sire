@@ -193,8 +193,6 @@ rotate_logs(){
 			rl_nextInputIsWhen=0
 		elif [ "$rl_id" == "" ]; then
 			rl_id=$arg
-		elif [ "$rl_when" == "" ]; then
-			rl_when=$arg
 		elif [ "$rl_maxBaks" == "" ]; then
 			rl_maxBaks=$arg
 		else
@@ -234,8 +232,11 @@ rotate_logs(){
 	fi
 	echo
 	unset rl_id
+	unset rl_nextInputIsWhen
 	unset rl_when
+	unset rl_nextInputIsMaxBaks
 	unset rl_maxBaks
+	unset rl_nextInputIsOutput
 	unset rl_outputLog
 	unset rl_logFiles
 	unset rl_error
