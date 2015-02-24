@@ -172,54 +172,56 @@ install_repo(){
 }
 
 accessLogLocation(){
-	key=$1
-	grep access_log /etc/nginx/sites-enabled/$key | head -n1 | awk '{print $2}' | tr -d ';'
+	key_=$1
+	grep access_log /etc/nginx/sites-enabled/$key_ | head -n1 | awk '{print $2}' | tr -d ';'
+	unset key_
 }
 
 errorLogLocation(){
-	key=$1
-	grep error_log /etc/nginx/sites-enabled/ace | head -n1 | awk '{print $2}' | tr -d ';'
+	key_=$1
+	grep error_log /etc/nginx/sites-enabled/$key_ | head -n1 | awk '{print $2}' | tr -d ';'
+	unset key_
 }
 
 rotate_logs(){
 	# rotate_logs uniqueId -t '0 3 * * *' -m 8 -o /var/log/self_output.log /var/log/log1.log /var/log/log2.log
 	echo
-	rl_when='0 2 * * *'
-	rl_maxBaks=10
+	when_='0 2 * * *'
+	maxBaks_=10
 	for arg in "$@"; do
 		if [ "$arg" == "-o" ]; then
-			rl_nextInputIsOutput=1
-		elif [ "$rl_nextInputIsOutput" == "1" ]; then
-			rl_outputLog=$arg
-			rl_nextInputIsOutput=0
+			nextInputIsOutput_=1
+		elif [ "$nextInputIsOutput_" == "1" ]; then
+			outputLog_=$arg
+			nextInputIsOutput_=0
 		elif [ "$arg" == "-m" ]; then
-			rl_nextInputIsMaxBaks=1
-		elif [ "$rl_nextInputIsMaxBaks" == "1" ]; then
-			rl_maxBaks=$arg
-			rl_nextInputIsMaxBaks=0
+			nextInputIsMaxBaks_=1
+		elif [ "$nextInputIsMaxBaks_" == "1" ]; then
+			maxBaks_=$arg
+			nextInputIsMaxBaks_=0
 		elif [ "$arg" == "-t" ]; then
-			rl_nextInputIsWhen=1
-		elif [ "$rl_nextInputIsWhen" == "1" ]; then
-			rl_when=$arg
-			rl_nextInputIsWhen=0
-		elif [ "$rl_id" == "" ]; then
-			rl_id=$arg
+			nextInputIsWhen_=1
+		elif [ "$nextInputIsWhen_" == "1" ]; then
+			when_=$arg
+			nextInputIsWhen_=0
+		elif [ "$id_" == "" ]; then
+			id_=$arg
 		else
-			rl_logFiles=$rl_logFiles" '$arg'"
+			logFiles_=$logFiles_" '$arg'"
 		fi
 	done
-	if [ "$rl_id" == "" ] || [ "$rl_when" == "" ] || [ "$rl_logFiles" == "" ]; then
-		rl_error="missing input"
+	if [ "$id_" == "" ] || [ "$when_" == "" ] || [ "$logFiles_" == "" ]; then
+		error_="missing input"
 	fi
-	rl_id=$rl_id"_rotateLogs"
-	echo "rl_id: $rl_id"
-	echo "rl_when: $rl_when"
-	echo "rl_maxBaks: $rl_maxBaks"
-	echo "rl_outputLog: $rl_outputLog"
-	echo "rl_logFiles: $rl_logFiles"
+	id_=$id_"_rotateLogs"
+	echo "id_: $id_"
+	echo "when_: $when_"
+	echo "maxBaks_: $maxBaks_"
+	echo "outputLog_: $outputLog_"
+	echo "logFiles_: $logFiles_"
 	if [ ! -d $sireDir/bin/node_modules/shlog-rotate ]; then
 		if [ "`which npm`" == "" ]; then
-			rl_error="npm not installed"
+			error_="npm not installed"
 		else
 			echo "shlog-rotate not installed. installing in $sireDir..."
 			mkdir -p $sireDir/bin/node_modules
@@ -227,28 +229,28 @@ rotate_logs(){
 		fi
 	fi
 	if [ ! -f /bin/node_modules/shlog-rotate/index.sh ]; then
-		rl_error=$rl_error"; shlog-rotate main not found"
+		error_=$error_"; shlog-rotate main not found"
 	fi
-	rl_cron="$rl_when /bin/bash $sireDir/bin/node_modules/shlog-rotate/index.sh $rl_maxBaks $rl_logFiles"
-	if [ "$rl_outputLog" != "" ]; then
-		rl_cron=$rl_cron" 2>&1 >> '$rl_outputLog'"
+	cron_="$when_ /bin/bash $sireDir/bin/node_modules/shlog-rotate/index.sh $maxBaks_ $logFiles_"
+	if [ "$outputLog_" != "" ]; then
+		cron_=$cron_" 2>&1 >> '$outputLog_'"
 	fi
-	rl_cron=$rl_cron" #$rl_id"
-	if [ "$rl_error" == "" ]; then
-		echo "rotate_logs() crontab_add \"#$rl_id\" \"$rl_cron\""
-		crontab_add "#$rl_id" "$rl_cron"
+	cron_=$cron_" #$id_"
+	if [ "$error_" == "" ]; then
+		echo "rotate_logs() crontab_add \"#$id_\" \"$cron_\""
+		crontab_add "#$id_" "$cron_"
 	else
-		echo "rotate_logs() failed: $rl_error"
+		echo "rotate_logs() failed: $error_"
 	fi
 	echo
-	unset rl_id
-	unset rl_nextInputIsWhen
-	unset rl_when
-	unset rl_nextInputIsMaxBaks
-	unset rl_maxBaks
-	unset rl_nextInputIsOutput
-	unset rl_outputLog
-	unset rl_logFiles
-	unset rl_error
-	unset rl_cron
+	unset id_
+	unset nextInputIsWhen_
+	unset when_
+	unset nextInputIsMaxBaks_
+	unset maxBaks_
+	unset nextInputIsOutput_
+	unset outputLog_
+	unset logFiles_
+	unset error_
+	unset cron_
 }
