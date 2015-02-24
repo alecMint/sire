@@ -226,7 +226,7 @@ rotate_logs(){
 		echo "rotate_logs() installing crontab: $cron"
 		#crontab_add "#$id" "$cron"
 	else
-		"rotate_logs() failed: $rl_error"
+		echo "rotate_logs() failed: $rl_error"
 	fi
 	unset rl_id
 	unset rl_when
