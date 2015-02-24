@@ -176,11 +176,9 @@ rotate_logs(){
 		echo "arg: $arg"
 		if [ "$arg" == "-o" ]; then
 			nextInputIsOutput=1
-		fi
-		if [ "$nextInputIsOutput" == "1" ]; then
+		elif [ "$nextInputIsOutput" == "1" ]; then
 			outputLog=$arg
 			nextInputIsOutput=0
-		fi
 		elif [ "$id" == "" ]; then
 			id=$arg
 		elif [ "$when" == "" ]; then
