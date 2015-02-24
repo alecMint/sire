@@ -49,6 +49,7 @@ killall node
 ### To Do
 - Use arguments as alternative to config for _deploy module
 -- If module == _deploy, source an arg-to-export file
+-- Or consider alternative: pass path to alt config file. This could be done globally (ie not just for _deploy)
 -- Add instructions to readme
 - Package hooky and remove dups
 - Fix issue where only one hooky can be running at once due to port conflict
