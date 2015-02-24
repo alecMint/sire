@@ -217,11 +217,11 @@ rotate_logs(){
 			npm install --prefix $sireDir/bin shlog-rotate
 		fi
 	fi
-	cron="$when /bin/bash $sireDir/bin/node_modules/shlog-rotate/index.sh $maxBaks $logFiles"
-	if [ "$outputLog" != "" ]; then
-		cron=$cron" 2>&1 >> '$outputLog'"
+	cron=$rl_when /bin/bash $sireDir/bin/node_modules/shlog-rotate/index.sh $rl_maxBaks $rl_logFiles
+	if [ "$rl_outputLog" != "" ]; then
+		cron=$cron" 2>&1 >> '$rl_outputLog'"
 	fi
-	cron=$cron" #$id"
+	cron=$cron" #$rl_id"
 	if [ "$rl_error" == "" ]; then
 		echo "rotate_logs() installing crontab: $cron"
 		#crontab_add "#$id" "$cron"
