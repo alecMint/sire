@@ -206,25 +206,28 @@ rotate_logs(){
 	echo "rl_maxBaks: $rl_maxBaks"
 	echo "rl_outputLog: $rl_outputLog"
 	echo "rl_logFiles: $rl_logFiles"
-#	if [ "$id" != "" ] && [ "$when" != "" ] && [ "$logFiles" != "" ]; then
-#		if [ !-d $sireDir/bin/node_modules/shlog-rotate ]; then
-#			if [ "`which npm`" == "" ]; then
-#				echo "rotate_logs() failed: npm not installed"
-#				exit 1
-#			fi
-#			mkdir -p $sireDir/bin/node_modules
-#			npm install --prefix $sireDir/bin shlog-rotate
-#		fi
-#		cron=$when /bin/bash $sireDir/bin/node_modules/shlog-rotate/index.sh $maxBaks $logFiles
-#		if [ "$outputLog" != "" ]; then
-#			cron=$cron" 2>&1 >> '$outputLog'"
-#		fi
-#		cron=$cron" #$id"
-#		echo "rotate_logs() installing crontab: $cron"
-#		crontab_add "#$id" "$cron"
-#	else
-#		echo "rotate_logs() failed: missing input"
-#	fi
+	if [ "$rl_id" == "" ] || [ "$rl_when" == "" ] || [ "$rl_logFiles" == "" ]; then
+		error="missing input"
+	fi
+	if [ !-d $sireDir/bin/node_modules/shlog-rotate ]; then
+		if [ "`which npm`" == "" ]; then
+			error="npm not installed"
+		else
+			mkdir -p $sireDir/bin/node_modules
+			npm install --prefix $sireDir/bin shlog-rotate
+		fi
+	fi
+	cron=$when /bin/bash $sireDir/bin/node_modules/shlog-rotate/index.sh $maxBaks $logFiles
+	if [ "$outputLog" != "" ]; then
+		cron=$cron" 2>&1 >> '$outputLog'"
+	fi
+	cron=$cron" #$id"
+	if [ "$error" == "" ]; then
+		echo "rotate_logs() installing crontab: $cron"
+		#crontab_add "#$id" "$cron"
+	else
+		"rotate_logs() failed: $error"
+	fi
 	unset rl_id
 	unset rl_when
 	unset rl_maxBaks
