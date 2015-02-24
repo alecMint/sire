@@ -171,8 +171,14 @@ install_repo(){
 }
 
 rotate_logs(){
-	when=$1
-	logfiles=`everything_but "$when"`
+	for arg in $@; do
+		echo "arg: $arg"
+		if [ "$when" == "" ]; then
+			when=$arg
+		else
+			logfiles=$logfiles" '$arg'"
+		fi
+	done
 	echo "when: $when"
 	echo "logfiles: $logfiles"
 }
