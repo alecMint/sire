@@ -186,7 +186,8 @@ errorLogLocation(){
 rotate_logs(){
 	# rotate_logs uniqueId -t '0 3 * * *' -m 8 -o /var/log/self_output.log /var/log/log1.log /var/log/log2.log
 	echo
-	when_='0 0 * * *'
+	#when_='0 0 * * *'
+	when_='@daily'
 	maxBaks_=10
 	for arg in "$@"; do
 		if [ "$arg" == "-o" ]; then
