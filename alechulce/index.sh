@@ -38,3 +38,4 @@ localhost_add_cname 'local.alechulce.com'
 # rotate logs
 logrotate_log=/var/log/logrotate_alechulce.log
 rotate_logs 'alechulce' "`accessLogLocation alechulce`" "`errorLogLocation alechulce`" "$logrotate_log" -o "$logrotate_log"
+rotate_logs 'alechulce-logrotate' "$logrotate_log" -o "$logrotate_log" -t '@weekly'
