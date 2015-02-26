@@ -74,6 +74,6 @@ cd $startpwd
 
 # rotate logs
 logrotate_log=/var/log/logrotate_markthegonzales.log
-rotate_logs 'markthegonzales' "$baksql_log" "`accessLogLocation markthegonzales`" "`errorLogLocation markthegonzales`" "$logrotate_log" -o "$logrotate_log"
-
+rotate_logs 'markthegonzales' "$baksql_log" "`accessLogLocation markthegonzales`" "`errorLogLocation markthegonzales`" -o "$logrotate_log"
+rotate_logs 'markthegonzales-logrotate' "$logrotate_log" -o "$logrotate_log" -t '@weekly'
 

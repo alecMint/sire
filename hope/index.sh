@@ -79,5 +79,5 @@ cd $startpwd
 
 # rotate logs
 logrotate_log=/var/log/logrotate_hope.log
-rotate_logs 'hope' "$baksql_log" "`accessLogLocation hope`" "`errorLogLocation hope`" "$logrotate_log" -o "$logrotate_log"
-
+rotate_logs 'hope' "$baksql_log" "`accessLogLocation hope`" "`errorLogLocation hope`" -o "$logrotate_log"
+rotate_logs 'hope-logrotate' "$logrotate_log" -o "$logrotate_log" -t '@weekly'

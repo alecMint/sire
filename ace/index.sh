@@ -62,6 +62,6 @@ gen_add_line_to_file "$installDir/config.local.json" '}'
 
 # rotate logs
 logrotate_log=/var/log/logrotate_ace.log
-rotate_logs 'ace' "`accessLogLocation ace`" "`errorLogLocation ace`" "$logrotate_log" -o "$logrotate_log"
-
+rotate_logs 'ace' "`accessLogLocation ace`" "`errorLogLocation ace`" -o "$logrotate_log"
+rotate_logs 'ace-logrotate' "$logrotate_log" -o "$logrotate_log" -t '@weekly'
 
