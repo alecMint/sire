@@ -61,7 +61,7 @@ gitsync_cron "$installDir" "master"
 
 # backup sql
 baksql_log=/var/log/markthegonzales_baksql.log
-cron="0 2 * * * /usr/local/bin/node $sireDir/_common/s3dl/bin/baksql.js -d $mysqlDb -b $s3Bucket/sql 2>&1 >> $baksql_log #markthegonzales_bakSql"
+cron="0 2 * * * /usr/local/bin/node $sireDir/_common/s3dl/bin/baksql.js -d $mysqlDb -b $s3Bucket/sql >> $baksql_log 2>&1 #markthegonzales_bakSql"
 crontab_add '#markthegonzales_bakSql' "$cron"
 
 

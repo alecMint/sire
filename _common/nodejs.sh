@@ -3,7 +3,7 @@
 VERSION=v0.10.32
 PLATFORM=linux
 ARCH=x64
-PREFIX="/usr/local"
+PREFIX="/usr/local" # use local so we dont overwrite apt installed
 
 CVERSION=`node -v 2> /dev/null`
 

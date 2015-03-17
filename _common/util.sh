@@ -36,7 +36,7 @@ remote_config_add(){
 	file=$2
 	key=$3
 	val=$4
-	search=`ssh ubuntu@$serverName "sudo cat $file 2>&1 /dev/null | grep $key | head -n1"`
+	search=`ssh ubuntu@$serverName "sudo cat $file 2>/dev/null | grep $key | head -n1"`
 	if [ "$search" == "" ]; then
 		ssh ubuntu@$serverName "echo 'export $key=\"$val\"' | sudo tee -a $file >> /dev/null"
 	fi
@@ -234,7 +234,7 @@ rotate_logs(){
 	fi
 	cron_="$when_ /bin/bash $sireDir/bin/node_modules/shlog-rotate/index.sh $maxBaks_ $logFiles_"
 	if [ "$outputLog_" != "" ]; then
-		cron_=$cron_" 2>&1 >> '$outputLog_'"
+		cron_=$cron_" >> '$outputLog_' 2>&1"
 	fi
 	cron_=$cron_" #$id_"
 	if [ "$error_" == "" ]; then
