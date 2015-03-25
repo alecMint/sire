@@ -146,6 +146,21 @@ public_ip(){
 	curl http://169.254.169.254/latest/meta-data/public-ipv4
 }
 
+configure_hooky(){
+	dir=$1
+	branch=$2
+	githubHookAuthToken=$3
+	port=$4
+	hookyConfig=/root/hooky.json
+	IP=`public_ip`
+	startpwd=`pwd`
+	cd $sireDir/_common/hooky
+	npmi
+	/usr/bin/local/node ./add_to_config.js -c "$hookyConfig" -r "$dir" -b $branch -t "$githubHookAuthToken" -p $port
+	forever_run "./index.js -a $IP -c '$hookyConfig'"
+	cd $startpwd
+}
+
 gitsync_cron(){
 	dir=$1
 	branch=$2

@@ -53,14 +53,15 @@ localhost_add_cname 'local.hopechapellongbeach.com'
 
 
 # deploy hook service
-IP=`public_ip`
-echo "[{\"repo\":\"$installDir\",\"branch\":\"master\"}]" > "$installDir/hooky.json"
-cd $startpwd/hooky
-npmi
-forever_run "./index.js -t $githubHookAuthToken -a $IP -c $installDir/hooky.json"
-cd $startpwd
+configure_hooky "$installDir" master $githubHookAuthToken 9998
+#IP=`public_ip`
+#echo "[{\"repo\":\"$installDir\",\"branch\":\"master\"}]" > "$installDir/hooky.json"
+#cd $sireDir/_common/hooky
+#npmi
+#forever_run "./index.js -t $githubHookAuthToken -a $IP -c $installDir/hooky.json"
+#cd $startpwd
 
-# until i fix multiple github hooks issue...
+# alternative sync using cron...
 #gitsync_cron "$installDir" "master"
 
 

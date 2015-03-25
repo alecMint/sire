@@ -13,31 +13,22 @@ var fs = require('fs');
 // it its a node module `npm run git-push` will be run after
 //
 
-var repos = require(argv.c||argv.config);
+var hookyConfigs = require(argv.c||argv.config);
 var publicIp = argv.a||argv.ip||argv.address;
-var port = 9998;
-var githubAuthToken = argv.t||argv.githubHookAuthToken;
 // get a new auth token @ https://github.com/settings/tokens/new
 
-console.log("hooky> startup. port:",port,", ip:",publicIp,", repos:",repos,", t:",githubAuthToken);
-if(!publicIp || !repos.length || !githubAuthToken) {
+console.log("hooky> startup. ip:",publicIp,", repos:",hookyConfigs);
+if(!publicIp || !hookyConfigs.length) {
   console.log('hooky> error both publicIp (-a) and repos required in config');
   process.exit(1);
 }
 
-var branches = {};
-repos.forEach(function(r,i){
+var branches = {}, repos = [];
+hookyConfigs.forEach(function(r,i){
   branches[r.repo] = r.branch;
   repos[i] = r.repo;
 });
-
-
-
-console.log("hooky> startup. port:",port,", ip:",publicIp,", repos:",repos);
-if(!publicIp || !repos.length) {
-  console.log('hooky> error both publicIp (-a) and repos (-r) required');
-  process.exit(1);
-}
+//console.log(repos);console.log(branches);process.exit();
 
 getConfigs(repos,function(errs,configs){
   if(errs) {
@@ -45,50 +36,59 @@ getConfigs(repos,function(errs,configs){
     process.exit();
   }
 
-  var s = octopie({
-    url:publicIp+':'+port,
-    authToken:githubAuthToken
+  //console.log('\n'+JSON.stringify(configs)+'\n');process.exit();
+
+  var groupedConfigs = groupByAuthToken(hookyConfigs);
+  Object.keys(groupedConfigs).forEach(function(githubAuthToken){
+  	var hookyConfig = groupedConfigs[githubAuthToken];
+
+  	console.log('new octopie:',publicIp+':'+hookyConfig[0].port);
+	  var s = octopie({
+	    url:publicIp+':'+hookyConfig[0].port,
+	    authToken:githubAuthToken
+	  });
+
+	  hookyConfig.forEach(function(repoConfig){
+	  	var r = repoConfig.repo;
+	    var giturl = configs[r].remote.origin.url;
+
+	    var githubName = giturl.replace(/\.git$/,'');
+	    var parts = githubName.split(/[:\/]+/);
+	    githubName = parts[parts.length-2]+'/'+parts[parts.length-1];
+
+	    configs[r].github = githubName;
+	    console.log('watching ',githubName,'pushes to',branches[r]);
+	    s.add(githubName);
+	  });
+
+	  s.on('push',function(data){
+	    console.log('got a push to ',data.repository.url,' ref ',data.ref);
+	    hookyConfig.forEach(function(repoConfig){
+	    	var r = repoConfig.repo;
+	      var repoPath = '/'+configs[r].github;
+	      var url = data.repository.url;
+
+	      if(url.indexOf(repoPath) != url.length-repoPath.length) return;
+	      var branch = '/'+branches[r];
+
+	      if(data.ref.indexOf(branch) != data.ref.length-branch.length) return console.log('push to wrong branch.',branch,url,repoPath);
+
+	      console.log('im going to update the code in ',r,branches[r],'!');
+
+	      updateCode(r, branches[r]);
+	    });
+	  });
+
+	  s.listen(hookyConfig[0].port,function(err){
+	    if(err) {
+	      if(err.code || err[0]) {
+	        console.log('hooky> error octopie could not listen?',err);
+	      }
+	    }
+	  });
+
   });
 
-  repos.forEach(function(r){
-    var giturl = configs[r].remote.origin.url;
-
-    var githubName = giturl.replace(/\.git$/,'');
-    var parts = githubName.split(/[:\/]+/);
-    githubName = parts[parts.length-2]+'/'+parts[parts.length-1];
-
-    configs[r].github = githubName;
-    console.log('watching ',githubName,'pushes to',branches[r]);
-    s.add(githubName);
-  });
-
-  s.on('push',function(data){
-
-    console.log('got a push to ',data.repository.url,' ref ',data.ref);
-
-    repos.forEach(function(r){
-      var repoPath = '/'+configs[r].github;
-      var url = data.repository.url;
-
-
-      if(url.indexOf(repoPath) != url.length-repoPath.length) return;
-      var branch = '/'+branches[r];
-
-      if(data.ref.indexOf(branch) != data.ref.length-branch.length) return console.log('push to wrong branch.',branch,url,repoPath);
-
-      console.log('im going to update the code in ',r,branch,'!');
-
-      updateCode(r, branch.substr(1));
-    });
-  });
-
-  s.listen(port,function(err){
-    if(err) {
-      if(err.code || err[0]) {
-        console.log('hooky> error octopie could not listen?',err);
-      }
-    }
-  });
 
 });
 
@@ -158,4 +158,16 @@ function updateCode(repo, branch){
   });
 
 }
+
+
+function groupByAuthToken(configs){
+	var grouped = {};
+	configs.forEach(function(config){
+		if (!grouped[config.githubAuthToken])
+			grouped[config.githubAuthToken] = [];
+		grouped[config.githubAuthToken].push(config);
+	});
+	return grouped;
+}
+
 

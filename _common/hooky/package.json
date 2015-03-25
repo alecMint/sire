@@ -7,6 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ryan Day",
+  "contributors": [
+  	{"name": "Alec Hulce"}
+  ],
   "license": "proprietary",
   "dependencies": {
     "gitconfiglocal": "~0.0.1",

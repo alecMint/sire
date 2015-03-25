@@ -54,8 +54,8 @@ killall node
 -- Add instructions to readme
 - Package hooky and remove dups
 - Fix issue where only one hooky can be running at once due to port conflict
--- Temp solution would be to run on alternate ports
--- Better solution would be to have a single hooky checking multiple targets
+-- Hooky supports this, but they all have to be in the same config file
+-- Save config to /root/hooky.cnf.json
 - Fix faulty logic inside _deploy/index.sh where it checks for existence of local sire .git when it should check remote .git
 -- Currently /root/sire is simply deleted and replaced with latest version. This could cause issues with submodule instantiation dependencies (e.g. _common/s3dl/node_modules)
 - Make crontab easier to read with whitespace

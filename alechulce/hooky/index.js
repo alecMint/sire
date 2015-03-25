@@ -76,9 +76,9 @@ getConfigs(repos,function(errs,configs){
 
       if(data.ref.indexOf(branch) != data.ref.length-branch.length) return console.log('push to wrong branch.',branch,url,repoPath);
 
-      console.log('im going to update the code in ',r,'!');
+      console.log('im going to update the code in ',r,branch,'!');
 
-      updateCode(r);
+      updateCode(r, branch.substr(1));
     });
   });
 
@@ -117,9 +117,9 @@ function getConfigs(repos,cb){
 }
 
 
-function updateCode(repo){
-
-  var cmd = "cd "+repo+" && git pull origin $(git branch | grep \\* | awk '{ print $2 }')";
+function updateCode(repo, branch){
+  //var cmd = "cd "+repo+" && git pull origin $(git branch | grep \\* | awk '{ print $2 }')";
+  var cmd = "cd "+repo+" && git pull origin "+branch;
   console.log('updating code in ',repo);
   console.log('cmd: ',cmd);
 
