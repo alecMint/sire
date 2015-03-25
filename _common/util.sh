@@ -157,7 +157,7 @@ configure_hooky(){
 	startpwd=`pwd`
 	cd $sireDir/_common/hooky
 	npmi
-	/usr/bin/local/node ./add_to_config.js -c "$hookyConfig" -r "$dir" -b $branch -t "$githubHookAuthToken" -p $port
+	/usr/local/bin/node ./add_to_config.js -c "$hookyConfig" -r "$dir" -b $branch -t "$githubHookAuthToken" -p $port
 	forever_run "./index.js -a $IP -c '$hookyConfig'"
 	cd $startpwd
 }
