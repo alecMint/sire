@@ -25,9 +25,9 @@ crontab_add "$installDir/crons/cleanup.sh" "0 4 * * * $installDir/crons/cleanup.
 
 
 # deploy hook service
-configure_hooky "$installDir" master $githubHookAuthToken 9998
+#configure_hooky "$installDir" master $githubHookAuthToken 9998
 # until i fix multiple github hooks issue...
-#gitsync_cron "$installDir" "master"
+gitsync_cron "$installDir" "master"
 
 
 #secret configs
