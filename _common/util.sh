@@ -147,6 +147,7 @@ public_ip(){
 }
 
 configure_hooky(){
+	echo "configure_hooky() $@"
 	dir=$1
 	branch=$2
 	githubHookAuthToken=$3
