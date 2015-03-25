@@ -55,6 +55,7 @@ fi
 localhost_add_cname 'local.markthegonzales.com'
 
 
+#configure_hooky "$installDir" master $githubHookAuthToken 9998
 # until i fix multiple github hooks issue...
 gitsync_cron "$installDir" "master"
 

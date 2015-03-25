@@ -27,12 +27,7 @@ forever_run ./server.js
 
 
 # deploy hook service
-IP=`public_ip`
-echo '[{"repo":"'$installDir'","branch":"master"}]' > $installDir'/hooky.json'
-cd $startpwd/hooky
-npmi
-forever_run "./index.js -t $githubHookAuthToken -a $IP -c $installDir/hooky.json"
-cd $startpwd
+configure_hooky "$installDir" master $githubHookAuthToken 9997
 
 
 # crons

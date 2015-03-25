@@ -20,12 +20,7 @@ install_repo "$installDir" "$gitRepo"
 
 
 # deploy hook service
-#IP=`public_ip`
-#echo '[{"repo":"'$installDir'","branch":"master"}]' > $installDir'/hooky.json'
-#cd $startpwd/hooky
-#npmi
-#forever_run "./index.js -t $githubHookAuthToken -a $IP -c $installDir/hooky.json"
-#cd $startpwd
+#configure_hooky "$installDir" master $githubHookAuthToken 9998
 
 # until i fix multiple github hooks issue...
 gitsync_cron "$installDir" "master"
