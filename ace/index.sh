@@ -43,6 +43,10 @@ gen_add_line_to_file "$installDir/web/config.local.php" awsRegion "\$awsRegion='
 if [ "$googleAnalyticsId" != "" ]; then
 	gen_add_line_to_file "$installDir/web/config.local.php" googleAnalyticsId "\$googleAnalyticsId='$googleAnalyticsId';"
 fi
+if [ "$facebookAppId" != "" ]; then
+	gen_add_line_to_file "$installDir/web/config.local.php" facebookAppId "\$facebookAppId='$facebookAppId';"
+	gen_add_line_to_file "$installDir/web/config.local.php" facebookAppSecret "\$facebookAppSecret='$facebookAppSecret';"
+fi
 
 if [ -f $installDir/config.local.json ]; then
 	rm $installDir/config.local.json

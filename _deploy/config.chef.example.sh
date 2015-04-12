@@ -20,3 +20,6 @@ export machineSshKeyPrivate=$'-----BEGIN RSA PRIVATE KEY-----\nMIIFnAGB...'
 # Keys for s3
 export awsAccessKey=''
 export awsAccessSecret=''
+
+export facebookAppId=''
+export facebookAppSecret=''

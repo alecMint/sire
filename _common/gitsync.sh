@@ -2,7 +2,7 @@
 dir=$1
 branch=$2
 
-cd $dir
+cd $dir || (echo "dir $dir does not exist, exiting" && exit 1)
 git fetch
 git reset --hard HEAD
 git checkout -f origin/$branch
