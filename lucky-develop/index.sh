@@ -10,6 +10,6 @@ if [ ! -f /usr/local/bin/forever ] && [ -f /usr/bin/forever ]; then
 	ln -s /usr/bin/forever /usr/local/bin/forever
 fi
 
-installDir=/var/www/platform-v2-lucky/current
+installDir=/var/www/platform-v2/current
 #echo "githubHookAuthToken: $githubHookAuthToken"
 configure_hooky $installDir develop $githubHookAuthToken 8013 $installDir/restart.sh
