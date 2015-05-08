@@ -106,7 +106,7 @@ forever_stop(){
 		echo "forever stop> $1 not running"
 	else
 		echo "forever_stop, index: $index"
-		/usr/local/bin/forever list | grep ''
+		#/usr/local/bin/forever list # this is stopping the script
 		/usr/local/bin/forever stop $index
 	fi
 }
