@@ -20,8 +20,9 @@ var configFile = argv.c
 ,branch = argv.b
 ,githubAuthToken = argv.t
 ,port = argv.p // one per auth token
+,postScript = argv.s
 ,removeFromConfig = false
-,o = {repo:repo, branch:branch, githubAuthToken:githubAuthToken, port: port }
+,o = {repo:repo, branch:branch, githubAuthToken:githubAuthToken, port:port, postScript:postScript }
 ,configs, replaced
 ;
 

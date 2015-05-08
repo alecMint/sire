@@ -75,7 +75,22 @@ getConfigs(repos,function(errs,configs){
 
 	      console.log('im going to update the code in ',r,branches[r],'!');
 
-	      updateCode(r, branches[r]);
+	      updateCode(r, branches[r], function(err){
+	      	if (err)
+	      		return;
+	      	if (repoConfig.postScript) {
+	      		console.log('running post script...');
+	      		proc.exec('/bin/bash '+repoConfig.postScript,function(error,stdout,stderr){
+	      			if (error) {
+	      				console.log('error running postScript '+repoConfig.postScript);
+	      				console.log(stderr);
+	      			} else {
+	      				console.log('ran postScript '+repoConfig.postScript);
+	      				console.log(stdout);
+	      			}
+	      		});
+	      	}
+	      });
 	    });
 	  });
 
@@ -117,9 +132,9 @@ function getConfigs(repos,cb){
 }
 
 
-function updateCode(repo, branch){
+function updateCode(repo, branch, cb){
   //var cmd = "cd "+repo+" && git pull origin $(git branch | grep \\* | awk '{ print $2 }')";
-  var cmd = "cd "+repo+" && git pull origin "+branch;
+  var cmd = "cd "+repo+" && git pull origin "+branch; // && npm install
   console.log('updating code in ',repo);
   console.log('cmd: ',cmd);
 
@@ -131,6 +146,7 @@ function updateCode(repo, branch){
       console.log('pulled code');
       console.log(stdout);
     }
+    if (cb) cb(error);
 
     var tasks = [
       function(){

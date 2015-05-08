@@ -152,12 +152,13 @@ configure_hooky(){
 	branch=$2
 	githubHookAuthToken=$3
 	port=$4
+	postScript=$5
 	hookyConfig=/root/hooky.json
 	IP=`public_ip`
 	startpwd=`pwd`
 	cd $sireDir/_common/hooky
 	npmi
-	/usr/local/bin/node ./add_to_config.js -c "$hookyConfig" -r "$dir" -b $branch -t "$githubHookAuthToken" -p $port
+	/usr/local/bin/node ./add_to_config.js -c "$hookyConfig" -r "$dir" -b $branch -t "$githubHookAuthToken" -p $port -s "$postScript"
 	forever_run "./index.js -a $IP -c $hookyConfig"
 	cd $startpwd
 }
