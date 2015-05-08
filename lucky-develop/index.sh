@@ -3,8 +3,11 @@
 
 ../_common/forever.sh
 
-if [ ! -f /usr/local/bin/node ]; then
+if [ ! -f /usr/local/bin/node ] && [ -f /usr/bin/node ]; then
 	ln -s /usr/bin/node /usr/local/bin/node
+fi
+if [ ! -f /usr/local/bin/forever ] && [ -f /usr/bin/forever ]; then
+	ln -s /usr/bin/forever /usr/local/bin/forever
 fi
 
 installDir=/var/www/platform-v2-lucky/current
