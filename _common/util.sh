@@ -1,4 +1,7 @@
 #misc crontab functions
+#
+# 05/08/2015 - changed forever to forever. was hanging on lucky servers. installing it globally in forever.sh anyway
+#
 
 crontab_add(){
 	search=$1
@@ -73,7 +76,7 @@ gen_add_line_to_file(){
 }
 
 forever_is_running(){
-	/usr/local/bin/forever list | grep "$1"
+	forever list | grep "$1"
 }
 
 forever_run(){
@@ -96,32 +99,32 @@ forever_run(){
 	echo "script: $script"
 	echo "torun: $torun"
 	echo "dir: $sireDir"
-	/usr/local/bin/forever start --spinSleepTime 1000 --minUptime 500 $torun
+	forever start --spinSleepTime 1000 --minUptime 500 $torun
 }
 
 forever_stop(){
 	#index=`forever_uid '$1'` # was using forever_index before, but had issues when stopping index 0
-	index=`/usr/local/bin/forever list | grep "$1" | awk '{print $3}' | sed -e 's/\[\|\]//g' | head -n1` # for some reason the above isnt working, dont have time to figure out why atm
+	index=`forever list | grep "$1" | awk '{print $3}' | sed -e 's/\[\|\]//g' | head -n1` # for some reason the above isnt working, dont have time to figure out why atm
 	if [ "$index" == "" ]; then
 		echo "forever stop> $1 not running"
 	else
 		echo "forever_stop, index: $index"
-		#/usr/local/bin/forever list # this is stopping the script
-		/usr/local/bin/forever stop $index
+		forever list
+		forever stop $index
 	fi
 }
 
 forever_uid(){
-	/usr/local/bin/forever list | grep "$1" | awk '{print $3}' | sed -e 's/\[\|\]//g' | head -n1
+	forever list | grep "$1" | awk '{print $3}' | sed -e 's/\[\|\]//g' | head -n1
 }
 
 forever_index(){
-	/usr/local/bin/forever list | grep "$1" | awk '{print $2}' | sed -e 's/\[\|\]//g' | head -n1
+	forever list | grep "$1" | awk '{print $2}' | sed -e 's/\[\|\]//g' | head -n1
 }
 
 forever_logfile(){
 	search=$1
-	/usr/local/bin/forever --plain list | grep $search | grep -oP '\/root[^ ]+'
+	forever --plain list | grep $search | grep -oP '\/root[^ ]+'
 }
 
 first_arg(){
