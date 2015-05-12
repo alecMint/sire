@@ -134,6 +134,7 @@ function getConfigs(repos,cb){
 
 function updateCode(repo, branch, cb){
   //var cmd = "cd "+repo+" && git pull origin $(git branch | grep \\* | awk '{ print $2 }')";
+  // @todo: dont npm stuff if no package.json
   var cmd = "cd "+repo+" && git checkout -f "+branch+" && git pull origin "+branch+" && npm install && npm rebuild";
   console.log('updating code in ',repo);
   console.log('cmd: ',cmd);
