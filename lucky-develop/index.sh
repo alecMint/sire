@@ -12,5 +12,5 @@ fi
 #fi
 
 installDir=/var/www/platform-v2/current
-echo "$installDir develop $githubHookAuthToken 8013 $installDir/restart.sh"
+echo "configure_hooky $installDir develop $githubHookAuthToken 8013 $installDir/restart.sh"
 configure_hooky $installDir develop $githubHookAuthToken 8013 $installDir/restart.sh
