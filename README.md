@@ -47,8 +47,6 @@ killall node
 
 
 ### To Do
-- forever list and forever stop sometimes get caught hanging
--- Possible connection to the symlink in their PATHs
 - Use arguments as alternative to config for _deploy module
 -- If module == _deploy, source an arg-to-export file
 -- Or consider alternative: pass path to alt config file. This could be done globally (ie not just for _deploy)
