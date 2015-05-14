@@ -13,4 +13,4 @@ fi
 
 installDir=/var/www/platform-v2/current
 
-configure_hooky $installDir develop $githubHookAuthToken 8013 $installDir/restart.sh
+configure_hooky $installDir develop $githubHookAuthToken 8013 "$installDir/restart.sh -r"
