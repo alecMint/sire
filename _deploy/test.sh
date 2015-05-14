@@ -48,6 +48,6 @@ fi
 
 echo ''
 echo 'Example module deploy:'
-echo "ssh ubuntu@$serverName 'sudo $sireDir/index.sh lucky-forwarder'"
+echo "ssh ubuntu@$serverName 'sudo $sireDir/index.sh lucky-deploy'"
 echo ''
 
