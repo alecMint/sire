@@ -1,5 +1,5 @@
 
-sig=`echo "$@" | sed -n 's/[ \/\\.]/_/gp'`
+sig=`echo "$@" | sed -n 's/[^a-zA-Z0-9_-]/_/gp'`
 lockFile="/tmp/gitsync.$sig.lock"
 if [ -f "$lockFile" ]; then
 	echo "lock file found, exiting"
