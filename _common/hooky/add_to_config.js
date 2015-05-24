@@ -21,7 +21,7 @@ var configFile = argv.c
 ,branch = argv.b
 ,githubAuthToken = argv.t
 ,port = argv.p // one per auth token
-,postScript = argv.s
+,postScript = argv.s && typeof argv.s == 'string' ? argv.s : null
 ,removeFromConfig = false
 ,o = {repo:repo, branch:branch, githubAuthToken:githubAuthToken, port:port, postScript:postScript }
 ,configs, replaced
