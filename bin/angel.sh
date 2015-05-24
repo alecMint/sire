@@ -12,5 +12,6 @@ running=`forever_is_running "$1"`
 if [ "$running" == "" ]; then
   echo $1" is not running!"
   forever_run "$1"
+  echo
 fi
 
