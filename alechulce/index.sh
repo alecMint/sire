@@ -20,10 +20,10 @@ install_repo "$installDir" "$gitRepo"
 
 
 # deploy hook service
-configure_hooky "$installDir" master $githubHookAuthToken
+#configure_hooky "$installDir" master $githubHookAuthToken
 
 # until i fix multiple github hooks issue...
-#gitsync_cron "$installDir" "master"
+gitsync_cron "$installDir" "master"
 
 
 # test cname
