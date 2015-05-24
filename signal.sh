@@ -4,7 +4,7 @@
 
 module=$1
 noAptUpdate=
-if [ "$2" == "-na" ]; then noAptUpdate=$2; fi
+if [ "$2" == "-na" ]; then noAptUpdate=" $2"; fi
 
 cd `dirname $0`
 
@@ -18,6 +18,6 @@ if [ ! -d "$module" ]; then
 	exit 1
 fi
 
-echo "ssh ubuntu@$serverName 'sudo $sireDir/index.sh $module $noAptUpdate'"
-ssh ubuntu@$serverName 'sudo $sireDir/index.sh $module $noAptUpdate'
+echo "ssh ubuntu@$serverName \"sudo $sireDir/index.sh $module$noAptUpdate\""
+ssh ubuntu@$serverName "sudo $sireDir/index.sh $module$noAptUpdate"
 
