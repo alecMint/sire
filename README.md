@@ -15,22 +15,24 @@ This example deploys the "hope" module (see hope/ dir in this repo). Once run, a
 
 Copy config.chef.example.sh to config.chef.sh inside ./_deploy and edit:
 ```
-export ec2Cert='/Users/ahulce/.ssh/my-aws-private-key.pem'
+export ec2Cert='/Users/robthomas/.ssh/my-aws-private-key.pem'
 export serverName='123.123.123.123' # or cname e.g. ec2-123-123-123-123.compute-1.amazonaws.com
-export sshKey='/Users/ahulce/.ssh/id_rsa.pub'
+export sshKey='/Users/robthomas/.ssh/id_rsa.pub'
 export githubHookAuthToken='b926g...'
 export twitterAppKey="HLXu..."
 export twitterAppSecret="pNJi..."
 export machineSshKeyPublic='ssh-rsa AAAAC4G...'
 export machineSshKeyPrivate=$'-----BEGIN RSA PRIVATE KEY-----\nMIIFnAGB...'
 ```
-Deploy sire to remote server (run this locally):
+Deploy sire to remote server (run this from sire repo root):
 ```
 ./index.sh _deploy
 ```
-Deploy hope module on remote server (run this remotely):
+Deploy hope module to remote server:
 ```
-/root/sire/index.sh hope
+./signal.sh hope
+# same as:
+# ssh ubuntu@123.123.123.123 'sudo /root/sire/index.sh hope'
 ```
 
 

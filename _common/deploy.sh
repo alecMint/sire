@@ -1,7 +1,7 @@
 #!/bin/bash
 
 dir=`dirname $0`
-. $dir/../_deploy/config.sh # for $installDir et al
+. $dir/../_deploy/config.sh # for $sireDir et al
 . $dir/util.sh
 . $dir/npmi.sh
 
