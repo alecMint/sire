@@ -14,7 +14,7 @@ This example deploys the "hope" module (see hope/ dir in this repo). Once run, a
 - File watch hooks + crons set up to push DB/uploads to S3
 
 Copy config.chef.example.sh to config.chef.sh inside ./_deploy and edit:
-```
+```bash
 export ec2Cert='/Users/robthomas/.ssh/my-aws-private-key.pem'
 export serverName='123.123.123.123' # or cname e.g. ec2-123-123-123-123.compute-1.amazonaws.com
 export sshKey='/Users/robthomas/.ssh/id_rsa.pub'
@@ -25,11 +25,11 @@ export machineSshKeyPublic='ssh-rsa AAAAC4G...'
 export machineSshKeyPrivate=$'-----BEGIN RSA PRIVATE KEY-----\nMIIFnAGB...'
 ```
 Deploy sire to remote server (run this from sire repo root):
-```
+```bash
 ./index.sh _deploy
 ```
 Deploy hope module to remote server:
-```
+```bash
 ./signal.sh hope
 # same as:
 # ssh ubuntu@123.123.123.123 'sudo /root/sire/index.sh hope'
@@ -39,7 +39,7 @@ Deploy hope module to remote server:
 ### Example custom boot down (using hope)
 This example uses the "hope" module to show how Sire may be used to to back up a wordpress site for seamless deployment to a new server.
 
-```
+```bash
 node /root/sire/_common/s3dl/bin/baksql.js -d wordpress -b sire-hope/sql
 node /root/sire/_common/s3dl/bin/shuv.js -d /var/www/hope/web/wp-content/uploads -b sire-hope/wp-content/uploads
 crontab -r
