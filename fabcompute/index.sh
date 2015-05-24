@@ -27,7 +27,7 @@ forever_run ./server.js
 
 
 # deploy hook service
-configure_hooky "$installDir" master $githubHookAuthToken 9997
+configure_hooky "$installDir" master $githubHookAuthToken
 
 
 # crons

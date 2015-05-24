@@ -29,4 +29,4 @@ localhost_add_cname 'local.fffdev-migrate-wordpress.com'
 
 
 # deploy hook service
-configure_hooky "$installDir" master $githubHookAuthToken 9997
+configure_hooky "$installDir" master $githubHookAuthToken

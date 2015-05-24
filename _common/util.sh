@@ -156,6 +156,7 @@ configure_hooky(){
 	githubHookAuthToken=$3
 	port=$4
 	postScript=$5
+	if [ "$port" == "" ]; then port=9998; fi
 	hookyConfig=/root/hooky.json
 	IP=`public_ip`
 	startpwd=`pwd`
@@ -164,19 +165,27 @@ configure_hooky(){
 	/usr/local/bin/node ./add_to_config.js -c "$hookyConfig" -r "$dir" -b $branch -t "$githubHookAuthToken" -p $port -s "$postScript"
 	forever_run "./index.js -a $IP -c $hookyConfig"
 	cd $startpwd
+	# remove gitsync cron...
+	gitsync_remove_cron "$1" "$2"
 }
 
 gitsync_cron(){
 	dir=$1
 	branch=$2
-	if [ "$branch" == "" ]; then
-		branch='master'
-	fi
+	if [ "$branch" == "" ]; then branch='master'; fi
 	key="gitsync_cron $dir $branch"
 	cron="$sireDir/_common/gitsync.sh '$dir' '$branch'; sleep 15;"
 	crontab_add "$key" "* * * * * echo '$key'; $cron $cron $cron $cron"
 	# remove from hooky...
 	/usr/local/bin/node ./add_to_config.js -c "$hookyConfig" -r "$dir"
+}
+
+gitsync_remove_cron(){
+	dir=$1
+	branch=$2
+	if [ "$branch" == "" ]; then branch='master'; fi
+	key="gitsync_cron $dir $branch"
+	crontab_remove "$key"
 }
 
 install_repo(){

@@ -53,7 +53,7 @@ localhost_add_cname 'local.hopechapellongbeach.com'
 
 
 # deploy hook service
-configure_hooky "$installDir" master $githubHookAuthToken 9998
+configure_hooky "$installDir" master $githubHookAuthToken
 #IP=`public_ip`
 #echo "[{\"repo\":\"$installDir\",\"branch\":\"master\"}]" > "$installDir/hooky.json"
 #cd $sireDir/_common/hooky

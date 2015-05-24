@@ -12,11 +12,12 @@ blocking so we can use in bash script
 */
 
 var fs = require('fs')
+,path = require('path')
 ,argv = require('optimist').argv
 ;
 
 var configFile = argv.c
-,repo = argv.r
+,repo = path.resolve(argv.r)
 ,branch = argv.b
 ,githubAuthToken = argv.t
 ,port = argv.p // one per auth token
