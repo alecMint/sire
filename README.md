@@ -50,18 +50,18 @@ killall node
 
 ### To Do
 - Use arguments as alternative to config for _deploy module
--- If module == _deploy, source an arg-to-export file
--- Or consider alternative: pass path to alt config file. This could be done globally (ie not just for _deploy)
--- Add instructions to readme
+	- If module == _deploy, source an arg-to-export file
+	- Or consider alternative: pass path to alt config file. This could be done globally (ie not just for _deploy)
+	- Add instructions to readme
 - Package hooky and remove dups
 - Fix issue where only one hooky can be running at once
--- Getting error: {"message":"Validation Failed","errors":[{"resource":"Hook","code":"custom","message":"Hook already exists on this repository"}],"documentation_url":"https://developer.github.com/v3/repos/hooks/#create-a-hook"}
+	- Getting error: {"message":"Validation Failed","errors":[{"resource":"Hook","code":"custom","message":"Hook already exists on this repository"}],"documentation_url":"https://developer.github.com/v3/repos/hooks/#create-a-hook"}
 - Fix faulty logic inside _deploy/index.sh where it checks for existence of local sire .git when it should check remote .git
--- Currently /root/sire is simply deleted and replaced with latest version. This could cause issues with submodule instantiation dependencies (e.g. _common/s3dl/node_modules)
+	- Currently /root/sire is simply deleted and replaced with latest version. This could cause issues with submodule instantiation dependencies (e.g. _common/s3dl/node_modules)
 - Make crontab easier to read with whitespace
 - Cleanup /root/.forever/*.log
--- +Ship to s3
+	- +Ship to s3
 - Support _deploy config option: s3_logs
--- All logs will ship to target bucket when rotated
+	- All logs will ship to target bucket when rotated
 
 
