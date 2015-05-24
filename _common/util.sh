@@ -166,6 +166,8 @@ configure_hooky(){
 	#echo "/usr/local/bin/node ./add_to_config.js -c \"$hookyConfig\" -r \"$dir\" -b $branch -t \"$githubHookAuthToken\" -p $port -s \"$postScript\""
 	/usr/local/bin/node ./add_to_config.js -c "$hookyConfig" -r "$dir" -b $branch -t "$githubHookAuthToken" -p $port -s "$postScript"
 	forever_run "./index.js -a $IP -c $hookyConfig"
+	echo "WARNING: we should only have one of these:"
+	ps -x | grep 'forever/bin/monitor' | grep "hooky/index.js"
 	cd $startpwd
 	# remove gitsync cron...
 	gitsync_remove_cron "$1" "$2"
