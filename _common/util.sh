@@ -1,6 +1,6 @@
 #misc crontab functions
 #
-# 05/08/2015 - changed forever to forever. was hanging on lucky servers. installing it globally in forever.sh anyway
+# 05/08/2015 - changed /usr/local/bin/forever to forever. was hanging on lucky servers. installing it globally in forever.sh anyway
 #
 
 crontab_add(){
