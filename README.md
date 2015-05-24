@@ -56,6 +56,7 @@ killall node
 - Package hooky and remove dups
 - Fix issue where only one hooky can be running at once
 	- Getting error: {"message":"Validation Failed","errors":[{"resource":"Hook","code":"custom","message":"Hook already exists on this repository"}],"documentation_url":"https://developer.github.com/v3/repos/hooks/#create-a-hook"}
+	- Would be best to share a port. Can we configure octopie to set up multiple hooks at once?
 - Fix faulty logic inside _deploy/index.sh where it checks for existence of local sire .git when it should check remote .git
 	- Currently /root/sire is simply deleted and replaced with latest version. This could cause issues with submodule instantiation dependencies (e.g. _common/s3dl/node_modules)
 - Make crontab easier to read with whitespace
