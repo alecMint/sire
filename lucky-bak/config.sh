@@ -1,3 +1,3 @@
 
 export installDir='/var/www/lucky-bak'
-export gitRepo="https://github.com/beachmint/lucky-bak.git"
+export gitRepo='git@github.com:beachmint/lucky-bak.git' # ssh instead of https so it uses my key
