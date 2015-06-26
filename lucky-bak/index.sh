@@ -4,7 +4,6 @@
 # modules
 ../_common/nginx.sh
 ../_common/php.sh
-#../_common/mysql.sh
 ../_common/s3.sh
 
 
