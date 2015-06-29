@@ -16,8 +16,8 @@
 install_repo "$installDir" "$gitRepo"
 if [ -f "$installDir/install.sh" ]; then
 	echo "running repo's install.sh"
-	"$installDir/install.sh"
+	"$installDir/install.sh -r"
 fi
 
-#gitsync_cron "$installDir" "prod"
+gitsync_cron "$installDir" "master"
 
