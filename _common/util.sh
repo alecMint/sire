@@ -181,7 +181,9 @@ gitsync_cron(){
 	cron="$sireDir/_common/gitsync.sh '$dir' '$branch'; sleep 15;"
 	crontab_add "$key" "* * * * * echo '$key'; $cron $cron $cron $cron"
 	# remove from hooky...
-	/usr/local/bin/node ./add_to_config.js -c "$hookyConfig" -r "$dir"
+	if [ -f /usr/local/bin/node ]; then
+		/usr/local/bin/node ./add_to_config.js -c "$hookyConfig" -r "$dir"
+	fi
 }
 
 gitsync_remove_cron(){
