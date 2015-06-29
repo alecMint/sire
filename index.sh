@@ -24,7 +24,7 @@ fi
 
 
 if [ "`which realpath`" == "" ]; then
-	echo "we dont have realpath, making one that works on directories only" # e.g. from my mac
+	echo "we dont have realpath, making one that works on directories" # e.g. from my mac
 	realpath() {
 		echo `cd "${1}";pwd`
 	}
