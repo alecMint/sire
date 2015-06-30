@@ -7,4 +7,8 @@ if [ -f ./config.sh ]; then
     . ./config.chef.sh
     fi
 fi
+if [ "$3" ]; then
+	serverName=$3
+fi
+
 . ./test.sh

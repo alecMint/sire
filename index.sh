@@ -1,15 +1,27 @@
 #!/bin/bash
 # Ex: ./index.sh ace alechulce -na
-# -na will skip installing basics
+# Skip `apt-get update`: -na
+# Remote instance override: --target=ec2-54-176-178-234.us-west-1.compute.amazonaws.com
+#
 
 echo 'whoami: '`whoami`
 
 aptUpdate=1
+argi=0
 for arg in "$@"; do
-	if [ "$arg" == '-na' ]; then
+	target=`echo "$arg" | sed -n 's/^--target=\(.*\)/\1/p'`
+	if [ "$target" != "" ]; then
+		serverNameOverride=$target
+	elif [ "$arg" == '-na' ]; then
 		aptUpdate=0
+	else
+		envs[$argi]=$arg
+		((argi++))
 	fi
 done
+echo "envs: ${envs[@]}"
+if [ "$serverNameOverride" ]; then echo "serverNameOverride: $serverNameOverride"; fi
+echo "aptUpdate: $aptUpdate"
 
 
 if [ -f /usr/bin/apt-get ]; then
@@ -42,11 +54,11 @@ if [ "$1" == "" ]; then
 else
 	oneInvalid=0
 	deployed=""
-	for env in "$@"; do
+	for env in "${envs[@]}"; do
 		if [ "$env" == '-na' ]; then
 			echo '.'
 		elif [ -d "$env" ]; then
-			./_common/deploy.sh "$refDir/$env"
+			./_common/deploy.sh "$refDir/$env" "$serverNameOverride"
 			deployed=$deployed"$env "
 		else
 			echo "$env is not a valid deploy name"
@@ -60,7 +72,7 @@ else
 	for env in $deployed; do
 		echo "testing $env"
 		if [ -f "$env"/test.sh ]; then
-			./_common/test.sh "$refDir/$env" "$env"
+			./_common/test.sh "$refDir/$env" "$env" "$serverNameOverride"
 			eCode=$?
 			if [ "$eCode" != "0" ]; then
 				echo "$env"/test.sh" failed: $eCode"

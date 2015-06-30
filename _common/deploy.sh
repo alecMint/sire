@@ -13,4 +13,8 @@ if [ -f ./config.sh ]; then
     . ./config.chef.sh
     fi
 fi
+if [ "$2" ]; then
+	serverName=$2
+fi
+
 . ./index.sh
