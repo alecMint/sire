@@ -6,34 +6,6 @@
 
 echo 'whoami: '`whoami`
 
-aptUpdate=1
-argi=0
-for arg in "$@"; do
-	target=`echo "$arg" | sed -n 's/^--target=\(.*\)/\1/p'`
-	if [ "$target" != "" ]; then
-		serverNameOverride=$target
-	elif [ "$arg" == '-na' ]; then
-		aptUpdate=0
-	else
-		envs[$argi]=$arg
-		((argi++))
-	fi
-done
-echo "envs: ${envs[@]}"
-if [ "$serverNameOverride" ]; then echo "serverNameOverride: $serverNameOverride"; fi
-echo "aptUpdate: $aptUpdate"
-
-
-if [ -f /usr/bin/apt-get ]; then
-	echo "we have apt-get"
-	if [ $aptUpdate == 1 ]; then
-		echo 'apt-get update...'
-		apt-get update
-		apt-get install --assume-yes curl build-essential realpath
-	fi
-	export DEBIAN_FRONTEND=noninteractive # shhh!
-fi
-
 
 if [ "`which realpath`" == "" ]; then
 	echo "we dont have realpath, making one that works on directories" # e.g. from my mac
@@ -47,6 +19,20 @@ refDir=`dirname $0`
 refDir=`realpath $refDir`
 echo "cd $refDir"
 cd $refDir
+
+
+. ./collect_args.sh $@
+
+
+if [ -f /usr/bin/apt-get ]; then
+	echo "we have apt-get"
+	if [ $aptUpdate == 1 ]; then
+		echo 'apt-get update...'
+		apt-get update
+		apt-get install --assume-yes curl build-essential realpath
+	fi
+	export DEBIAN_FRONTEND=noninteractive # shhh!
+fi
 
 
 if [ "$1" == "" ]; then
