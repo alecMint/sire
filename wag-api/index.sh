@@ -27,11 +27,14 @@ if [ -f "$installDir/install.sh" ]; then
 fi
 
 
-# @todo: move this to wagapi/install.sh
+# install composer dependencies
 cd "$installDir"
 /usr/bin/curl -sS https://getcomposer.org/installer | /usr/bin/php
 /usr/bin/php composer.phar install
 # also maybe: php artisan migrate
+
+# give perms
+chown -r www-data ./app/storage
 
 
 #gitsync_cron "$installDir" "master"
