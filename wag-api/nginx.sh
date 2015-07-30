@@ -7,7 +7,7 @@ server {
 	listen 80;
 
 	server_name prod-api.wagwalking.com;
-	root $installDir/web;
+	root $installDir/public;
 	autoindex off;
 
 	access_log /var/log/nginx/wagapi_access.log;
@@ -49,7 +49,7 @@ server {
 #	listen 443;
 #
 #	server_name www.luckymag.com luckymag.com m.luckymag.com promo.luckymag.com legacy.luckymag.com;
-#	root $installDir/web;
+#	root $installDir/public;
 #	autoindex off;
 #
 #	access_log /var/log/nginx/wagapi_access_ssl.log;
