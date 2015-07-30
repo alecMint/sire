@@ -17,5 +17,11 @@ if [ -f "$installDir/install.sh" ]; then
 	eval "$installDir/install.sh" -r
 fi
 
+
+# @todo: move this to wagapi/install.sh
+php "$installDir/composer.phar" install
+# also maybe: php artisan migrate
+
+
 #gitsync_cron "$installDir" "master"
 
