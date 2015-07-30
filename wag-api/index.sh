@@ -34,7 +34,7 @@ cd "$installDir"
 # also maybe: php artisan migrate
 
 # give perms
-chown -r www-data ./app/storage
+chown -R www-data ./app/storage
 
 
 #gitsync_cron "$installDir" "master"
