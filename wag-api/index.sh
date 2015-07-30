@@ -1,10 +1,15 @@
+# @todo: move most of this into wagapi/install.sh
 
 . ../secrets
 
 # modules
 ../_common/nginx.sh
 ../_common/php.sh
+
+
+# laravel needs this...
 /usr/bin/apt-get -y install php5-mcrypt
+service php5-fpm restart
 
 
 # nginx conf
