@@ -4,6 +4,7 @@
 # modules
 ../_common/nginx.sh
 ../_common/php.sh
+/usr/bin/apt-get -y install php5-mcrypt
 
 
 # nginx conf
