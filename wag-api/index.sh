@@ -9,6 +9,9 @@
 
 # laravel needs this...
 /usr/bin/apt-get -y install php5-mcrypt
+#if [ ! -d /etc/php5/conf.d ]; then mkdir /etc/php5/conf.d; fi
+#ln -s /etc/php5/conf.d/mcrypt.ini /etc/php5/mods-available/mcrypt.ini
+/usr/sbin/php5enmod mcrypt
 service php5-fpm restart
 
 
