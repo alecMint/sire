@@ -19,7 +19,7 @@ fi
 
 
 # @todo: move this to wagapi/install.sh
-php "$installDir/composer.phar" install
+# /usr/bin/php "$installDir/composer.phar" install
 # also maybe: php artisan migrate
 
 
