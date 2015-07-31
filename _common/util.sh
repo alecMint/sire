@@ -47,8 +47,8 @@ remote_config_add(){
 }
 
 escape_bash_val(){
-	# echo '$wef="wef"' | sed 's/\(["$]\)/\\\1/g'
-	echo "$1" | sed 's/\(["$]\)/\\\1/g'
+	# echo '$wef="w\$ef"' | sed 's/\(["$\]\)/\\\1/g'
+	echo "$1" | sed 's/\(["$\]\)/\\\1/g'
 }
 
 localhost_add_cname(){
