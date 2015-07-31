@@ -32,9 +32,11 @@ fi
 
 # install composer dependencies
 cd "$installDir"
-/usr/bin/curl -sS https://getcomposer.org/installer | /usr/bin/php
-/usr/bin/php composer.phar install
-# also maybe: php artisan migrate. actually no; db should be handled separately as its own module, even if it resides on the same instance
+if [ "$branch" == "master" ]; then
+	/usr/bin/curl -sS https://getcomposer.org/installer | /usr/bin/php
+	/usr/bin/php composer.phar install
+	# also maybe: php artisan migrate. actually no; db should be handled separately as its own module, even if it resides on the same instance
+fi
 
 # give perms
 chown -R www-data ./app/storage
