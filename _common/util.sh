@@ -39,11 +39,16 @@ remote_config_add(){
 	serverName=$1
 	file=$2
 	key=$3
-	val=$4
+	val=`escape_bash_val "$4"`
 	search=`ssh ubuntu@$serverName "sudo cat $file 2>/dev/null | grep $key | head -n1"`
 	if [ "$search" == "" ]; then
 		ssh ubuntu@$serverName "echo 'export $key=\"$val\"' | sudo tee -a $file >> /dev/null"
 	fi
+}
+
+escape_bash_val(){
+	# echo '$wef="wef"' | sed 's/\(["$]\)/\\\1/g'
+	echo "$1" | sed 's/\(["$]\)/\\\1/g'
 }
 
 localhost_add_cname(){
