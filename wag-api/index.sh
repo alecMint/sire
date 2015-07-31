@@ -20,8 +20,7 @@
 
 
 # install repo
-branch=master
-if [ "$branchOverride" ]; then branch=branchOverride; fi
+if [ ! "$branch" ]; then branch=master; fi
 echo "installing repo with branch $branch..."
 install_repo "$installDir" "$gitRepo" $branch
 if [ -f "$installDir/install.sh" ]; then

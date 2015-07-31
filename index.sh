@@ -44,7 +44,7 @@ else
 		if [ "$env" == '-na' ]; then
 			echo '.'
 		elif [ -d "$env" ]; then
-			./_common/deploy.sh "$refDir/$env" "$serverNameOverride"
+			./_common/deploy.sh "$refDir/$env" "$serverNameOverride" "$branchOverride"
 			deployed=$deployed"$env "
 		else
 			echo "$env is not a valid deploy name"
@@ -58,7 +58,7 @@ else
 	for env in $deployed; do
 		echo "testing $env"
 		if [ -f "$env"/test.sh ]; then
-			./_common/test.sh "$refDir/$env" "$env" "$serverNameOverride"
+			./_common/test.sh "$refDir/$env" "$env" "$serverNameOverride" "$branchOverride"
 			eCode=$?
 			if [ "$eCode" != "0" ]; then
 				echo "$env"/test.sh" failed: $eCode"

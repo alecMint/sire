@@ -16,5 +16,8 @@ fi
 if [ "$2" ]; then
 	serverName=$2
 fi
+if [ "$3" ]; then
+	branch=$3
+fi
 
 . ./index.sh
