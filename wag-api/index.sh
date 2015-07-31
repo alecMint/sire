@@ -20,8 +20,8 @@
 
 
 # install repo
-if [ ! "$branch" ]; then branch=master; fi
-echo "installing repo with branch $branch..."
+branch=master
+branch=patch-one
 install_repo "$installDir" "$gitRepo" $branch
 if [ -f "$installDir/install.sh" ]; then
 	echo "running repo's install.sh"
