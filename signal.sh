@@ -1,5 +1,6 @@
 #!/bin/bash
 # Ex: ./signal.sh lucky-deploy
+# Ex: ./signal.sh wag-api --target=52.7.27.99 -na
 #
 
 
