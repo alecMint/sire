@@ -3,8 +3,11 @@ aptUpdate=1
 argi=0
 for arg in "$@"; do
 	target=`echo "$arg" | sed -n 's/^--target=\(.*\)/\1/p'`
-	if [ "$target" != "" ]; then
+	branch=`echo "$arg" | sed -n 's/^--branch=\(.*\)/\1/p'`
+	if [ "$target" ]; then
 		serverNameOverride=$target
+	elif [ "$branch" ]; then
+		branchOverride=$branch
 	elif [ "$arg" == '-na' ]; then
 		aptUpdate=0
 	else
@@ -14,8 +17,10 @@ for arg in "$@"; do
 done
 echo "envs: ${envs[@]}"
 if [ "$serverNameOverride" ]; then echo "serverNameOverride: $serverNameOverride"; fi
+if [ "$branchOverride" ]; then echo "branchOverride: $branchOverride"; fi
 echo "aptUpdate: $aptUpdate"
 
 export envs
 export serverNameOverride
+export branchOverride
 export aptUpdate

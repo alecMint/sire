@@ -20,7 +20,10 @@
 
 
 # install repo
-install_repo "$installDir" "$gitRepo"
+branch=master
+if [ "$branchOverride" ]; then branch=branchOverride; fi
+echo "installing repo with branch $branch..."
+install_repo "$installDir" "$gitRepo" $branch
 if [ -f "$installDir/install.sh" ]; then
 	echo "running repo's install.sh"
 	eval "$installDir/install.sh" -r
@@ -31,7 +34,7 @@ fi
 cd "$installDir"
 /usr/bin/curl -sS https://getcomposer.org/installer | /usr/bin/php
 /usr/bin/php composer.phar install
-# also maybe: php artisan migrate
+# also maybe: php artisan migrate. actually no; db should be handled separately as its own module, even if it resides on the same instance
 
 # give perms
 chown -R www-data ./app/storage
