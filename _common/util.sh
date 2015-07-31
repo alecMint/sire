@@ -205,7 +205,17 @@ install_repo(){
 		mkdir -p "$dir"
 		git clone $repo "$dir"
 	fi
+	install_repo_configs "$1" "$2" "$3"
 	$sireDir/_common/gitsync.sh "$dir" "$branch"
+}
+
+install_repo_configs(){
+	if [ "$configLocalPhp" ]; then
+		echo $configLocalPhp > "$installDir/config.local.php"
+	fi
+	if [ "$configLocalJson" ]; then
+		echo $configLocalJson > "$installDir/config.local.json"
+	fi
 }
 
 accessLogLocation(){

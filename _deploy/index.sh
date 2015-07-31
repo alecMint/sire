@@ -76,3 +76,13 @@ if [ "$machineSshKeyPublic" != '' ]; then
 	ssh ubuntu@$serverName "sudo chmod 0400 /root/.ssh/id_rsa"
 fi
 
+if [ "$configLocalPhp" != "" ]; then
+	echo 'copying configLocalPhp secrets...'
+	remote_config_add $serverName $sireDir/secrets configLocalPhp "$configLocalPhp"
+fi
+if [ "$configLocalJson" != "" ]; then
+	echo 'copying configLocalJson secrets...'
+	remote_config_add $serverName $sireDir/secrets configLocalJson "$configLocalJson"
+fi
+
+
