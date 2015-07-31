@@ -42,7 +42,7 @@ remote_config_add(){
 	val=$4
 	search=`ssh ubuntu@$serverName "sudo cat $file 2>/dev/null | grep $key | head -n1"`
 	if [ "$search" == "" ]; then
-		ssh ubuntu@$serverName "echo 'export $key=\'$val\'' | sudo tee -a $file >> /dev/null"
+		ssh ubuntu@$serverName "echo 'export $key=\"$val\"' | sudo tee -a $file >> /dev/null"
 	fi
 }
 
