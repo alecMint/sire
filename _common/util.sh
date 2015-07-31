@@ -216,7 +216,8 @@ install_repo(){
 
 install_repo_configs(){
 	if [ "$configLocalPhp" ]; then
-		echo $configLocalPhp > "$installDir/config.local.php"
+		echo $'<?php\n' > "$installDir/config.local.php"
+		echo $configLocalPhp >> "$installDir/config.local.php"
 	fi
 	if [ "$configLocalJson" ]; then
 		echo $configLocalJson > "$installDir/config.local.json"
