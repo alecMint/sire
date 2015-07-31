@@ -12,7 +12,7 @@
 #if [ ! -d /etc/php5/conf.d ]; then mkdir /etc/php5/conf.d; fi
 #ln -s /etc/php5/conf.d/mcrypt.ini /etc/php5/mods-available/mcrypt.ini
 /usr/sbin/php5enmod mcrypt
-service php5-fpm restart
+/usr/sbin/service php5-fpm restart
 
 
 # nginx conf
