@@ -19,5 +19,6 @@ fi
 if [ "$3" ]; then
 	branch=$3
 fi
+echo "WEFWEFEWFWEFWEFEWF: $branch"
 
 . ./index.sh
