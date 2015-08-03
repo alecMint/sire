@@ -21,7 +21,6 @@
 
 # install repo
 branch=master
-branch=patch-one
 install_repo "$installDir" "$gitRepo" $branch
 if [ -f "$installDir/install.sh" ]; then
 	echo "running repo's install.sh"
@@ -30,15 +29,13 @@ fi
 
 
 # install composer dependencies
-cd "$installDir"
-if [ "$branch" == "master" ]; then
-	/usr/bin/curl -sS https://getcomposer.org/installer | /usr/bin/php
-	/usr/bin/php composer.phar install
-	# also maybe: php artisan migrate. actually no; db should be handled separately as its own module, even if it resides on the same instance
-fi
+# cd "$installDir"
+# /usr/bin/curl -sS https://getcomposer.org/installer | /usr/bin/php
+# /usr/bin/php composer.phar install
 
-# give perms
-chown -R www-data ./app/storage
+
+# give php access
+chown -R www-data "$installDir/app/storage"
 
 
 #gitsync_cron "$installDir" "master"
