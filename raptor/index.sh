@@ -4,6 +4,7 @@
 
 # modules
 ../_common/nodejs.sh
+../_common/forever.sh
 
 
 # install repo
