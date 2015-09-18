@@ -41,3 +41,11 @@ chown -R www-data "$installDir/app/storage"
 
 #gitsync_cron "$installDir" "master"
 
+
+# for fresh dev instance
+#if [ databaseDoesNotExist ]; then
+#	echo 'create database if not exists DATABASE_NAME' | mysql
+#	# set up auth
+#	# import DB
+#fi
+
