@@ -44,8 +44,11 @@ chown -R www-data "$installDir/app/storage"
 
 # for fresh dev instance
 #if [ databaseDoesNotExist ]; then
-#	echo 'create database if not exists DATABASE_NAME' | mysql
 #	# set up auth
+#	create user 'DB_USER'@'localhost' identified by 'DB_PASS';
+#	grant all on *.* to 'DB_USER'@'localhost';
+#	flush privileges;
+#	echo 'create database if not exists DB_DATABASE' | mysql
 #	# import DB
 #fi
 
