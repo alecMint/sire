@@ -26,6 +26,10 @@ if [ $updateAptGet == 1 ]; then
 	echo "updating apt-get..."
 	ssh ubuntu@$serverName "sudo apt-get update"
 fi
+
+echo 'installing essentials...'
+ssh ubuntu@$serverName "sudo apt-get -y install realpath curl"
+
 echo 'installing git...'
 ssh ubuntu@$serverName "sudo apt-get -y install git-core"
 
