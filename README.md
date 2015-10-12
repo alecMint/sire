@@ -49,6 +49,9 @@ killall node
 
 
 ### To Do
+- Encaps _common/util.sh methods with parens instead of brackets to avoid var clobs
+	- e.g. (+start with) rotate_logs2() => rotate_logs()
+	- Test thoroughly though, the new shell may not behave as expected
 - Figure out why /var/log/access.log is filling up + fix
 	- Even though all nginx confs point to own logfile
 - Solve issue with overflowing forever logs
