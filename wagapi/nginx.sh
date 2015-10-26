@@ -6,7 +6,7 @@ cat > /etc/nginx/sites-available/wagapi <<FILE
 server {
 	listen 80;
 
-	server_name prod-api.wagwalking.com;
+	server_name ~^.*-api\.wagwalking\.com$;
 	root $installDir/public;
 	autoindex off;
 
@@ -50,7 +50,7 @@ server {
 #server {
 #	listen 443;
 #
-#	server_name www.luckymag.com luckymag.com m.luckymag.com promo.luckymag.com legacy.luckymag.com;
+#	server_name ~^.*-api\.wagwalking\.com$;
 #	root $installDir/public;
 #	autoindex off;
 #
