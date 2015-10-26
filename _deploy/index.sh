@@ -89,4 +89,11 @@ if [ "$configLocalJson" != "" ]; then
 	remote_config_add $serverName $sireDir/secrets configLocalJson "$configLocalJson"
 fi
 
+moreSecrets=('DB_HOST' 'DB_USER' 'DB_PASS' 'DB_DATABASE')
+for secret in ${moreSecrets[*]}; do
+	if [ "${!secret}" ]; then
+		echo "copying $secret..."
+		remote_config_add $serverName $sireDir/secrets $secret "${!secret}"
+	fi
+done
 

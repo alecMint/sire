@@ -49,6 +49,9 @@ killall node
 
 
 ### To Do
+- **Top Priority:** Set module-specific secrets
+	- Instead of using global conf we have to keep updating
+	- Think this over though, cuz really what we want to answer is where does chef inject
 - Encaps _common/util.sh methods with parens instead of brackets to avoid var clobs
 	- e.g. (+start with) rotate_logs2() => rotate_logs()
 	- Test thoroughly though, the new shell may not behave as expected
