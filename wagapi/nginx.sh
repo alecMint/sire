@@ -15,7 +15,7 @@ server {
 
 	gzip on; # use gzip compression
 	gzip_min_length 1100;
-	gzip_buffers 4 8k; 
+	gzip_buffers 4 8k;
 	gzip_proxied any; # enable proxy for the fcgi requests
 	gzip_types text/plain text/css application/x-javascript text/javascript application/json;
 
@@ -64,9 +64,11 @@ server {
 #
 #	gzip on; # use gzip compression
 #	gzip_min_length 1100;
-#	gzip_buffers 4 8k; 
+#	gzip_buffers 4 8k;
 #	gzip_proxied any; # enable proxy for the fcgi requests
-#	gzip_types text/plain text/css application/x-javascript text/javascript application/json; 
+#	gzip_types text/plain text/css application/x-javascript text/javascript application/json;
+#
+#	client_max_body_size 32M;
 #
 #	# pass php to fastcgi
 #	location ~ \.php\$ {
