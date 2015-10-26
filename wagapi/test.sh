@@ -15,3 +15,4 @@ else
 fi
 
 
+# @todo: test mysql connection
