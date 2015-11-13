@@ -6,7 +6,7 @@
 ../_common/nginx.sh
 ../_common/php.sh
 ../_common/mysql.sh # @todo: only do this #ifOnDev
-../_common/node.sh # for utils + rotate_logs()
+../_common/nodejs.sh # for utils + rotate_logs()
 
 
 # laravel needs this...
