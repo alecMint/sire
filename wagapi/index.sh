@@ -57,5 +57,11 @@ service mysql restart
 
 
 
-# @todo: pushbash (chef/tools)
+# @todo: pushbash dev4 (chef/tools)
+# @todo: chef/wagapi/files/DEV.config.local.php
+
+# deploy db:
+# scp ~/Downloads/wag.20151111_3.sql ubuntu@`shudo -s dev4`:/tmp/
+# mysqlimport /tmp/wag.prod.20151111_3.sql > /tmp/alec.log 2>&1
+# 
 
