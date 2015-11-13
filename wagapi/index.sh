@@ -56,12 +56,14 @@ sed -i 's/bind-address.*/bind-address = 0.0.0.0/' /etc/mysql/my.cnf
 service mysql restart
 
 
-
+# Final bits for deploying fresh dev instance
 # @todo: pushbash dev4 (chef/tools)
 # @todo: chef/wagapi/files/DEV.config.local.php
+#		: > /var/www/wagapi/config.local.php && vim /var/www/wagapi/config.local.php
 
-# deploy db:
+# deploy db (eventually, pull latest copy from s3):
 # scp ~/Downloads/wag.20151111_3.sql ubuntu@`shudo -s dev4`:/tmp/
 # mysqlimport /tmp/wag.prod.20151111_3.sql > /tmp/alec.log 2>&1
+# php /var/www/wagapi/artisan migrate
 # 
 
