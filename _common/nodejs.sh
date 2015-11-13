@@ -8,6 +8,7 @@ PREFIX="/usr/local" # use local so we dont overwrite apt installed
 CVERSION=`node -v 2> /dev/null`
 
 if [ "$CVERSION" != "$VERSION" ]; then
+	echo "installing node..."
 	# might need this to avoid npm install error
 	#mkdir -p /root/.node-gyp/$VERSION
 
