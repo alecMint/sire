@@ -15,4 +15,12 @@ else
 fi
 
 
+if [ ! "`echo "select convert_tz('2015-11-11 12:00:00', 'America/Los_Angeles', 'America/New_York');" | mysql -uroot | grep '2015-11-11 12:00:00' 2>/dev/null`" ]; then
+	>&2 echo 'mysql timezone data failed to install'
+	exit 1
+else
+	echo 'mysql timezone data installed'
+fi
+
+
 # @todo: test mysql connection

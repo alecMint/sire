@@ -11,7 +11,7 @@ date >> "$lockFile"
 dir=$1
 branch=$2
 
-cd $dir || (echo "dir $dir does not exist, exiting" && exit 1)
+cd "$dir" || (echo "dir $dir does not exist, exiting" && exit 1)
 git fetch
 git reset --hard HEAD
 #git checkout -f origin/$branch # is there a reason i had origin/...?

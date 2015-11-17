@@ -7,6 +7,7 @@
 ../_common/php.sh
 ../_common/mysql.sh # @todo: only do this #ifOnDev
 ../_common/nodejs.sh # for utils + rotate_logs()
+mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -uroot mysql
 
 
 # laravel needs this...
