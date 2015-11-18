@@ -23,4 +23,12 @@ else
 fi
 
 
+if [ ! -f "$installDir/config.local.php" ]; then
+	>&2 echo 'failed to deploy chef config'
+	exit 1
+else
+	echo 'chef config deployed'
+fi
+
+
 # @todo: test mysql connection

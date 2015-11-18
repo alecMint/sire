@@ -25,6 +25,7 @@ mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -uroot mysql
 # install repo
 branch=master
 install_repo "$installDir" "$gitRepo" $branch
+./chef-config.sh # before repo/install.sh in case it needs it or wants to modify it
 if [ -f "$installDir/install.sh" ]; then
 	echo "running repo's install.sh"
 	eval "$installDir/install.sh" -r
@@ -58,13 +59,8 @@ service mysql restart
 
 
 # Final bits for deploying fresh dev instance
-# @todo: pushbash dev4 (chef/tools)
-# @todo: chef/wagapi/files/DEV.config.local.php
-#		: > /var/www/wagapi/config.local.php && vim /var/www/wagapi/config.local.php
-
 # deploy db (eventually, pull latest copy from s3):
-# scp ~/Downloads/wag.20151111_3.sql ubuntu@`shudo -s dev4`:/tmp/
-# mysqlimport /tmp/wag.prod.20151111_3.sql > /tmp/alec.log 2>&1
-# php /var/www/wagapi/artisan migrate
+# scp ~/Downloads/wag.prod.20151117.sql ubuntu@`shudo -s dev4`:/tmp/
+# mysqlimport /tmp/wag.prod.20151117.sql > /tmp/alec.log 2>&1; php /var/www/wagapi/artisan migrate >> /tmp/alec.log
 # 
 
