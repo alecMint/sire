@@ -61,6 +61,6 @@ service mysql restart
 # Final bits for deploying fresh dev instance
 # deploy db (eventually, pull latest copy from s3):
 # scp ~/Downloads/wag.prod.20151117.sql ubuntu@`shudo -s dev4`:/tmp/
-# mysqlimport /tmp/wag.prod.20151117.sql > /tmp/alec.log 2>&1; php /var/www/wagapi/artisan migrate >> /tmp/alec.log
+# mysqlimport /tmp/wag.prod.20151117.sql > /tmp/alec.log 2>&1; php /var/www/wagapi/artisan migrate --force >> /tmp/alec.log
 # 
 
