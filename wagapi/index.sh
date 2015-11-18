@@ -28,6 +28,7 @@ install_repo "$installDir" "$gitRepo" $branch
 ./chef-config.sh # before repo/install.sh in case it needs it or wants to modify it
 if [ -f "$installDir/install.sh" ]; then
 	echo "running repo's install.sh"
+	export CHEF_ENV='DEV' # @todo: this is a temp placeholder, replace when running from actual chef
 	eval "$installDir/install.sh" -r
 fi
 
