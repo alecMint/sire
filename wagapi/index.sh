@@ -9,6 +9,7 @@
 ../_common/nodejs.sh # for utils + rotate_logs()
 ../_common/s3.sh # for db baks
 mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -uroot mysql
+if [ ! `which pv` ]; then apt-get install -y pv; fi # for us, not the app
 
 
 # laravel needs this...
