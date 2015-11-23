@@ -20,7 +20,7 @@ git pull origin $branch
 git submodule update
 
 if [ -f ./package.json ]; then
-	npm install
+	npm install --production # --production to avoid installing devDependencies
 fi
 
 if [ -f ./post-gitsync.sh ]; then
