@@ -18,6 +18,10 @@ if [ -f /tmp/chef-deploy/wagapi/files/DEV.config.local.json ]; then
 fi
 
 
+if [ -f /tmp/chef-deploy/tools/files/DEV.wagtools ]; then
+	cp /tmp/chef-deploy/tools/files/DEV.wagtools /root/.wagtools
+fi
+
 if [ -f /tmp/chef-deploy/tools/files/DEV.bashrc ]; then
 	bashrc=/root/.bashrc
 	tmp=`mktemp -t pushbash.deploy.XXXXXX`
