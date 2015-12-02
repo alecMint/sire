@@ -49,6 +49,8 @@ killall node
 
 
 ### To Do
+- Fix issue where two forevers are launched on raptor deploy
+	- Causes raptor to fail on deploy
 - **Top Priority:** Set module-specific secrets
 	- Instead of using global conf we have to keep updating
 	- Think this over though, cuz really what we want to answer is where does chef inject
