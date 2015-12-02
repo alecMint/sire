@@ -31,7 +31,7 @@ if [ ! `which pv` ]; then apt-get install -y pv; fi # for us, not the app
 # install repo
 branch=master
 install_repo "$installDir" "$gitRepo" $branch
-./chef-config.sh # before repo/install.sh in case it needs it or wants to modify it
+if [ -f ./chef-config.sh ]; then ./chef-config.sh; fi # before repo/install.sh in case it needs it or wants to modify it
 if [ -f "$installDir/install.sh" ]; then
 	echo "running repo's install.sh"
 	eval "$installDir/install.sh" -r
