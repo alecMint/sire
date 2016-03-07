@@ -17,6 +17,9 @@ startpwd=`pwd`
 
 # install repo
 install_repo "$installDir" "$gitRepo"
+cd algo
+npm install
+cd "$startpwd"
 
 
 # deploy hook service
