@@ -79,5 +79,7 @@ killall node
 	- +Ship to s3
 - Support _deploy config option: s3_logs
 	- All logs will ship to target bucket when rotated
+- Group rotate_logs
+	- I.e. so that if you call it multiple times, it'll append to crontabs that have same timing if it exists
 
 
