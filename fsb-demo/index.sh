@@ -33,3 +33,6 @@ gitsync_cron "$installDir" "master"
 #gen_add_line_to_file "$installDir/config.local.json" awsRegion ",\"awsRegion\": \"$awsRegion\""
 #gen_add_line_to_file "$installDir/config.local.json" '}'
 
+
+forever_run "$installDir/algo/server.js"
+
