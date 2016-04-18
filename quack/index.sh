@@ -11,6 +11,11 @@ startpwd=`pwd`
 
 # install repo
 install_repo "$installDir" "$gitRepo"
+if [ -f "$installDir/install.sh" ]; then
+	cd "$installDir"
+	./install.sh
+	cd "$startpwd"
+fi
 
 
 # deploy hook service
