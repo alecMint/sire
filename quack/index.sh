@@ -24,4 +24,5 @@ fi
 #gitsync_cron "$installDir" "master"
 
 
+forever_run "$installDir/index.js"
 
