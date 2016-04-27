@@ -14,6 +14,8 @@ startpwd=`pwd`
 
 # install repo
 install_repo "$installDir" "$gitRepo"
+mkdir "$installDir"/node_modules
+npm install --prefix "$installDir"
 
 
 # deploy hook service
