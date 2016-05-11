@@ -28,7 +28,7 @@ server {
 	location ~ ^/wp-content/uploads {
 		if (!-f \$request_filename) {
 			# 9991 = s3dl
-			proxy_pass http://localhost:9991;
+			proxy_pass http://localhost:9991; #s3dl
 			break;
 		}
 	}

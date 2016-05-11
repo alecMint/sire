@@ -94,8 +94,10 @@ function createServer(port){
 			return console.log('nginxCnf not passed',portConfig);
 		var cnf = fs.readFileSync(portConfig.nginxCnf).toString();
 		console.log('replacing s3dl port in nginx cnf',portConfig.nginxCnf,portConfig.target,portConfig.attempting);
-		var re = new RegExp('proxy_pass http://localhost:'+portConfig.target+';','g');
-		var newCnf = cnf.replace(re, 'proxy_pass http://localhost:'+portConfig.attempting+';');
+		//var re = new RegExp('proxy_pass http://localhost:'+portConfig.target+';','g');
+		// what if process is restarting and we dont still have portConfig.target in nginx conf?
+		var re = /proxy_pass http:\/\/localhost:[0-9]+; #s3dl/g;
+		var newCnf = cnf.replace(re, 'proxy_pass http://localhost:'+portConfig.attempting+'; #s3dl');
 		console.log(newCnf);
 		fs.writeFileSync(portConfig.nginxCnf, newCnf);
 		cp.spawn('/etc/init.d/nginx',['reload']);
