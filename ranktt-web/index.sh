@@ -13,6 +13,7 @@ startpwd=`pwd`
 
 
 # install repo
+export NODE_ENV=production
 install_repo "$installDir" "$gitRepo"
 mkdir "$installDir"/node_modules
 npm install --prefix "$installDir"

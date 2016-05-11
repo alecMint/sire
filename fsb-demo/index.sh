@@ -16,6 +16,7 @@ startpwd=`pwd`
 
 
 # install repo
+export NODE_ENV=production
 install_repo "$installDir" "$gitRepo"
 mkdir "$installDir"/algo/node_modules
 npm install --prefix "$installDir"/algo
