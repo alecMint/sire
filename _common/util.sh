@@ -130,7 +130,7 @@ forever_index(){
 
 forever_logfile(){
 	search=$1
-	/usr/local/bin/forever --plain list | grep $search | grep -oP '\/root[^ ]+'
+	/usr/local/bin/forever --plain list | grep $search | grep -oP '\/root[^ ]+' # @todo: swap grep -oP with awk '{print $8}' for compat
 }
 
 first_arg(){
