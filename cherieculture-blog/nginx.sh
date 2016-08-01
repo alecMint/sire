@@ -2,21 +2,21 @@
 
 phpBackend="127.0.0.1:9000"
 
-cat > /etc/nginx/sites-available/hope <<FILE
+cat > /etc/nginx/sites-available/cherieculture-blog <<FILE
 server {
 	listen 80;
-	server_name hopechapellongbeach.com;
-	return 301 http://www.hopechapellongbeach.com\$request_uri;
+	server_name cherieculture.com;
+	return 301 http://www.cherieculture.com\$request_uri;
 }
 server {
 	listen 80;
 
-	server_name www.hopechapellongbeach.com local.hopechapellongbeach.com;
-	root /var/www/hope/web;
+	server_name www.cherieculture.com;
+	root /var/www/cherieculture-blog/web;
 	autoindex off;
 
-	access_log /var/log/nginx/hope_access_log.log;
-	error_log /var/log/nginx/hope_error_log.log;
+	access_log /var/log/nginx/cherieculture-blog_access_log.log;
+	error_log /var/log/nginx/cherieculture-blog_error_log.log;
 
 	gzip on; # use gzip compression
 	gzip_min_length 1100;
@@ -60,6 +60,6 @@ server {
 }
 FILE
 rm /etc/nginx/sites-enabled/default 2> /dev/null
-ln -f /etc/nginx/sites-available/hope /etc/nginx/sites-enabled/hope
+ln -f /etc/nginx/sites-available/cherieculture-blog /etc/nginx/sites-enabled/cherieculture-blog
 
 /etc/init.d/nginx reload
