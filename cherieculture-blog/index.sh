@@ -4,6 +4,7 @@ startpwd=`pwd`
 . ../secrets
 
 # modules
+../_common/nginx.sh
 ../_common/php.sh
 ../_common/mysql.sh
 
